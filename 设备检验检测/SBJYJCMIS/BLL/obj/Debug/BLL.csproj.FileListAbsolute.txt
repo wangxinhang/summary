@@ -1,0 +1,66 @@
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.BLL.dll
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.BLL.pdb
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.DALFactory.dll
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.IDAL.dll
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.Model.dll
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.IDAL.pdb
+E:\设备检验检测平台\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.Model.pdb
+E:\设备检验检测平台\SBJYJCMIS\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\设备检验检测平台\SBJYJCMIS\BLL\obj\Debug\SBJYJCMIS.BLL.dll
+E:\设备检验检测平台\SBJYJCMIS\BLL\obj\Debug\SBJYJCMIS.BLL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.BLL.dll
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.BLL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.Model.dll
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\SBJYJCMIS\SBJYJCMIS\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\SBJYJCMIS\SBJYJCMIS\BLL\obj\Debug\SBJYJCMIS.BLL.dll
+D:\SBJYJCMIS\SBJYJCMIS\BLL\obj\Debug\SBJYJCMIS.BLL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.BLL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.BLL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\obj\Debug\SBJYJCMIS.BLL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\BLL\obj\Debug\SBJYJCMIS.BLL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.BLL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.BLL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.Model.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\obj\Debug\SBJYJCMIS.BLL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\BLL\obj\Debug\SBJYJCMIS.BLL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.BLL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.BLL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\obj\Debug\SBJYJCMIS.BLL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\BLL\obj\Debug\SBJYJCMIS.BLL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.BLL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.BLL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.Model.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\obj\Debug\SBJYJCMIS.BLL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\BLL\obj\Debug\SBJYJCMIS.BLL.pdb

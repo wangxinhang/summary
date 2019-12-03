@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+        // assign()
+        let json1 = {a:2};
+        let json2 = {};
+        let json3 = {c:3};
+        let dafault = {
+            a:1,
+            b:3,
+        }
+        let json = Object.assign({},dafault,json1,json2,json3);
+        console.log(json);
+
+        }
+        
+    </script>
+</body>
+</html>

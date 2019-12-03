@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <my-slot>
+            <div slot="word">已插入文字</div>
+            <img slot="img" src="img/20190130201555.jpg" alt="">
+            <div>这也是</div>
+            <input slot="word" type="color">
+        </my-slot>
+    </div>
+
+    <template id="slot">
+        <div>
+            <slot name="word">这是插文字的插槽</slot>
+            <div>我是真正的组件里的元素</div>
+            <slot name="img">这是插图片的插槽</slot>
+        </div>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        Vue.component('my-slot', {
+            template: "#slot",
+
+        })
+        new Vue({
+            el: "#box",
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <button @click = "post">点击</button>
+    </div>
+
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Hello World!',
+            },
+            methods: {
+                post: function () {
+                    //发送 post 请求
+                    this.$http.post('C:/Users/mcs04/Desktop/hang/5.Vue/test/txt.php', {
+                        name: "菜鸟教程",
+                        url: "http://www.runoob.com"
+                    }, {
+                        emulateJSON: true
+                    }).then(function (res) {
+                        document.write(res.body);
+                    }, function (res) {
+                        console.log(res.status);
+                    });
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

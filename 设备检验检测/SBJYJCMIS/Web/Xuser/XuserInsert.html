@@ -1,0 +1,501 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="../Styles/Query.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/ScrollBar.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="../SzdwControls/domCommon.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.form.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwPopupWindow.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwAjaxDataOperate.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwValidator.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwOnOff.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButton.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwDropDownList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <style type="text/css">
+        input::-ms-clear {
+            display: none;
+        }
+    </style>
+
+</head>
+<body> 
+    <div id="operatePanel">
+        <div id="basicInfoTitle" class="groupTitle" style="cursor:pointer;">
+            <label>用户信息</label>
+            <div id="expBasic" style="float:right"></div>
+        </div>
+        <div id="basicInfoGroup" class="groupPanel">
+            <div class="pwRow">
+                <div id="Div1" class="cellDiv">
+                    <label class="pwLabel">用户名称:</label>
+                    <input id="hdnId" type="hidden"/>    
+                    <input id="txtName" type="text" class="pwTextBox" style="width:180px;float:right;" />    
+                </div>
+            </div>
+            <div class="pwRow">
+                <div id="cell00" class="cellDiv">
+                    <label class="pwLabel">中文姓名:</label>
+                    <div id="btnQueryName" style="float:right;border:0px solid silver;display:none;"></div>
+                    <input id="txtNameCN" type="text" class="pwTextBox" style="width:180px;float:right" />
+                </div>
+            </div>
+            <div class="pwRow">
+                <div id="cell11" class="cellDiv">
+                    <label class="pwLabel">部门类型:</label>
+                    <input id="ddlDepartmentType" type="text" class="pwDropDownList" style="width: 183px; float: right" />
+                </div>
+            </div>
+            <div class="pwRow">
+                <div id="cell10" class="cellDiv">
+                    <label class="pwLabel">单位:</label>
+                    <input id="ddlDepartment" type="text" class="pwDropDownList" style="width: 183px; float: right" />
+                </div>
+            </div>
+            <div class="pwRow" style="height:40px;display:none;">
+                <div id="cell50" class="cellDiv">
+                    <label for="txt" class="pwLabel">签名图片:</label>
+                    <form id="formFile" action="" method="post" enctype="multipart/form-data">
+                        <img id="imgSign" value="选择附件" width="187" height="40" title="用户签名，点击选择图片！" onclick="selectFile();" style="background-color:white;float: right; width: 187px;cursor:pointer;" />
+                        <input type="file" id="filDoc" name="filDoc" oninput="getFilePath()" style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;" />
+                        <input id="btnUpload" type="button" class="pwKeyButton2" onclick="uploadFile();" style="display:none;" />
+                    </form>
+                </div>
+            </div>
+            <div class="pwRow" style="margin-bottom:0;height:50px;">
+                <div id="cell180" class="cellDiv">
+                    <label class="pwLabel">用户描述:</label>
+                    <textarea id="txtMemo" rows="2" cols="1" class="pwTextarea" style="width:180px;height:50px; float:right;overflow:auto"></textarea>
+                    <input type="hidden" id="hdnSignImg" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="buttonPanel" class="pwBtnPanel">
+        <input id="chkClose" type="checkbox" checked="checked" class="pwCheckbox"/>
+        <label for="chkClose" class="pwLabel">提交后关闭</label>
+        <div style="display:none;">
+            <input id="chkEmployee" type="checkbox" class="pwCheckbox" />
+            <label for="chkEmployee" class="pwLabel">创建人员</label>
+        </div>
+        <input id="btnCancel" type="button" value="取消" class="pwButton2" style="float:right;" />
+        <input id="btnSave" type="button" value="提交保存" class="pwKeyButton2" style="float:right" />
+    </div>
+      
+    <script type="text/javascript">
+        //#region 全局变量
+        var xuserId,permission = null; 
+        var bodyWidth = $(document).width();
+        var bodyHeight = $(document).height();
+        var ml = 10; mt = 10; btnHeight = 32; btnPanelHeight = 35; btnImageWidth = 24;
+        var panelWidth = bodyWidth - ml * 2;
+        var maxHeight = bodyHeight - btnPanelHeight - 28;
+
+        //#endregion 全局变量
+        
+        //#region 网页加载 
+        $(document).ready(function () {
+            xuserId = parent.xuserId;
+            //设置录入面板
+            SetOperatePanel();
+
+            //设置按钮面板
+            SetButtonPanel();
+
+            //窗口调整大小
+            $(window).resize(function () {
+                var pw = parent.document.body.popupWindow;
+                SzdwCommon.rePositionButtonPanel(pw, $("#buttonPanel"));
+                SzdwCommon.reSizeOperatePanel(pw, $("#operatePanel"), $("#buttonPanel"));
+                var body = document.body;
+                bodyWidth = $(body).width();
+                bodyHeight = $(body).height();
+                panelWidth = bodyWidth - ml * 2;
+                maxHeight = bodyHeight - btnPanelHeight - 28;
+            });
+        });
+        //#endregion 网页加载  
+
+        //#region 数据操作面板
+
+        //#region 设置面板
+        function SetOperatePanel() {
+            //#region 设置面板
+            var p = $("#operatePanel");
+            var x = 0;
+            var y = 0;
+            var w = bodyWidth - x * 2;
+            var h = bodyHeight - btnPanelHeight;
+            $(p).addClass("queryPanel").css({ "left": x, "top": y, "min-width": 0, "margin-bottom": "3px", "padding": "0px 0px 15px 0px", "overflow": "hidden" }).outerWidth(w).outerHeight(h, true);
+
+            var cw = w - ml * 2;
+            $(".cellDiv").outerWidth(cw);
+
+            //设置滚动条
+            $(p).addClass("scrollBar2");
+            $(p).mouseover(function () {
+                $(this).css({ "overflow-y": "auto" });
+            }).mouseleave(function () {
+                $(this).css({ "overflow-y": "hidden" });
+            });
+
+            //#endregion 设置面板
+
+            //#region 信息分组 
+
+            //基本信息
+            SetBasicInfoTitle();
+            SetBasicInfoGroup();
+            //#endregion 信息分组 
+
+            //#region 加载验证器
+            LoadValidaor();
+            //#endregion 加载验证器
+
+            CreateSearchButton();
+            BindDdlDepartmentType();
+            BindDdlDepartment();
+        }
+        //#endregion 设置操作面板 
+
+        //#region 单位列表下拉框 
+        //绑定
+
+        function BindDdlDepartmentType() {
+            $.ajax({
+                url: "../Department/DepartmentTypeHandler.ashx",
+                type: "post",
+                data: {
+                    MethodName: "GetDepartmentTypeNameList"
+                },
+                dataType: "json",
+                success: function (jsData) {
+                    if (jsData instanceof Array) {
+                        var jsonList = new Array();
+                        var len = jsData.length;
+                        for (var i = 0; i < len; i++) {
+                            jsonList.push({ Id: jsData[i].Id, Name: jsData[i].Name });
+                        }
+                        var paramDdl = { jsonList: jsonList, fnInitial: InitialDdlDepartmentType };
+                        $("#ddlDepartmentType").dropDownList(paramDdl);
+                        if (jsonList.length > 0) {
+                            $("#ddlDepartmentType").val(jsonList[0].Name).data("value", jsonList[0].Id);
+                            BindDdlDepartment(jsonList[0].Id);
+                        }
+                    }
+                }
+            });
+        }
+
+        function InitialDdlDepartmentType(szdwDdl) {
+            szdwDdl.nonCascadeItemLength = 1;
+            szdwDdl.namingContainer = $("#basicInfoGroup");
+            szdwDdl.fnItemClick = function () {
+                BindDdlDepartment($("#ddlDepartmentType").data("value"));
+            }
+        }
+
+        function BindDdlDepartment(departmentTypeId) {
+            var requestUrl = "../Department/DepartmentHandler.ashx";
+
+            //单位下拉框
+            var paramJson = { xuserId: xuserId, departmentTypeId: departmentTypeId, MethodName: "GetDepartmentListByDepartmentTypeId" };
+            var paramDdlDep = {
+                requestUrl: requestUrl,
+                paramJson: paramJson,
+                fnInitial: InitialDdlDepartment,
+                maxHeight: maxHeight
+            };
+            $("#ddlDepartment").dropDownList(paramDdlDep);
+        }
+
+        //下拉框初始化设置
+        function InitialDdlDepartment(szdwDdl) {
+            szdwDdl.hasSearchBox = 1;
+            szdwDdl.namingContainer = $("#operatePanel");
+            szdwDdl.fnItemClick = function () {
+                var v = $(szdwDdl.targetControl).data("validator");
+                if (v) {
+                    $(v.panel).css({ "display": "none" });
+                }
+            };
+        }
+        //#endregion 单位列表下拉框
+
+        //#region 信息分组
+
+        //#region 基本信息
+
+        //#region 基本信息标题
+        function SetBasicInfoTitle() {
+            var p = $("#basicInfoTitle");
+            var x = 0;
+            var y = 0;
+            var w = bodyWidth;
+            $(p).css({ "position": "relative", "left": x, "top": y }).outerWidth(w);
+
+            //绑定事件
+            $(p).click(function () {
+                SzdwCommon.infoGroupTitleClick(szdwExpBasic, basicInfoValidators);
+            }).mouseover(function () {
+                if (szdwExpBasic.onOff) szdwExpBasic.Show();
+            }).mouseleave(function () {
+                if (szdwExpBasic.onOff) szdwExpBasic.Hide();
+            });
+
+            //加载组显隐开关
+            LoadSzdwExpBasic();
+        }
+        //#endregion 基本信息标题   
+
+        //#region 基本信息显隐
+        var szdwExpBasic = null;
+        function LoadSzdwExpBasic() {
+            if (!szdwExpBasic) {
+                var p = "relative";
+                var x = 0;
+                var y = 0;
+                var w = 56;
+                var h = 22;
+                szdwExpBasic = new SzdwOnOff(p, x, y, w, h);
+                szdwExpBasic.namingContainer = $("#expBasic");
+                szdwExpBasic.visible = false;
+                szdwExpBasic.onOff = true;
+                szdwExpBasic.backColorOn = parent.themeColor ? parent.themeColor : parent.parent.themeColor;
+                szdwExpBasic.fnClickCallBack = FnExpBasic;
+                szdwExpBasic.Load();
+            }
+        }
+
+        //显隐回调函数
+        var basicInfoValidators = [];//存储验证器对象的数组
+        function FnExpBasic() {
+            var arrValidators = basicInfoValidators;
+            //隐藏验证器
+            $.each(arrValidators, function (i, item) {
+                $(item.panel).css({ "display": "none" });
+                item.showing = false;
+            });
+
+            //组面板显示完毕后执行验证
+            var g = $("#basicInfoGroup");
+            $(g).slideToggle(300, null, function () {
+                SzdwCommon.setGroupValidatorsPosition(arrValidators);
+                SzdwCommon.scrollToView(g, $(g).parent());
+            });
+        }
+        //#endregion 基本信息显隐
+
+        //#region 基本信息组
+        function SetBasicInfoGroup() {
+            $("#basicInfoGroup").css({ "position": "relative" }).outerWidth(bodyWidth);
+        }
+
+        //#endregion 基本信息组    
+
+        //#endregion 基本信息
+
+        //#endregion 信息分组   
+
+        //#region 验证
+
+        function LoadValidaor() {
+            var wt = 3;
+
+            //#region 基本信息验证
+            var ncBsc = $("#basicInfoGroup");
+            $("#txtName").szdwValidate({
+                widthType: wt,
+                fnInitial: function (szdwCtrl) {
+                    szdwCtrl.namingContainer = ncBsc;
+                    szdwCtrl.offsetMode = 0;
+                    szdwCtrl.ruleJson = { required: true, pinyinNumber: true, existence: true };
+                    szdwCtrl.existenceRequestUrl = "../Xuser/XuserProcess.ashx";
+                    szdwCtrl.existenceRequestMethodName = "XuserIsExisted";
+                    szdwCtrl.existenceParamName = "userName";//要传到服务端的参数名称
+                    szdwCtrl.submitControl = $("#btnSave");//提交保存数据的控件
+                    basicInfoValidators.push(szdwCtrl);
+                }
+            });
+            $("#ddlDepartment").szdwValidate({
+                widthType: wt,
+                fnInitial: function (szdwCtrl) {
+                    szdwCtrl.namingContainer = ncBsc;
+                    szdwCtrl.offsetMode = 0;
+                    szdwCtrl.ruleJson = { required: true};
+                     szdwCtrl.submitControl = $("#btnSave");//提交保存数据的控件
+                    basicInfoValidators.push(szdwCtrl);
+                }
+            });
+
+            //#endregion 基本信息验证
+        }
+        //#endregion 验证 
+
+        //#region 查询按钮
+        var szdwSearchButton = null;
+        function CreateSearchButton() {
+            var nc = $("#btnQueryName");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = 0;
+            var h = 26;
+            szdwSearchButton = new SzdwButton(p, x, y, w, h);
+            szdwSearchButton.namingContainer = nc;
+            szdwSearchButton.imageWidth = btnImageWidth;
+            szdwSearchButton.image = "../Image/Search16wr.png";
+            szdwSearchButton.btnCssJson["background-color"] = "#666666";
+            szdwSearchButton.btnCssJson["border"] = "1px solid #666666";
+            szdwSearchButton.btnCssJson["border-left"] = "1px solid #777777";
+            szdwSearchButton.btnHoverCssJson["background-color"] = "#707070";
+            szdwSearchButton.btnHoverCssJson["border"] = "1px solid #666666";
+            szdwSearchButton.btnHoverCssJson["border-left"] = "1px solid #777777";
+            szdwSearchButton.title = "人员名称筛选";
+            szdwSearchButton.Load();
+
+            //单击事件
+            var btn = szdwSearchButton.button;
+            $(btn).click(function (e) {
+                //var nameValid = $("#txtName").prop("validator");
+                //$(nameValid.panel).css("display", "none");
+                //nameValid.showing = false;
+                parent.OpenEmployeeWin();
+                e.stopPropagation();
+            });
+        }
+        //#endregion 查询按钮 
+
+        //#endregion 数据操作面板 
+
+        //#region 按钮面板
+
+        //#region 设置按钮面板
+        function SetButtonPanel() {
+            var p = $("#buttonPanel");
+            var w = bodyWidth;
+            var h = btnPanelHeight;
+            var x = 0;
+            var y = bodyHeight - h - 2;
+            $(p).css({ "position": "relative", "left": x, "top": y, "padding": "5px 10px 0px 5px" });
+            $(p).outerWidth(w).outerHeight(h);
+
+            //按钮事件绑定
+            ButtonHandler();
+        }
+        //#endregion 设置按钮面板
+
+        //#region 签名图片处理
+        function selectFile() {
+            //触发 文件选择的click事件  
+            $("#filDoc").trigger("click");
+        }
+
+        function uploadFile() {
+            var paramJson = {
+                XuserId: xuserId,
+                MethodName: "UploadFile",
+                enctype: 'multipart/form-data'
+            };
+
+            $("#formFile").ajaxSubmit({
+                url: "SignImgHandler.ashx"
+                , type: "post"
+                , data: paramJson
+                , dataType: "json"
+                , success: function (data) {
+                    if (data&&data.IsOk) {
+                        $("#imgSign").prop("src", data.FileName);
+                        $("#hdnSignImg").val(data.FileName);
+                    }
+                    else {
+                        alert("上传文件出错！");
+                    }
+                }
+                , error: function () {
+                    alert("上传文件出错！");
+                }
+            });
+        }
+
+        function getFilePath() {
+            $("#btnUpload").trigger("click");
+        }
+        //#endregion
+
+        //#region 按钮事件
+        function ButtonHandler() {
+            //获取弹窗
+            var pw = parent.document.body.popupWindow;
+
+            //绑定事件
+            $("#btnSave").click(function () {
+                //验证  
+                var isValid = GetValidResult();
+                var disabled = $(this).attr("disabled");
+
+                //验证通过写入数据
+                if (isValid && disabled) {
+                    $(this).attr("disabled", true);
+
+                    //显示操作信息
+                    SzdwCommon.showOperateInfoPanel(parent.opInfoPanel, parent.CreateOperateInfoPanel, "正在添加记录…");
+
+                    //写入数据
+                    var name = $("#txtName").val();
+                    var nameCN = $("#txtNameCN").val();
+                    var memo = $("#txtMemo").val();
+                    var departmentId = $("#ddlDepartment").data("value");
+                    var isCreateEmployee = $("#chkEmployee").prop("checked") ? 1 : 0;
+                    var signImg = $("#hdnSignImg").val();
+                    var creatorId = xuserId;
+                    var requestUrl = "XuserProcess.ashx";
+                    var paramJson = { Name: name, NameCN: nameCN, DepartmentId: departmentId,signImg:signImg, Memo: memo, CreatorId: creatorId, isCreateEmployee: isCreateEmployee, MethodName: "XuserInsert" };
+                    SzdwAjaxDataOperate.ajaxInsert(null, requestUrl, paramJson, OperateCallBack);
+                }
+            });
+
+            $("#btnCancel").click(function () {
+                pw.Hide();
+            });
+        }
+
+        //#endregion 按钮事件        
+
+        //#region 获取验证结果
+        function GetValidResult() {
+            var basicValid = SzdwCommon.getGroupValidation(basicInfoValidators);
+            if (!basicValid && !szdwExpBasic.onOff) {
+                szdwExpBasic.Click();
+            }
+
+            var isValid = basicValid;
+
+            return isValid;
+        }
+        //#endregion 获取验证结果
+
+        //#region 回调函数
+        function OperateCallBack() {
+            $("#txtName").val("").focus();
+            $("#txtNameCN").val("");
+            $("#ddlDepartment").val("").data("value", 0);
+            $("#txtMemo").val("");
+            $("#btnSave").attr("disabled", false);
+
+            SzdwCommon.hideOperateInfoPanel(parent.opInfoPanel, "添加记录成功");
+            parent.RefreshDataAfterInsert();
+            if ($("#chkClose").prop("checked")) {
+                $("#btnCancel").trigger("click");
+            }
+        }
+        //#endregion 回调函数
+
+        //#endregion 按钮面板      
+    </script>
+</body>
+</html>

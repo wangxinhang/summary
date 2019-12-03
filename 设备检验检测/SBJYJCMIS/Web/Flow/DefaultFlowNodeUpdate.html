@@ -1,0 +1,582 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../Styles/Query.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/ScrollBar.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwPopupWindow.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwAjaxDataOperate.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwValidator.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwOnOff.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwDropDownList.js" type="text/javascript"></script>
+    <style type="text/css">
+        input::-ms-clear
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+    <div id="operatePanel">
+        <div id="flowInfoTitle" class="groupTitle" style="cursor: pointer;">
+            <label>
+                流程类别
+            </label>
+            <div id="expFlow" style="float: right">
+            </div>
+        </div>
+        <div id="flowInfoGroup" class="groupPanel" style="height:25px;">
+            <div class="pwRow">
+                <div id="cell40" class="cellDiv">
+                    <label for="ddlFlow" class="pwLabel">
+                        流程类别:
+                    </label>
+                    <input id="ddlFlow" type="text" class="pwDropDownList" style="width: 180px; float: right" />
+                </div>
+            </div>
+        </div>
+        <div id="basicInfoTitle" class="groupTitle" style="cursor: pointer;">
+            <label>
+                默认节点信息</label>
+            <div id="expBasic" style="float: right">
+            </div>
+        </div>
+        <div id="basicInfoGroup" class="groupPanel">
+            <div class="pwRow">
+                <div id="cell00" class="cellDiv">
+                    <label for="ddlDepartment" class="pwLabel">
+                        单位/部门:
+                    </label>
+                    <input id="ddlDepartment" type="text" class="pwDropDownList" style="width: 180px;
+                        float: right" />
+                </div>
+            </div>
+            <div class="pwRow">
+                <div id="cell00" class="cellDiv">
+                    <label for="ddlFlowNode" class="pwLabel">
+                        节点名称:
+                    </label>
+                    <input id="ddlFlowNode" type="text" class="pwDropDownList" style="width: 180px;
+                        float: right" />
+                </div>
+            </div>
+            <div class="pwRow">
+                <div id="Div1" class="cellDiv">
+                    <label for="ddlRole" class="pwLabel">
+                        角色名称:
+                    </label>
+                    <input id="ddlRole" type="text" class="pwDropDownList" style="width: 180px; float: right" />
+                </div>
+            </div>
+            <div class="pwRow">
+                <div id="Div1" class="cellDiv">
+                    <label for="ddlXuser" class="pwLabel">
+                        用户名称:
+                    </label>
+                    <input id="ddlXuser" type="text" class="pwDropDownList" style="width: 180px; float: right" />
+                </div>
+            </div>
+            <div class="pwRow" style="margin-bottom: 0; height: 50px;">
+                <div id="cell180" class="cellDiv">
+                    <label class="pwLabel">
+                        默认描述:
+                    </label>
+                    <textarea id="txtMemo" rows="2" cols="1" class="pwTextarea" style="width: 180px;
+                        height: 50px; float: right; overflow: auto"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="buttonPanel" class="pwBtnPanel">
+        <input id="btnCancel" type="button" value="取消" class="pwButton2" style="float: right;" />
+        <input id="btnSave" type="button" value="提交保存" class="pwKeyButton2" style="float: right" />
+    </div>
+    </form>
+    <script type="text/javascript">
+        //#region 全局变量
+        var permission = null;
+        var bodyWidth = $(document).width();
+        var bodyHeight = $(document).height();
+        var ml = 10; mt = 10; btnHeight = 32; btnPanelHeight = 35;
+        var panelWidth = bodyWidth - ml * 2;
+        //#endregion 全局变量
+
+        //#region 网页加载 
+        $(document).ready(function () {
+            //设置录入面板
+            SetOperatePanel();
+
+            //设置按钮面板
+            SetButtonPanel();
+
+            //窗口调整大小
+            $(window).resize(function () {
+                var pw = parent.document.body.popupWindow;
+                SzdwCommon.rePositionButtonPanel(pw, $("#buttonPanel"));
+                SzdwCommon.reSizeOperatePanel(pw, $("#operatePanel"), $("#buttonPanel"));
+            });
+        });
+        //#endregion 网页加载  
+
+        //#region 数据操作面板
+
+        //#region 设置面板
+        function SetOperatePanel() {
+            //#region 设置面板
+            var p = $("#operatePanel");
+            var x = 0;
+            var y = 0;
+            var w = bodyWidth - x * 2;
+            var h = bodyHeight - btnPanelHeight;
+            $(p).addClass("queryPanel").css({ "left": x, "top": y, "min-width": 0, "margin-bottom": "3px", "padding": "0px 0px 15px 0px", "overflow": "hidden" }).outerWidth(w).outerHeight(h, true);
+
+            var cw = w - ml * 2;
+            $(".cellDiv").outerWidth(cw);
+
+            //设置滚动条
+            $(p).addClass("scrollBar2");
+            $(p).mouseover(function () {
+                $(this).css({ "overflow-y": "auto" });
+            }).mouseleave(function () {
+                $(this).css({ "overflow-y": "hidden" });
+            });
+
+            //#endregion 设置面板
+
+            //#region 信息分组 
+            SetFlowSituationTitle();
+            SetFlowBasicInfoGroup();
+            //基本信息
+            SetBasicInfoTitle();
+            SetBasicInfoGroup();
+            //#endregion 信息分组 
+
+            //加载下拉框数据
+            BindDdlFlow();
+            BindDdlDepartment();
+            BindDdlFlowNode();
+            BindDdlRole();
+            BindDdlXuser();
+
+            //#region 加载验证器
+           LoadValidaor();
+            //#endregion 加载验证器
+        }
+        //#endregion 设置操作面板 
+
+        //#region 下拉框
+
+        //#region 流程类别列表下拉框
+        var szdwDdlFlow = null;
+        function BindDdlFlow() {
+            var requestUrl = "../Permission/PermissionDropDwonListProcess.ashx";
+            //部门下拉框
+            var paramJson = { MethodName: "GetFlowList" };
+            var paramDdlDep = { requestUrl: requestUrl, paramJson: paramJson, fnInitial: InitialDdlFlow, maxHeight: 260 };
+            $("#ddlFlow").dropDownList(paramDdlDep);
+            $("#ddlFlow").val("请选择");
+            $("#ddlFlow").data("value", 0);
+        }
+
+        //下拉框初始化设置
+        function InitialDdlFlow(szdwDdl) {
+            szdwDdl.namingContainer = $("#operatePanel");
+            szdwDdl.fnItemClick = function () {
+                var v = $(szdwDdl.targetControl).data("validator");
+                if (v) {
+                    $(v.panel).css({ "display": "none" });
+                }
+            };
+        }
+        //#endregion 部门列表下拉框
+
+        //#region 部门下拉框
+        //绑定下拉框到目标控件
+        var szdwDdlDepartment = null;
+        function BindDdlDepartment() {
+            var qsJson = $.parseJSON(SzdwCommon.getQueryString("paramJson"));
+            var requestUrl = "../Permission/PermissionDropDwonListProcess.ashx";
+
+            //部门下拉框
+            var paramJson = { XuserId: parent.xuserId, MethodName: "GetDepartmentList" };
+            var paramDdlDep = { requestUrl: requestUrl, paramJson: paramJson, fnInitial: InitialDdlDepartment };
+            $("#ddlDepartment").dropDownList(paramDdlDep);
+        }
+
+        //通用下拉框初始化设置
+        function InitialDdlDepartment(szdwDdl) {
+            szdwDdl.namingContainer = $("#operatePanel");
+            szdwDdl.fnItemClick = function () {
+                departmentId = $("#ddlDepartment").data("value");
+                //选择单位下的节点列表
+                BindDdlFlowNode();
+                var v = $(szdwDdl.targetControl).data("validator");
+                if (v) {
+                    $(v.panel).css({ "display": "none" });
+                }
+            };
+        }
+        //#endregion 部门下拉框
+
+        //#region 节点下拉框
+        var szdwDdlFlowNode = null;
+        function BindDdlFlowNode() {
+            var requestUrl = "../Permission/PermissionDropDwonListProcess.ashx";
+            var departmentId = $("#ddlDepartment").data("value");
+            //部门下拉框
+            var pjDdlDep = { departmentId: departmentId, MethodName: "GetFlowNodeListByDepartmentId" };
+            var paramDdlDep = { requestUrl: requestUrl, paramJson: pjDdlDep, fnInitial: InitialDdlFlowNode, maxHeight: 300 };
+            $("#ddlFlowNode").dropDownList(paramDdlDep);
+        }
+        //下拉框初始化设置
+        function InitialDdlFlowNode(szdwDdl) {
+            szdwDdl.namingContainer = $("#operatePanel");
+            szdwDdl.fnItemClick = function () {
+                //绑定节点下的角色列表
+                BindDdlRole();
+                var v = $(szdwDdl.targetControl).data("validator");
+                if (v) {
+                    $(v.panel).css({ "display": "none" });
+                }
+            };
+        }
+        //#endregion 提交节点下拉框
+
+        //#region 角色下拉框
+        var szdwDdlRole = null;
+        function BindDdlRole() {
+            var requestUrl = "FlowNodeDefaultSettingProcess.ashx";
+            var flowNodeId = $("#ddlFlowNode").data("value");
+            //审批节点下拉框
+            var pjDdlDep = { name: null, flowNodeId: flowNodeId, MethodName: "GetRoleList" };
+            var paramDdlDep = { requestUrl: requestUrl, paramJson: pjDdlDep, fnInitial: InitialDdlRole, maxHeight: 300 };
+            $("#ddlRole").dropDownList(paramDdlDep);
+        }
+        //下拉框初始化设置
+        function InitialDdlRole(szdwDdl) {
+            szdwDdl.namingContainer = $("#operatePanel");
+            szdwDdl.fnItemClick = function () {
+                BindDdlXuser();
+                var v = $(szdwDdl.targetControl).data("validator");
+                if (v) {
+                    $(v.panel).css({ "display": "none" });
+                }
+            };
+        }
+        //#endregion 审批节点下拉框
+
+        //#region 用户下拉框
+        var szdwDdlXuser = null;
+        function BindDdlXuser() {
+            var requestUrl = "FlowNodeDefaultSettingProcess.ashx";
+            var roleId = $("#ddlRole").data("value");
+            //部门下拉框
+            var pjDdlDep = { roleId: roleId, MethodName: "GetXuserList" };
+            var paramDdlDep = { requestUrl: requestUrl, paramJson: pjDdlDep };
+            $("#ddlXuser").dropDownList(paramDdlDep);
+        }
+        //#endregion 用户下拉框
+
+        //#endregion 下拉框 
+
+        //#region 设置流程类别标题
+        function SetFlowSituationTitle() {
+            var p = $("#flowInfoTitle");
+            var x = 0;
+            var y = 0;
+            var w = bodyWidth;
+            $(p).css({ "position": "relative", "left": x, "top": y }).outerWidth(w);
+
+            //绑定事件
+            $(p).click(function () {
+                SzdwCommon.infoGroupTitleClick(szdwExpFlowBasic, flowBasicInfoValidators);
+            }).mouseover(function () {
+                if (szdwExpFlowBasic.onOff) szdwExpFlowBasic.Show();
+            }).mouseleave(function () {
+                if (szdwExpFlowBasic.onOff) szdwExpFlowBasic.Hide();
+            });
+
+            //加载组显隐开关
+            LoadSzdwExpFlowBasic();
+        }
+
+        //加载组显隐开关
+        var szdwExpFlowBasic = null;
+        function LoadSzdwExpFlowBasic() {
+            if (!szdwExpFlowBasic) {
+                var p = "relative";
+                var x = 0;
+                var y = 0;
+                var w = 56;
+                var h = 22;
+                szdwExpFlowBasic = new SzdwOnOff(p, x, y, w, h);
+                szdwExpFlowBasic.namingContainer = $("#expFlow");
+                szdwExpFlowBasic.visible = false;
+                szdwExpFlowBasic.onOff = true;
+                szdwExpFlowBasic.backColorOn = parent.themeColor ? parent.themeColor : parent.parent.themeColor;
+                szdwExpFlowBasic.fnClickCallBack = FnExpFlowBasic;
+                szdwExpFlowBasic.Load();
+            }
+        }
+
+        //显隐回调函数
+        var flowBasicInfoValidators = []; //存储验证器对象的数组
+        function FnExpFlowBasic() {
+            var arrValidators = flowBasicInfoValidators;
+            //隐藏验证器
+            $.each(arrValidators, function (i, item) {
+                $(item.panel).css({ "display": "none" });
+                item.showing = false;
+            });
+
+            //组面板显示完毕后执行验证
+            var g = $("#flowInfoGroup");
+            $(g).slideToggle(300, null, function () {
+                SzdwCommon.setGroupValidatorsPosition(arrValidators);
+                SzdwCommon.scrollToView(g, $(g).parent());
+            });
+        }
+
+        //加载样式
+        function SetFlowBasicInfoGroup() {
+            $("#flowInfoGroup").css({ "position": "relative" }).outerWidth(bodyWidth);
+        }
+
+        //#endregion 设置流程类别
+
+        //#region 基本信息标题
+        function SetBasicInfoTitle() {
+            var p = $("#basicInfoTitle");
+            var x = 0;
+            var y = 0;
+            var w = bodyWidth;
+            $(p).css({ "position": "relative", "left": x, "top": y }).outerWidth(w);
+
+            //绑定事件
+            $(p).click(function () {
+                SzdwCommon.infoGroupTitleClick(szdwExpBasic, basicInfoValidators);
+            }).mouseover(function () {
+                if (szdwExpBasic.onOff) szdwExpBasic.Show();
+            }).mouseleave(function () {
+                if (szdwExpBasic.onOff) szdwExpBasic.Hide();
+            });
+
+            //加载组显隐开关
+            LoadSzdwExpBasic();
+        }
+        //#endregion 基本信息标题   
+        //#region 基本信息显隐
+        var szdwExpBasic = null;
+        function LoadSzdwExpBasic() {
+            if (!szdwExpBasic) {
+                var p = "relative";
+                var x = 0;
+                var y = 0;
+                var w = 56;
+                var h = 22;
+                szdwExpBasic = new SzdwOnOff(p, x, y, w, h);
+                szdwExpBasic.namingContainer = $("#expBasic");
+                szdwExpBasic.visible = false;
+                szdwExpBasic.onOff = true;
+                szdwExpBasic.backColorOn = parent.themeColor ? parent.themeColor : parent.parent.themeColor;
+                szdwExpBasic.fnClickCallBack = FnExpBasic;
+                szdwExpBasic.Load();
+            }
+        }
+
+        //显隐回调函数
+        var basicInfoValidators = []; //存储验证器对象的数组
+        function FnExpBasic() {
+            var arrValidators = basicInfoValidators;
+            //隐藏验证器
+            $.each(arrValidators, function (i, item) {
+                $(item.panel).css({ "display": "none" });
+                item.showing = false;
+            });
+
+            //组面板显示完毕后执行验证
+            var g = $("#basicInfoGroup");
+            $(g).slideToggle(300, null, function () {
+                SzdwCommon.setGroupValidatorsPosition(arrValidators);
+                SzdwCommon.scrollToView(g, $(g).parent());
+            });
+        }
+        //#endregion 基本信息显隐
+        //#region 基本信息组
+        function SetBasicInfoGroup() {
+            $("#basicInfoGroup").css({ "position": "relative" }).outerWidth(bodyWidth);
+        }
+
+        //#endregion 基本信息组 
+
+        //#region 验证
+
+        function LoadValidaor() {
+            var wt = 3;
+
+            var ncBsc = $("#flowInfoGroup");
+            $("#ddlFlow").szdwValidate({
+                widthType: wt,
+                fnInitial: function (szdwCtrl) {
+                    szdwCtrl.namingContainer = ncBsc;
+                    szdwCtrl.offsetMode = 0;
+                    szdwCtrl.ruleJson = { required: true };
+                    flowBasicInfoValidators.push(szdwCtrl);
+                }
+            });
+
+            //#region 基本信息验证
+            var ncBsc = $("#basicInfoGroup");
+            $("#ddlDepartment").szdwValidate({
+                widthType: wt,
+                fnInitial: function (szdwCtrl) {
+                    szdwCtrl.namingContainer = ncBsc;
+                    szdwCtrl.offsetMode = 0;
+                    szdwCtrl.ruleJson = { required: true };
+                    basicInfoValidators.push(szdwCtrl);
+                }
+            });
+            $("#ddlFlowNode").szdwValidate({
+                widthType: wt,
+                fnInitial: function (szdwCtrl) {
+                    szdwCtrl.namingContainer = ncBsc;
+                    szdwCtrl.offsetMode = 0;
+                    szdwCtrl.ruleJson = { required: true };
+                    basicInfoValidators.push(szdwCtrl);
+                }
+            });
+            $("#ddlRole").szdwValidate({
+                widthType: wt,
+                fnInitial: function (szdwCtrl) {
+                    szdwCtrl.namingContainer = ncBsc;
+                    szdwCtrl.offsetMode = 0;
+                    szdwCtrl.ruleJson = { required: true };
+                    basicInfoValidators.push(szdwCtrl);
+                }
+            });
+            $("#ddlXuser").szdwValidate({
+                widthType: wt,
+                fnInitial: function (szdwCtrl) {
+                    szdwCtrl.namingContainer = ncBsc;
+                    szdwCtrl.offsetMode = 0;
+                    szdwCtrl.ruleJson = { required: true };
+                    basicInfoValidators.push(szdwCtrl);
+                }
+            });
+
+            //#endregion 基本信息验证
+        }
+        //#endregion 验证 
+
+        //#region 按钮面板
+
+        //#region 设置按钮面板
+        function SetButtonPanel() {
+            var p = $("#buttonPanel");
+            var w = bodyWidth;
+            var h = btnPanelHeight;
+            var x = 0;
+            var y = bodyHeight - h - 2;
+            $(p).css({ "position": "relative", "left": x, "top": y, "padding": "5px 10px 0px 5px" });
+            $(p).outerWidth(w).outerHeight(h);
+
+            //按钮事件绑定
+            ButtonHandler();
+        }
+        //#endregion 设置按钮面板 
+
+        //#region 按钮事件
+        function ButtonHandler() {
+            //获取弹窗
+            var pw = parent.document.body.popupWindow;
+            var szdwGv = parent.szdwGv;
+
+            //绑定现有数据
+            var qsJson = $.parseJSON(SzdwCommon.getQueryString("paramJson"));
+            $("#txtMemo").val(qsJson.memo);
+            $("#ddlFlow").val(qsJson.flow);
+            $("#ddlFlow").data("value", qsJson.flowId);
+            $("#ddlDepartment").val(qsJson.department);
+            $("#ddlDepartment").data("value", qsJson.departmentId);
+            $("#ddlFlowNode").val(qsJson.flowNode);
+            $("#ddlFlowNode").data("value",  qsJson.flowNodeId);
+            $("#ddlRole").val(qsJson.role);
+            $("#ddlRole").data("value", qsJson.roleId);
+            $("#ddlXuser").val(qsJson.xuser);
+            $("#ddlXuser").data("value", qsJson.xuserId);
+
+
+            //绑定事件
+            $("#btnSave").click(function () {
+                //验证  
+                var isValid = GetValidResult();
+                if(isValid){
+                //显示操作信息
+                SzdwCommon.showOperateInfoPanel(parent.opInfoPanel, parent.CreateOperateInfoPanel, "正在更新记录…");
+                var oldAllowRecoverRow = szdwGv.allowRecoverRowStyleWhenDataBinding;
+                szdwGv.allowRecoverRowStyleWhenDataBinding = false;
+
+                //更新数据
+                var id = qsJson.id;
+                var departmentId = $("#ddlDepartment").data("value");
+                var flowNodeId = $("#ddlFlowNode").data("value");
+                var roleId = $("#ddlRole").data("value");
+                var xuserId = $("#ddlXuser").data("value");
+                var flowId = $("#ddlFlow").data("value");
+                var memo = $("#txtMemo").val();
+                var objDataBind = szdwGv;
+                var modifierId = qsJson.modifierId;
+
+                var requestUrl = "DefaultFlowNodeProcess.ashx";
+                var paramJson = { Id: id, DepartmentId: departmentId, FlowNodeId: flowNodeId, RoleId: roleId, XuserId: xuserId, FlowId: flowId, ModifierId: modifierId, Memo: memo, MethodName: "DefaultFlowNodeUpdate" };
+
+                $.ajax({
+                    url: requestUrl, type: "post", data: paramJson, dataType: "json",
+                    success: function (jsonData) {
+                        if (jsonData.isUpdated) {
+                            SzdwCommon.hideOperateInfoPanel(parent.opInfoPanel, "记录更新成功", parent.RecoverSelectedRow);
+                            if (szdwGv) { szdwGv.DataBind(); szdwGv.allowRecoverRowStyleWhenDataBinding = oldAllowRecoverRow; }
+                            pw.Hide();
+                        }
+                        else {
+                            SzdwCommon.hideOperateInfoPanel(parent.opInfoPanel, "记录更新失败", parent.RecoverSelectedRow);
+                            alert("更新记录失败！请查看检查更新数据");
+                        }
+                    }
+                });
+            }
+            });
+
+            $("#btnCancel").click(function () {
+                pw.Hide();
+                pw.fnClose();
+            });
+        }
+
+        //#region 获取验证结果
+        function GetValidResult() {
+            var flowValid = SzdwCommon.getGroupValidation(flowBasicInfoValidators);
+            if (!flowValid && !szdwExpFlowBasic.onOff) {
+                szdwExpFlowBasic.Click();
+            }
+
+            var basicValid = SzdwCommon.getGroupValidation(basicInfoValidators);
+            if (!basicValid && !szdwExpBasic.onOff) {
+                szdwExpBasic.Click();
+            }
+
+            var isValid = flowValid && basicValid;
+
+            return isValid;
+        }
+        //#endregion 获取验证结果
+
+        //#endregion 按钮事件   
+
+        //#endregion 按钮面板      
+    </script>
+</body>
+</html>

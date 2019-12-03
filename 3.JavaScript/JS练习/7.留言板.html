@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		input[type="text"] {
+			width: 400px;
+		}
+
+		#box {
+			width: 440px;
+			height: 200px;
+			border: 1px solid red;
+			overflow: auto;
+		}
+	</style>
+</head>
+
+<body>
+	<input type="text" name="text" id="" value="" />
+	<input type="submit" name="submit" id="" value="提交" />
+	<div id="box">
+
+	</div>
+</body>
+
+</html>
+<script type="text/javascript">
+	window.onload = function () {
+		//	1.获取标签
+		var oText = document.getElementsByName("text")[0];
+		var oSubmit = document.getElementsByName("submit")[0];
+		var oBox = document.getElementById("box");
+		var oBody = document.getElementsByTagName("body")[0];
+		//	2.绑定点击事件
+		oSubmit.onclick = function () {
+			if (oText.value == "") {
+				alert("请输入内容，不能为空");
+			} else {
+				createTag();
+				oText.value = "";
+			}
+		}
+
+		function createTag() {
+			// 2.4.1.1获取创建的老的所有div
+			var oldSmallBox = oBox.getElementsByTagName("div");
+			
+			//	2.1创建div
+			var smallBox = document.createElement("div");
+			smallBox.setAttribute("style", "overflow: hidden;");
+
+			//	2.2创建p标签
+			var op = document.createElement("p");
+			op.setAttribute("style", "width: 380px; height:20px; margin-left:10px; float: left;");
+
+			//	2.3创建a标签
+			var oa = document.createElement("a");
+			oa.setAttribute("href", "#");
+			oa.setAttribute("style", "margin-right:10px; float: right;");
+			var aText = document.createTextNode("删除");
+			oa.appendChild(aText);
+			//第二种添加文本也可以 oa.innerText = "删除";
+
+			//	2.4将p，a标签以及input的内容添加到指定位置
+			var pText = document.createTextNode(oText.value);
+			op.appendChild(pText);
+			smallBox.appendChild(op);
+			smallBox.appendChild(oa);
+			// 2.4.1将div始终加入到box的最上面
+			// 2.4.1.2判断
+			if (oldSmallBox.length > 0) {
+				oBox.insertBefore(smallBox, oldSmallBox[0]);
+			} else {
+				oBox.appendChild(smallBox);
+			}
+
+			// 2.5遍历a标签，删除box
+			var aAll = oBox.getElementsByTagName("a");
+			for (var i = 0; i < aAll.length; i++) {
+				aAll[i].onclick = function () {
+					oBox.removeChild(this.parentNode);
+				}
+			}
+		}
+	}
+</script>

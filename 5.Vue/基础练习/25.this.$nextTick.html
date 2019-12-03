@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="file">
+        <button @click="show">点击改变msg</button>
+        <p ref="p1">{{msg}}</p>
+        <p ref="p2">{{msg1}}</p>
+        <p ref="p3">{{msg1}}</p>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+        // filter
+        new Vue({
+            el: '#app',
+            data: {
+                msg: "我是原来的msg",
+                msg1: ""
+            },
+            methods: {
+                show() {
+                    this.msg = "我是改变后的msg";
+                    this.$nextTick(() => {
+                        this.$refs.p2.innerHTML = this.$refs.p1.innerHTML
+                    })
+                    this.$refs.p3.innerHTML = this.$refs.p1.innerHTML
+
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+﻿
+
+/*#region 系统登录信息*/
+.loginPanel {
+    position: relative;
+    background-color: #082950;
+    width: 100%;
+    height: 430px;
+}
+/*#endregion 系统登录信息*/
+/*#region 用户登录*/
+.userPassLogin {
+    position: relative;
+    height: 30px;
+}
+
+.userPassLabel {
+    float: left;
+    line-height: 30px;
+    font-family: 微软雅黑;
+    font-size: 11pt;
+}
+
+.userPassText {
+    float: left;
+    background-color: white; /*width:230px;background-color:green;*/ /*888888;ef473a;border:1px solid #AAAAAA;*/
+}
+
+
+.userImage {
+    position: relative;
+    float: left;
+    background: url("../Image/user20DS.png") no-repeat center;
+    width: 30px;
+    height: 29px;
+    border-right: 1px solid #cfcdcd;
+}
+
+.passImage {
+    position: relative;
+    float: left;
+    background: url("../Image/lock21DS.png") no-repeat center;
+    width: 30px;
+    height: 28px;
+    border-right: 0px solid #cfcdcd;
+    background-color: white;
+    border: 1px solid #cfcdcd;
+    border-right: 0px;
+}
+
+.userBtnImage {
+    position: relative;
+    float: left;
+    background: url("../Image/arrow20w.png") no-repeat center #DDDDDD;
+    cursor: pointer;
+}
+
+.textBox {
+    position: relative;
+    float: left;
+    border: 0px;
+    padding: 3px 6px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14pt;
+    color: #606060; /*background-color:#ef473a;*/
+    background-color: white;
+}
+
+.btnLogin {
+    position: relative;
+    width: 50px;
+    float: right;
+    font-family: 微软雅黑;
+    font-size: 11pt;
+    color: White;
+    cursor: pointer;
+    margin: 0px 0px 0px 0px;
+    text-align: center;
+    background-color: #808080;
+    height: 30px;
+    line-height: 30px;
+}
+
+    .btnLogin:hover {
+        opacity: 0.8;
+        color: red;
+    }
+
+.btnLoginDisable {
+    position: relative;
+    font-family: 微软雅黑;
+    font-size: 11pt;
+    color: #EEEEEE;
+    cursor: not-allowed;
+    margin: 0px 0px 0px 0px;
+    text-align: center;
+    background-color: silver;
+    height: 36px;
+    line-height: 36px;
+}
+
+.borderRadius4 {
+    border-radius: 3px;
+    moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.validatorBorderRadius {
+    border-radius: 0px 3px 3px 0px;
+    moz-border-radius: 0px 3px 3px 0px;
+    -webkit-border-radius: 0px 3px 3px 0px;
+}
+/*#endregion 用户登录*/
+.pwSpan {
+    float: left;
+    line-height: 26px;
+    padding-right: 2px;
+    color: White;
+    text-align: right;
+}
+
+.diyUploadHover {
+    float: left;
+    border: 1px solid silver;
+    width: 100px;
+    height: 110px;
+    margin-right: 10px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+}
+
+.viewThumbA {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 110px;
+    overflow: hidden;
+}
+
+.imgA {
+    width: 100%;
+    height: 100%;
+}
+
+.diyFileNameA {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    display: block;
+    border: 1px solid black;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.dateTextBox {
+    float: left;
+    width: 256px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0px 3px 0px 3px;
+    color: White;
+    border: 1px solid silver;
+    background-color: white;
+    opacity: 0.9;
+}
+
+.XTextarea {
+    float: left;
+    font-family: 微软雅黑, Arial, Helvetica, sans-serif;
+    font-size: small;
+    width: 290px;
+    height: 25px;
+    line-height: 20px;
+    padding: 0px 3px 0px 3px;
+    overflow:auto;
+    color: black;
+    border: 1px solid silver;
+    background-color: white;
+    opacity: 0.9;
+}
+.pwKeyButton2T
+{
+    position:relative;float:left;width:70px;height:26px;margin-left:5px;border:1px solid gray;background-color:#808080;cursor:pointer;color:White;
+}
+
+.pwKeyButton2T:hover
+{
+    background-color:#505050;color:red; 
+}
+
+.pwButton2T
+{
+    position:relative;float:left;width:70px;height:26px;margin-left:5px;border:1px solid gray;background-color:#808080;cursor:pointer;color:White;
+}
+
+.pwButton2T:hover
+{
+    background-color:#505050;color:red;
+}

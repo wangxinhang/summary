@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <div id="box">
+            <my-data></my-data>
+    </div>
+    <div id="box1">
+            <my-data></my-data>
+    </div>
+    <my-data></my-data>
+
+    <script src="vue.js"></script>
+    <script>
+    /*
+        //1.创建组件构造器:构造出一个你要的组件
+        let Profile = Vue.extend({
+           //1.1 模板选项
+           template: `
+            <div>
+               <input type="date"></input>  
+               <p>今天已经时冬天了！</p> 
+            </div>
+           `
+        });
+        //2.注册成全局的组件
+        Vue.component("my-data", Profile);
+    */
+
+    //上述两步可以见简化成一步
+    Vue.component("my-data",{
+           //1.1 模板选项
+           template: `
+            <div>
+               <input type="date"></input>  
+               <p>今天已经时冬天了！</p> 
+            </div>
+           `
+    });
+    //实例化
+        new Vue({
+           el:"#box",
+        });
+        
+        new Vue({
+           el:"#box1",
+        })
+    </script>
+</body>
+
+</html>

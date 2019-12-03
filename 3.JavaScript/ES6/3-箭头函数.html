@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // window.onload = function () {
+
+            var x = 11;
+
+            var obj = {
+                x: 22,
+                say: () => {
+                    console.log(this.x);
+                }
+            }
+            obj.say();
+            //输出的值为11
+
+            
+            // 不定参数：函数参数允许使用延展运算符，表示不确定参数个数。
+            function show(...args) { console.log(args) };
+            show(1, 2);      // [ 1, 2 ]
+            show(1, 2, 3, 4, 5);      // [ 1, 2, 3, 4, 5 ]
+
+
+
+            // // 1.this问题，this指的是定义箭头函数所在的对象，而不是运行时所在的对象（window）
+            // let x = 11;
+            // let obj = {
+            //     x: 22,
+            //     say: function () {
+            //         // console.log(this.x);
+            //     }
+            // }
+            // obj.say();
+
+            // let y = 2;
+
+            // function fn1() {
+            //     let y = 11;
+            //     let obj1 = {
+            //         x: 30,
+            //         y: 22,
+            //         say: () => {
+            //             console.log(this.y);
+            //         }
+
+            //     }
+            //     obj1.say();
+
+            // }
+            // let fn2 = fn1();
+
+
+            // //输出的值为11
+            // //  2.箭头函数是没有arguments对象的，可以用...来代替
+            // // 3.箭头函数不能当构造函数来使用的
+            // let show = (...args) => {
+            //     console.log(args)
+            // };
+            // show(1, 2, 3);
+        // }
+    </script>
+</body>
+
+</html>

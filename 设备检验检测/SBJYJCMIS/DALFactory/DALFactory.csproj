@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{52A57185-380E-47B2-A249-673DFF192354}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SBJYJCMIS.DALFactory</RootNamespace>
+    <AssemblyName>SBJYJCMIS.DALFactory</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contract\ContractDataAccess.cs" />
+    <Compile Include="Flow\FlowDataAccess.cs" />
+    <Compile Include="InspectionOrgan\InspectionOrganDataAccess.cs" />
+    <Compile Include="Mine\MineDataAccess.cs" />
+    <Compile Include="Region\RegionDataAccess.cs" />
+    <Compile Include="Department\DepartmentDataAccess.cs" />
+    <Compile Include="Employee\EmployeeDataAccess.cs" />
+    <Compile Include="Group\GroupDataAccess.cs" />
+    <Compile Include="Permission\PermissionDataAccess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\RoleDataAccess.cs" />
+    <Compile Include="Xmenu\XmenuDataAccess.cs" />
+    <Compile Include="Xpage\XpageDataAccess.cs" />
+    <Compile Include="XuserGroup\XuserGroupDataAccess.cs" />
+    <Compile Include="Xuser\XuserDataAccess.cs" />
+    <Compile Include="Operation\OperationDataAccess.cs" />
+    <Compile Include="Resource\ResourceDataAccess.cs" />
+    <Compile Include="ResourceType\ResourceTypeDataAccess.cs" />
+    <Compile Include="GroupRole\GroupRoleDataAccess.cs" />
+    <Compile Include="RolePermission\RolePermissionDataAccess.cs" />
+    <Compile Include="XmenuPage\XmenuPageDataAccess.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IDAL\IDAL.csproj">
+      <Project>{012203D5-5648-4A5D-AD28-B5F6B79E77BF}</Project>
+      <Name>IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3827a259-4c49-412f-8c12-26c0ecfd385d}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\JZDFPTMIS.DALFactory.dll" />
+    <Content Include="bin\Debug\JZDFPTMIS.DALFactory.pdb" />
+    <Content Include="bin\Debug\JZDFPTMIS.IDAL.dll" />
+    <Content Include="bin\Debug\JZDFPTMIS.IDAL.pdb" />
+    <Content Include="bin\Debug\JZDFPTMIS.Model.dll" />
+    <Content Include="bin\Debug\JZDFPTMIS.Model.pdb" />
+    <Content Include="bin\Release\JZDFPTMIS.DALFactory.dll" />
+    <Content Include="bin\Release\JZDFPTMIS.DALFactory.pdb" />
+    <Content Include="bin\Release\JZDFPTMIS.IDAL.dll" />
+    <Content Include="bin\Release\JZDFPTMIS.IDAL.pdb" />
+    <Content Include="bin\Release\JZDFPTMIS.Model.dll" />
+    <Content Include="bin\Release\JZDFPTMIS.Model.pdb" />
+    <Content Include="obj\Debug\DALFactory.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\JZDFPTMIS.DALFactory.dll" />
+    <Content Include="obj\Debug\JZDFPTMIS.DALFactory.pdb" />
+    <Content Include="obj\Release\DALFactory.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\JZDFPTMIS.DALFactory.dll" />
+    <Content Include="obj\Release\JZDFPTMIS.DALFactory.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DALFactory.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\ResolveAssemblyReference.cache" />
+    <None Include="obj\Release\build.force" />
+    <None Include="obj\Release\DALFactory.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\ResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

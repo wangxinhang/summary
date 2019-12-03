@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="box">
+        <parent>
+            <child1></child1>
+            <child2></child2>
+        </parent>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+        //1.创建并注册父组件
+        Vue.component('parent', {
+            template: `<div>
+                         <div>这是父组件</div>
+                         <slot></slot>
+                    </div>`
+        });
+        // 1.创建并注册子组件
+        Vue.component('child1', {
+            template: `<div>这是子组件1</div>`
+        });
+        Vue.component('child2', {
+            template: `<div>这是子组件2</div>`
+        });
+        //实例化
+        new Vue({
+            el: "#box",
+        })
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- <body>
+<div id="app">
+    <parent></parent>
+</div>
+<script src="vue.js"></script>
+<script>
+    var childComponent = Vue.extend({
+        template: '<p>this is child template</p>'
+    });
+    Vue.component("parent",{
+        template: '<p>this is parent template</p><child></child><child></child>',
+        components: {
+            'child': childComponent,
+        }
+    });
+    var app = new Vue({
+        el: '#app'
+    });
+</script>
+</body> -->

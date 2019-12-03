@@ -1,0 +1,187 @@
+﻿ html, body 
+{    
+    width:100%; height:100%; margin:0px; padding:0px;/*background-color:#EEEEEE;*/ 
+}
+ 
+.outPanel
+{
+    position:absolute;/*display:none;*/
+}
+
+.loginPanel
+{
+    position:absolute;border:1px solid #EEEEEE;width:580px;height:360px;
+}
+
+.bodyBack{
+    background:url("../Styles/image/backImg/backImg21.jpg") no-repeat center;
+}
+
+.borderRadius8 {
+    border-radius:8px;moz-border-radius: 8px;-webkit-border-radius: 8px;
+}
+/*#region 系统分类*/
+.sysType
+{
+     font-family: 微软雅黑; font-size:15pt;color:white; text-align:center; padding:0px;margin:10px 0px 10px 0px;
+}
+/*#endregion 系统分类*/
+
+/*#region Logo信息*/
+.logoPanel
+{
+    margin:0px;height:85px;padding-bottom:5px;/*background-color:red;*/
+    border-bottom:1px solid #EEEEEE;
+}
+
+.softLogo
+{
+     float:left;width:50%;height:100%;
+}
+
+.softName
+{
+   float:right;font-family: 微软雅黑; font-size:22pt;color:#222222; text-align:center;width:50%;height:100%;line-height:85px;
+}
+
+.leftBox{
+    float:left;background:url("../Styles/image/sys/vudit150.png") no-repeat 132% 50%  ;width:43%;height:90%;background-size:230px 240px;
+}
+
+.rightBox{
+    float:right;width:55%;height:100%;font-family: 微软雅黑; font-size: 11pt; 
+}
+/*#endregion Logo信息*/
+
+/*#region 用户登录*/
+.userPassLogin
+{
+   position:relative; margin-top:36px;height:30px;
+}
+
+.userPassLabel
+{
+  float:left;line-height:30px;
+}
+
+.userPassText
+{
+  float:left;border:1px solid #AAAAAA;/*width:230px;background-color:green;*//*888888;ef473a*/
+}
+
+.userImage
+{
+   position:relative; float:left;background:url("../Styles/image/loginPhotos/user20DS.png") no-repeat center;width:30px;height:30px;
+}
+
+.passImage
+{
+   position:relative; float:left;background:url("../Styles/image/loginPhotos/lock21DS.png") no-repeat center;width:30px;height:30px;
+}
+
+.userBtnImage
+{
+   position:relative; float:left;background:url("../Styles/Image/loginPhotos/arrow20w.png") no-repeat center #DDDDDD;cursor:pointer;
+}
+
+.textBox
+{
+   position:relative; float:left;border:0px; padding:3px 6px ;height:24px;line-height:24px;width:190px;
+   font-size:14pt;color:#606060;/*background-color:#ef473a;*/
+}
+
+.btnLogin
+{
+   position:relative;font-family:微软雅黑; font-size:11pt;color:White;cursor:pointer;margin:0px 80px 0px 44px;
+   text-align:center;background-color:#ef473a;height:36px;line-height:36px; 
+}
+
+.btnLogin:hover
+{  
+   opacity:0.8;
+}
+
+.btnLoginDisable
+{
+   position:relative;font-family:微软雅黑; font-size:11pt;color:#EEEEEE;cursor:not-allowed;margin:0px 80px 0px 44px;
+   text-align:center;background-color:silver;height:36px;line-height:36px; 
+}
+
+.borderRadius4 {
+    border-radius:3px;moz-border-radius: 3px;-webkit-border-radius: 3px;
+}
+
+.validatorBorderRadius {
+    border-radius:0px 3px 3px 0px;
+    moz-border-radius: 0px 3px 3px 0px;
+    -webkit-border-radius: 0px 3px 3px 0px;
+}
+/*#endregion 用户登录*/
+
+/*#region 技术支持*/
+
+.supportInfo
+{
+    font-family: 微软雅黑; font-size:10pt; color:white;height:30px;text-align:center;display:none;
+}
+/*#endregion 技术支持*/
+
+/*#region 二维码*/
+
+.qrCodePanel
+{
+    position:absolute;/*display:none;*/
+    width:128px;height:170px;  /*设置div的大小*/    
+    text-align:center;
+}
+
+.qrCode
+{ 
+    background:url("../Styles/image/loginPhotos/appIn212.png") no-repeat center;width:140px;height:140px;
+    
+}
+
+.qrCodeText
+{ 
+    font-family: 微软雅黑; font-size:10pt; color:white;height:32px;line-height:32px;
+}
+/*#endregion 二维码*/
+
+
+/*#region 帮助文档*/
+.toolPanel
+{
+    position:relative;float:right;margin:0px 30px 0px 0px;height:100%;width:30%;min-width:200px;
+}
+
+.manual
+{
+    position:relative;float:right;/*height:100%;*/line-height:80px;text-align:center;z-index:999;cursor:pointer;padding:0 5px 0 0;
+}
+
+.manualIcon {
+     position:relative;float:left;width:30px;height:80px; background:url(/Styles/image/loginPhotos/book20ds.png) no-repeat center;
+}
+
+.manualLink {
+     position:relative;float:left;font-family: 微软雅黑; font-size:11pt;text-decoration:none;color:#222222;
+}
+
+.manualMenu{
+     position:absolute;width:200px;font-family: 微软雅黑; font-size:11pt;color:white;background-color:#222222;display :none;opacity:0.9;padding:8px 0px;
+}
+
+.manualMenuItem {
+   height:30px; line-height:30px;color:white;text-align:left;margin: 0 1px;padding:3px 10px;
+}
+
+.manualMenuItem:hover {
+     background-color:#505050;color:white
+}
+
+.manualMenuItem a {
+   position:relative;float:left;font-family: 微软雅黑; font-size:11pt;text-decoration:none;color:white;
+}
+
+/*#region 帮助文档*/
+

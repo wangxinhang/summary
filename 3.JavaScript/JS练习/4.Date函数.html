@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 50px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+
+</html>
+<script>
+    var date = new Date();
+    var hour = date.getHours();
+    var time = date.toLocaleTimeString();
+    var firstSpan = document.getElementsByTagName("span")[0];
+    var secondSpan = document.getElementsByTagName("span")[1];
+    firstSpan.innerHTML = toShow();
+    secondSpan.innerHTML = time;
+
+    function toShow() {
+        if (hour >= 6 && hour <= 11) {
+            return "上午好";
+        } else if (hour >= 12 && hour <= 18) {
+            return '下午好';
+        } else if (hour >= 18 && hour <= 23) {
+            return '晚上好';
+        }
+    }
+</script>

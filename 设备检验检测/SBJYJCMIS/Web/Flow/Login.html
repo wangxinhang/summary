@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="Styles/Login.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/ColorConverter.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="Scripts/jQuery.md5.js" type="text/javascript"></script>
+    <script src="SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="SzdwControls/SzdwInfoPanel.js" type="text/javascript"></script>
+    <script src="SzdwControls/SzdwMark.js" type="text/javascript"></script>
+        
+    <style type="text/css">
+        input::-ms-clear{display:none;} 
+    </style>
+</head>
+<body style=" background:url(Image/backImg/PmLiyuan1600.jpg) center no-repeat #1CA4D7;">
+    <form id="loginForm" action="">        
+        <div id="loginPanel" class="loginPanel" >          
+            <div id="logoPanel" class="softPanel">
+                <div id="softLogo" class="softLogo"></div>
+                <div id="corpLogo" class="corpLogo"></div>
+            </div>
+            <div id="corpName" class="corpName">隐患排查整改系统</div>
+            <div id="user" class="userLogin">                    
+                <div id="userImage" class="userImage"></div>
+                <input id="txtUser" type="text" class="textBox" />
+                <input id="xuserId" type="text" style="display:none"/>  
+            </div>      
+            <div id="pass" class="userLogin">
+                <div id="passImage" class="passImage"></div>
+                <input id="txtPass" type="password" class="textBox"/> 
+            </div>  
+            <div id="loginIn" class="loginIn"> 
+                <div id="btnProject" class="btnLogin">
+                    <div id="projectImage">P</div>
+                    <div id="projectName">登录</div>
+                    <div id="projectMark"></div>
+                </div>    
+            </div>              
+        </div>   
+        <div id="supportInfo"></div>
+    </form>  
+
+    <script type="text/javascript">
+        //#region 全局变量
+        var permission = null; //用户权限：json格式
+        var panelWidth = 270; loginImageWidth = 40; loginImageHeight = 36;
+        var themeColor = "#325001"; hoverBackColor = "#243f76", imgBackColor = themeColor; //006000,325001,406406;416800
+        var imgOpacity = 0.8; txtOpacity = 0.8, markImageOpacity = 0.95; infoPanelOpacity = 0.8;
+        var IsIE8 = navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8.";
+        var IsIE78 = navigator.userAgent.indexOf("MSIE 8.0") > 0 || navigator.userAgent.indexOf("MSIE 7.0") > 0;
+        //#endregion 全局变量
+
+        //#region 网页加载 
+
+        //#region 初始加载
+        $(document).ready(function () {
+            //设置面板
+            LoadPage();
+
+            //窗口调整大小
+            $(window).resize(function () {
+                SetPanel();
+            });
+        });
+
+        function LoadPage() {
+            CreateMask();
+
+            //设置Logo和公司名称
+            SetLogoInfo();
+
+            //登录组件设置
+            SetUserPass();
+            SetLoginIn();
+
+            //设置登录面板
+            SetPanel();
+        }
+
+        //背景遮罩
+        function CreateMask() {
+            var nc = document.body;
+            var m = document.createElement("div");
+            var cssJson = { "position": "absolute", "left": 0, "top": 0, "width": "100%", "height": "100%", "background-color": "black", "display": "none","z-index":-1 };
+            $(m).attr("id", "mask").css(cssJson).appendTo(nc).fadeTo(300, 0.2);
+
+            $(nc).click(function () {
+                $(m).fadeTo(500, 0.2);
+            });
+
+            $(".textBox").focus(function () {
+                $(m).fadeTo(500, 0.5);
+            }).click(function (e) {
+                e.stopPropagation();               
+            })
+        }
+
+        //#endregion 初始加载
+
+        //#endregion 网页加载        
+
+        //#region 面板设置
+
+        //#region 设置面板
+        function SetPanel() {
+            //定位登陆面板
+            var w = panelWidth;
+            var b = $(document.body);
+            var bw = $(b).width();
+            var bh = $(b).height();
+            var p = $("#loginPanel");
+            var h = $(p).outerHeight();
+            var x = (bw - w) / 2;
+            var mt = 10;
+            var y = (bh - h) / 2 - mt * 19;
+            if (y < mt*2) { y = mt*2; }
+            //if (y < mt) { y = (bh - h) / 2; }
+            $(p).css({ "left": x, "top": y }).fadeIn(1000);
+
+        }
+        //#endregion 设置面板
+
+        //#region 设置企业Logo和名称
+        function SetLogoInfo() {
+            var w = panelWidth;
+            var h = 84;
+            var lw = w / 2 - 1;
+            var softLogo=$("#softLogo");
+            var corpLogo=$("#corpLogo");
+
+            $("#softLogo").outerWidth(lw).height(h).css({ "float": "left" });
+            $("#corpLogo").outerWidth(lw).height(h).css({ "float": "left", "border-left": "1px solid #888888" });
+            $("#corpName").outerWidth(w).css({"font-size":"18pt" });
+            $("#logoPanel").outerWidth(w).height(h);
+
+            //$("#logoPanel").css({ "display": "none" });
+            //var lgp = $("#logoPanel").clone(true);
+            //$(lgp).css({ "display": "block", "position": "absolute","top":20 }).appendTo(document.body);
+        }
+        //#endregion 设置企业Logo和名称
+
+        //#region 设置登录组件
+
+        //#region 用户和密码输入框
+        function SetUserPass() {
+            var pd = 0;
+            var w = panelWidth;
+            var iw = loginImageWidth;
+            var ih = loginImageHeight;
+            var ulw = w - pd * 2;
+            var ulh = ih + pd * 2;
+            var tw = ulw - iw;
+            var ptw = ulw - iw * 2;
+
+            $(".userLogin").outerWidth(w).outerHeight(ulh).css({ "padding": pd });
+
+            //用户名图片
+            var ui = $("#userImage");
+            $(ui).outerWidth(iw).outerHeight(ih);
+            SzdwCommon.SetOpacity(ui, imgBackColor, imgOpacity);
+
+            //密码图片
+            var pi = $("#passImage");
+            $(pi).outerWidth(iw).outerHeight(ih);
+            SzdwCommon.SetOpacity(pi, imgBackColor, imgOpacity);
+
+            //用户名和密码输入框
+            //var txtColor = IsIE78 ? "Black" : themeColor;
+            var txtColor = themeColor;
+            var txtBackColor = "White";
+            //var txtOpacity = imgOpacity - 0.2;
+            $(".textBox").outerWidth(tw).outerHeight(ih).css({ "line-height": ih + "px", "color": txtColor,"imeMode":"inactive" });
+            SzdwCommon.SetOpacity($(".textBox"), txtBackColor, txtOpacity);
+
+            //用户和密码验证
+            ValidateUser();
+            ValidatePass();
+        }
+        //#endregion 用户和密码输入框
+
+        //#region 用户验证
+        function ValidateUser() {
+            var u = $("#txtUser");
+            var imageUrl = "SzdwControls/Image/warnning21w2.png";
+            $(u).attachInfoPanel({ imageUrl: imageUrl, showMode: 2, positionMode: 1, backColor: themeColor, backOpacity: infoPanelOpacity });  //附加信息提示框 
+            $(u).attachMark(); //附加标记提示框
+            $(u).focus(function () {
+                var infoPanel = $(this).data("infoPanel");
+                if (infoPanel) {
+                    infoPanel.Hide();
+                }
+            }).blur(function () {
+                if ($.trim($(this).val()).length == 0) {
+                    var infoPanel = $(this).data("infoPanel");
+                    if (infoPanel) {
+                        infoPanel.contentText = "请输入用户名";
+                        infoPanel.Refresh();
+                    }
+                } else {
+                    XuserIsExisted(this);
+                }
+            });
+        }
+
+        //用户名是否存在
+        function XuserIsExisted(txtUser) {
+            var u = txtUser;
+            var m = $(u).data("mark");
+            m.status = 0;
+            m.SetMark();
+            m.Show();
+            var url = "Xuser/XuserProcess.ashx";
+            var userName = $.trim($(u).val());
+            var paramJson = {userName:userName,MethodName:"XuserIsExisted"};
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json",
+                success: function (jsData) {
+                    if (jsData.isExisted) {
+                        m.status = 1;
+                        m.SetMark();
+                    } else {
+                        m.Hide();
+                        var infoPanel = $(u).data("infoPanel");
+                        infoPanel.contentText = "该用户不存在";
+                        infoPanel.Refresh();
+                    }
+                }
+            });
+        }
+        //#endregion 用户验证
+
+        //#region 密码验证
+        function ValidatePass() {
+            var p = $("#txtPass");
+            var imageUrl = "SzdwControls/Image/warnning21w2.png";
+            $(p).attachInfoPanel({ imageUrl: imageUrl, showMode: 2, positionMode: 1, backColor: themeColor, backOpacity: infoPanelOpacity });  //附加信息提示框
+            $(p).attachMark(); //附加标记提示框
+            $(p).focus(function () {
+                $(this).data("infoPanel").Hide();
+            }).blur(function () {
+                if ($.trim($(this).val()).length == 0) {
+                    var infoPanel = $(this).data("infoPanel");
+                    infoPanel.contentText = "请输入密码";
+                    infoPanel.Refresh();
+                    return false;
+                }
+            }).keypress(function (e) {
+                var k = e.which;
+                if (k == 13) {
+                    $("#btnProject").trigger("click");
+                }
+            });
+        }
+        //#endregion 密码验证
+
+        //#region 登录按钮
+
+        //#region 设置登录按钮
+        function SetLoginIn() {
+            var m = 15;
+            var w = panelWidth;
+            var bw = w;
+            var iw = loginImageWidth;
+            var ih = loginImageHeight;
+            var tw = bw - iw * 2;
+            var th = ih;
+            //var markImageOpacity = 0.6;
+
+            //#region 登录按钮
+            $("#loginIn").outerWidth(bw);
+            //var btn = $(".btnLogin");
+            var btn = $("#projectName"); 
+            SzdwCommon.SetOpacity(btn, imgBackColor, imgOpacity); //imgOpacity
+            $(btn[1]).css({ "margin-top": m });
+
+            $(btn).mouseover(function () {
+                SzdwCommon.SetOpacity(this, hoverBackColor, imgOpacity );
+                SzdwCommon.SetOpacity($(this.parentNode).find("[id$='Image']"), hoverBackColor, markImageOpacity);
+                SzdwCommon.SetOpacity($(this.parentNode).find("[id$='Mark']"), hoverBackColor, markImageOpacity);
+            }).mouseleave(function () {
+                SzdwCommon.SetOpacity(this, imgBackColor, imgOpacity);
+                SzdwCommon.SetOpacity($(this.parentNode).find("[id$='Image']"), imgBackColor, markImageOpacity);
+                SzdwCommon.SetOpacity($(this.parentNode).find("[id$='Mark']"), imgBackColor, markImageOpacity);
+            });
+            //#endregion 登录按钮
+
+            //#region 系统图标文字
+            var pImg = "url('Image/arrow20w.png') no-repeat center";
+            $("#projectImage").outerWidth(iw).height(ih).css({ "float": "left", "line-height": th + "px", "font-size": "12pt" });
+            SzdwCommon.SetOpacity($("#projectImage"), imgBackColor, markImageOpacity);
+            $("#projectMark").outerWidth(iw).height(ih).css({ "float": "left", "background": pImg }).data("background",pImg);
+            SzdwCommon.SetOpacity($("#projectMark"), imgBackColor, markImageOpacity);
+
+            var pn = $("#projectName");
+            $(pn).outerWidth(tw).height(th).css({ "float": "left", "line-height": th + "px" }).data("text", $(pn).text());
+            //#endregion 系统图标文字
+
+            //登录事件
+            LoginIn($("#btnProject")); //系统登录
+            ClearLoginErrorInfo();//清除登录错误信息
+        }
+        //#endregion 设置登录按钮
+
+        //#region 系统登录验证
+        function LoginIn(btn) {
+            var n = $("#projectName");
+            var m = $("#projectMark");
+            var imageUrl = "SzdwControls/Image/warnning21w2.png";
+            $(n).attachInfoPanel({ width: $(n).outerWidth(), imageUrl: imageUrl, positionMode: 1, backColor: "Brown", backOpacity: 0.1 });  //附加信息提示框
+                       
+            var u = $("#txtUser");
+            var p = $("#txtPass");
+            $(btn).click(function (e) {
+                if ($.trim($(u).val()).length == 0 || $.trim($(p).val()).length == 0) {
+                    NullDetectionInfo(u, "请输入用户名");
+                    NullDetectionInfo(p, "请输入密码");
+                } else {
+                    XUserPasswordIsValid(p, this);
+                }
+                e.stopPropagation();
+            });
+        }
+
+        //#region 点击登录时的用户密码验证
+        //用户或密码为空时的操作提示
+        function NullDetectionInfo(txtCtrl, infoText) {
+            if ($.trim($(txtCtrl).val()).length == 0) {
+                var m = $(txtCtrl).data("mark");
+                if (m) { m.Hide(); }
+
+                var infoPanel = $(txtCtrl).data("infoPanel");
+                if (!infoPanel.showing) {
+                    infoPanel.contentText = infoText;
+                    infoPanel.Refresh();
+                }
+                return false;
+            }
+        }
+
+        //检测用户密码是否正确
+        function XUserPasswordIsValid(txtPass, btnLogin) {
+            var p = txtPass;
+            var url = "Xuser/XuserProcess.ashx";
+            var userName = $.trim($("#txtUser").val());
+            var password = $.trim($(p).val());
+            var paramJson = { userName: userName, password: password, MethodName: "XuserPasswordIsValid" };
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json",
+                success: function (jsData) {
+                    if (!jsData.passValid) {
+                        var infoPanel = $(p).data("infoPanel");
+                        infoPanel.contentText = "密码错误";
+                        infoPanel.Refresh();
+                    } else {
+                        LoginAccess(btnLogin);
+                    }
+                }
+            });
+        }
+
+        //访问权限系统
+        function LoginAccess(btn) {
+            var n = $("#projectName");
+            var m = $("#projectMark");
+
+            //登录状态设置
+            var backColor = $(m).css("background-color");
+            var ldImg = "url('SzdwControls/Image/refresh.gif') no-repeat center";
+            $(m).css({ "background": ldImg, "background-color": backColor });
+
+            $(n).text("");
+            var infoPanel = $(n).data("infoPanel");
+            infoPanel.hasImage = false;
+            infoPanel.contentText = "正在登录，请稍候……";
+            infoPanel.Refresh();
+
+            //登录到系统 
+            var url = "Xuser/XuserProcess.ashx";
+            var userName = $.trim($("#txtUser").val());
+            var paramJson = { userName: userName, MethodName: "XuserGetAccessPermission" };
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json",
+                success: function (jsData) {
+                    if (jsData.accessPermission) {
+                        //登录经营分析系统
+                        var xuiMd5 = $.md5(jsData.xuserId.toString());
+                        var param = "?xui=" + xuiMd5;
+                        location.href = "Main/Main.html" + param;
+                    } else {
+                        infoPanel.showing = false;
+                        infoPanel.hasImage = true;
+                        infoPanel.contentText = "无权限，请联系管理员";
+                        infoPanel.Refresh();
+                        $(m).css({ "background": $(m).data("background") });
+                    }
+                }
+            });
+        }
+        //#endregion 点击登录时的用户密码验证
+
+        //#region 清除登录错误信息
+        function ClearLoginErrorInfo() {
+            $(document).click(function () {
+                var pn = $("#projectName")
+                var pni = $(pn).data("infoPanel");
+                if (pni) {
+                    pni.Hide();
+                    $(pn).text($(pn).data("text"));
+                }
+            });
+        }
+        //#endregion 清除登录错误信息
+
+        //#endregion 系统登录验证
+
+        //#endregion 登录按钮
+        
+        //#endregion 设置登录组件
+
+        //#endregion 面板设置 
+                       
+    </script>
+</body>
+</html>

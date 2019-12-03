@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        #a1,
+        #a2 {
+            width: 100px;
+            background-color: pink;
+        }
+
+        #b1,
+        #b2 {
+            width: 100px;
+            background-color: aqua;
+            margin-left: 10px;
+            display: none;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            top: 500px;
+            left: 100%;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li id="a1">一级菜单
+            <ul id=b1>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li id="a2">一级菜单
+            <ul id="b2">
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+    </ul>
+    <div></div>
+</body>
+
+</html>
+<script src="jquery/jquery-3.1.1.js"></script>
+<script>
+    $(function () {
+
+        // $("#a1").click(function () {
+        //     $("#b1").toggle(1000);
+        // })
+        // $("#a2").click(function () {
+        //     $("#b2").toggle(1000);
+        // })
+        // $("#a1").click(function () {
+        //     $("#b1").fadeToggle(1000);
+        // })
+        // $("#a2").click(function () {
+        //     $("#b2").fadeToggle(1000);
+        // })
+        $("#a1").click(function () {
+            $("#b1").slideToggle(1000);
+        $("div").animate({left:0},400)
+
+        })
+        $("#a2").click(function () {
+            $("#b2").slideToggle(1000);
+        })
+    })
+</script>

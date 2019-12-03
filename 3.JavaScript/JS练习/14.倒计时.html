@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 80px;
+            text-align: center;
+            line-height: 80px;
+            margin: 200px auto;
+            font-size: 50px;
+            background-color: pink;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var box = document.getElementsByTagName("div");
+
+        var timer = null;
+        clearInterval(timer);
+        timer = setInterval(s, 20);
+
+        function s() {
+        var date = new Date(2019, 9, 1, 00, 00, 00) - new Date();
+        var allSecond = parseInt(date / 1000);
+        var second = time(parseInt(allSecond % 60));
+        var mintune = time(parseInt(allSecond / 60 % 60));
+        var hour = time(parseInt(allSecond / 60 / 60 % 24));
+        var date = time(parseInt(allSecond / 60 / 60 / 24));
+            if (allSecond < 0) {
+                clearInterval(timer);
+                box[0].innerText = "啦啦啦";
+            }else{
+            box[0].innerText = "倒计时：" + date + "天" + hour + "时" + mintune + "分" + second + "秒";
+            }
+        }
+        function time(x) {
+            return x < 10 ? "0" + x : x;
+        }
+    }
+</script>

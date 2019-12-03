@@ -1,0 +1,296 @@
+*{
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+li{
+	list-style: none;
+}
+img{
+	vertical-align: top;
+}
+.topbar{
+	width: 100%;
+}
+.topbar{
+	background: #F7F7F7;
+}
+.container{
+	width: 1200px;
+	margin: 0 auto;
+	zoom: 1;
+}
+.container:after{
+	content: ".";
+	height: 0;
+	visibility: hidden;
+	display:block;
+	clear: both;
+}
+.topbar-left{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	color: #c1cde2;
+	font-weight: bold;
+}
+.topbar-right {
+	float: right;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 50px;
+}
+.topbar-right a{
+	color: purple;
+	padding: 0px 5px;
+}
+.search .logo{
+	float: left;
+}
+.search .logo a{
+	display: inline-block;
+	width: 153px;
+	height:59px;
+	background:  url(../img/logo.png) 0 0 no-repeat;
+	margin-top:20px;
+}
+.search .search-info{
+	margin: 30px 0 0 120px;
+	float: left;
+	position: relative;
+}
+.search .search-info input[type=search]{
+	width: 500px;
+	height: 40px;
+	background:  url(../img/search.png) 2% 50% no-repeat;
+	border: 1px solid green;
+	padding-left: 40px;
+	/*outline: none;*/
+	line-height: 40px;
+	position: absolute;
+	top: 0px;
+	left:0px;
+	font-size:16px ;
+}
+.search .search-info input[type=submit]{
+	width: 128px;
+	height: 40px;
+	/*outline: none;*/
+	line-height: 40px;
+	position: absolute;
+	top: 0px;
+	left: 500px;
+	background: green;
+	color: white;
+}
+.search .cart {
+	margin-top: 30px;
+	float: right;
+	position: relative;
+}
+.search .cart .mycart {
+	width: 160px;
+	height: 40px;
+	background:  url(../img/buycar.png) 10% 50% no-repeat;
+	border: 1px solid gold;
+	box-sizing: border-box;
+	line-height: 40px;
+	position: absolute;
+	top: 0px;
+	left: -200px;
+}
+.search .cart .mycart a {
+	margin-left:50px ;
+	color: green;
+}
+.search .cart .number {
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	position: absolute;
+	top: 0px;
+	left: -40px;
+	background: gold;
+	color: white;
+}
+.main-top .nav{
+	height: 30px;
+	margin: 10px 0 0 ;
+	position: relative;
+}
+.main-top .nav::after{
+	content: "";
+	display: block;
+	width: 1200px;
+	height: 1px;
+	border-top: 1px solid black;
+	background: green;
+	position: absolute;
+	top: 28px;
+	left: 0px;
+}
+.main-top .nav>li,.main-top .nav>span{
+	float:left;
+	position: relative;
+}
+.main-top .nav>span{
+	margin-top: 3px;
+}
+.main-top .nav>li>a{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	text-decoration: none;
+	padding: 0 20px;
+	color: black;
+}
+.main-top .nav>li:nth-child(1)>a{
+	padding: 0 46px;
+}
+/*！！！！特别注意！！！！！！由于横线是.nav:after设置的,且采用position:absolute,为防止鼠标滑过.nav里的li时,.list出现闪动,故要设置top:28px而非30px（覆盖横线）,并且.list的z-index的值也要大于.nav:after的z-index的值*/
+.main-top .nav>li .list{
+	position: absolute;
+	top: 28px;
+	left: 0px;
+	z-index: 3;
+	display: none;
+}
+.main-top .nav>li .list li a{
+	display: inline-block;
+	width: 200px;
+	height: 45px;
+	border-bottom: 1px solid grey;
+	box-sizing: border-box;
+	text-align: center;
+	line-height: 45px;
+	text-decoration: none;
+	font-size: 16px;
+	color: plum;
+	position: relative;
+}
+.main-top .nav>li .list li a::after{
+	content: "";
+	display: inline-block;
+	width: 10px;
+	height: 45px;
+	padding-left: 100px;
+	background:url(../img/rightarrow.png) 50% 50% no-repeat;
+	background-size: 14px;
+	position: absolute;
+}
+.main-top .nav>li .list li:nth-child(1) a{
+	background:  url(../img/sprite.png) 30px 10px no-repeat;
+}
+.main-top .nav>li .list li:nth-child(2) a{
+	background:  url(../img/sprite.png) 30px -40px no-repeat;
+}
+.main-top .nav>li .list li:nth-child(3) a{
+	background:  url(../img/sprite.png) 30px -90px no-repeat;
+}
+.main-top .nav>li .list li:nth-child(4) a{
+	background:  url(../img/sprite.png) 30px -140px no-repeat;
+}
+.main-top .nav>li .list li:nth-child(5) a{
+	background:  url(../img/sprite.png) 30px -190px no-repeat;
+}
+.main-top .nav>li .list li:nth-child(6) a{
+	background:  url(../img/sprite.png) 30px -240px no-repeat;
+}
+.main-top .nav>li:hover a{
+	background: green;
+	color: white;
+	font-size: 18px;
+}
+.main-top .nav>li:hover .list{
+	display: block;
+}
+.main-top .nav>li .list ul li:hover a{
+	color: green;
+}
+.main-top .img {
+	margin-left: 200px;
+}
+.main-top .img li{
+	float: left;
+}
+.main-bottom .nav{
+	overflow: hidden;
+	position: relative;
+}
+.main-bottom .nav ul{
+	float: left;
+	margin-top: 20px;
+}
+.main-bottom .nav ul li{
+	float: left;
+}
+.main-bottom .nav ul li a{
+	font-size: 16px;
+	padding: 0px 10px;
+	height: 40px;
+	line-height: 40px;
+}
+.main-bottom .nav ul li a:hover{
+	font-size: 20px;
+	color: green;
+	text-decoration: none;
+}
+.main-bottom .nav .more{
+	float: right;
+	margin-top: 30px;
+}
+.main-bottom .nav .more a:hover{
+	font-size: 20px;
+	color: green;
+	text-decoration: none;
+}
+/*添加横线两种方法都行,要么在.nav::after加,注意在.nav处加上position:relative;要么在.foods::before加（如下注释处）,注意在.foods处加上position: relative;*/
+.main-bottom .nav::after{
+	content: "";
+	display: block;
+	width: 1200px;
+	height: 1px;
+	background: green;
+	border-top: 1px solid black;
+	position: absolute;
+	top: 58px;
+	left: 0px;
+}
+/*.main-bottom .foods{
+	position: relative;
+}
+.main-bottom .foods::before{
+	content: "";
+	display: block;
+	width: 1200px;
+	height: 1px;
+	background: green;
+	border-top: 1px solid black;
+	position: absolute;
+	top: -2px;
+	left: 0px;
+}*/
+.main-bottom .foods ul li{
+	float: left;
+	width: 250px;
+	height: 300px;
+	text-align: center;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+.main-bottom .foods ul li:nth-child(1){
+	width: 200px;
+	border: none;
+}
+.main-bottom .foods ul li a{
+	text-decoration: none;
+}
+.main-bottom .foods ul li p:nth-of-type(1){
+	margin: 20px 0 ;
+}
+.main-bottom .foods ul li p:nth-of-type(2){
+	margin: 10px 0 ;
+	color: red;
+}

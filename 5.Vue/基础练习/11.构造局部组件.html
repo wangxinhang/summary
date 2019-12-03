@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="box">
+        <my-date></my-date>
+        <my-date></my-date>
+        <my-color></my-color>
+    </div>
+
+    <my-data></my-data> <!-- 局部组件只能在局部使用 -->
+
+    <script src="vue.js"></script>
+    <script>
+        /*
+        //1.创建组件构造器:构造出一个你要的组件
+        let Profile = Vue.extend({
+           //1.1 模板选项
+           template: `
+            <div>
+               <input type="date"></input>  
+               <p>今天已经时冬天了！</p> 
+            </div>
+           `
+        });
+        let Profile1 = Vue.extend({
+           //1.1 模板选项
+           template: `
+            <div>
+               <input type="color"></input>  
+               <p>这是一个色板！</p> 
+            </div>
+           `
+        });
+        new Vue({
+            el:"#box",
+
+            //2.注册成局部组件
+           components:{
+               "my-date":Profile,
+               "my-color":Profile1
+            }
+        })
+    */
+        new Vue({
+            el: "#box",
+
+            //2.注册成局部组件
+            components: {
+                "my-date": {
+                    //1.1 模板选项
+                    template: `
+                            <div>
+                                <input type="date"></input>  
+                                <button @click = "num += 1">今天已经时冬天了！{{num}}</button> 
+                            </div>
+                        `,
+                    data(){
+                        return {
+                            num:1,
+                        };
+                    }
+                },
+                "my-color": {
+                    //1.1 模板选项
+                    template: `
+                            <div>
+                            <input type="color"></input>  
+                            <p>这是一个色板！</p> 
+                            </div>
+                        `
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

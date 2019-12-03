@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+    
+            class Student {
+                constructor(name, age, subject) {
+                    this.name = name;
+                    this.age = age;
+                    this.subject = subject;
+                }
+                study( ){
+                console.log('我在学习' + this.subject);
+                }
+            }
+
+            class  Child   extends  Student {
+                constructor(name, age, subject, school) {
+                    super(name, age, subject);
+                    this.school = school; 
+                }
+            }
+
+        let  child1 = new Child('小辉', 8, '小学义务教育课程', '北大附小');
+        let  child2 = new Child('小辉', 8, '小学');
+        child1.study( );      //我在学习小学义务教育课程
+        child2.study( );      //我在学习小学义务教育课程
+
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            width: 768px;
+            height: 240px;
+            border: 1px solid #000;
+            margin: 200px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        ul::after {
+            content: "";
+            height: 0;
+            visibility: hidden;
+            display: block;
+            clear: both;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+        }
+
+        li img {
+            vertical-align: top;
+        }
+
+        span {
+            width: 50px;
+            height: 100px;
+            background-color: pink;
+        }
+
+        span:nth-of-type(1) {
+            position: absolute;
+            top: 70px;
+            left: 0;
+        }
+
+        span:nth-of-type(2) {
+            position: absolute;
+            top: 70px;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><a href="#"><img src="image/t01bc07baaf1efcf572.jpg" alt=""></a></li>
+            <li><a href="#"><img src="image/t0113d2a551bc036c86.jpg" alt=""></a></li>
+        </ul>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+
+</html>
+
+<script>
+    window.onload = function () {
+        var box = document.getElementsByTagName("div")[0];
+        var ul = box.getElementsByTagName("ul")[0];
+        var li = ul.getElementsByTagName("li");
+        var span = box.getElementsByTagName("span");
+        var timer = null;
+        var speed = -2;
+        // 让ul的长度变成原来的二倍
+        ul.innerHTML = ul.innerHTML + ul.innerHTML;
+        ul.style.width = li[0].offsetWidth * li.length + "px";
+
+
+        // 自动轮播
+        timer = setInterval(autoPlay, 20);
+
+
+       // 鼠标进入停止
+        box.onmouseover = function () {
+            clearInterval(timer);
+        }
+        // 鼠标离开开始
+        box.onmouseout = function () {
+            clearInterval(timer);
+            timer = setInterval(autoPlay, 20);
+        }
+
+     
+
+        // 点击向左
+        span[0].onclick = function () {
+            clearInterval(timer);
+            speed = -2;
+            timer = setInterval(autoPlay, 20);
+        }
+        // 点击向右
+        span[1].onclick = function () {
+            clearInterval(timer);
+            speed = 2;
+            timer = setInterval(autoPlay, 20);
+        }
+
+        function autoPlay() {
+            // 向左走的边界条件
+            if (ul.offsetLeft < -li[0].offsetWidth * li.length / 2) {
+                ul.style.left = 0 + "px";
+            }
+            // 向右走的边界条件
+            if (ul.offsetLeft > 0) {
+                ul.style.left = -li[0].offsetWidth * li.length / 2 + "px";
+            }
+            ul.style.left = ul.offsetLeft + speed + "px";
+        }
+    }
+</script>

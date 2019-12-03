@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <div id="app1">
+            <up></up>
+        </div>
+        <div id="app2">
+            <down></down>
+        </div>
+    </div>
+
+    <script src="vue.js"></script>
+
+    <script>
+        Vue.prototype.eventBus = new Vue(); //1.给两个不同的组件找一个载体:事件车,把共同的方法放在这个事件车上
+
+        //up组件
+        Vue.component('up', {
+            template: `
+                <div class="up">
+                <p>这是up组件, 下一行为down传递的消息</p>
+                <p>{{msg}}</p>
+                </div>
+            `,
+            data() {
+                return {
+                    msg: '未传递消息'
+                }
+            },
+            mounted() {
+                this.eventBus.$on('send', (msg) => { //3.通过$on绑定send方法
+                    this.msg = (msg)
+                })
+            }
+        });
+        //down组件
+        Vue.component('down', {
+            template: `
+                <div class="down">
+                    <p>这是down组件</p>
+                    <button @click="toUp">点击我向up组件传递消息</button>
+                </div>
+            `,
+            data() {
+                return {
+                    msg: "来自down组件的信息"
+                }
+            },
+            methods: {
+                toUp() {
+                    this.eventBus.$emit('send', this.msg); //2.通过$emit触发名为send事件
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #a1, #a2 {
+            width: 100px;
+            background-color: pink;
+        }
+        #b1,#b2 {
+            width: 100px;
+            background-color: aqua;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li id="a1">一级菜单
+            <ul id=b1>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+        <li id="a2">一级菜单
+            <ul id="b2">
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+</html>
+<script>
+    // 1.树形菜单
+    $("a1").onmouseover = function () {
+        // toShow("firstUl");
+        tochange("b1");
+        // document.getElementById("b1").style.display = "block";
+    };
+    $("a1").onmouseout = function () {
+        // tohidden("firstUl");
+        tochange("b1");
+        // document.getElementById("b1").style.display = "none";
+    };
+    $("a2").onmouseover = function () {
+        // toShow("secondUl");
+        tochange("b2");
+        // document.getElementById("b2").style.display = "block";
+
+    };
+    $("a2").onmouseout = function () {
+        // tohidden("secondUl");
+        tochange("b2");
+        document.getElementById("b2").style.display = "none";
+    };
+
+    function tochange(id) {
+        var ul = document.getElementById(id);
+        if (ul.style.display == "block") {
+            ul.style.display = "none";
+        } else {
+            ul.style.display = "block";
+        }
+    }
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>

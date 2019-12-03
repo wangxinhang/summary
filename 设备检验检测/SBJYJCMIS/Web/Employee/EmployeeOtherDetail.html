@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwGridView.js" type="text/javascript"></script>
+    <link href="../SzdwControls/SzdwGridView.css" rel="stylesheet" type="text/css" />
+    <script src="../SzdwControls/domCommon.js" type="text/javascript"></script>
+</head>
+<body >    
+    <script type="text/javascript">
+        /*#region 网页加载时事件*/
+        $(document).ready(function () {
+            //获取结果
+            GetQueryResult();
+        });
+
+        //#endregion 网页加载时事件
+
+        //#region 查询结果 
+
+        //#region 单击按钮事件
+        function GetQueryResult() {
+            var mt = 0; //查询面板与数据结果集中间的间隔 
+
+            //获取父容器及其相关属性
+            var c = document.body;
+            var bw = $(document.body).width();
+            var bh = $(document).height();
+            var position = "absolute";
+            var x = 0;
+            var y = 0;
+            var width = bw - 2 * mt;
+            var height = bh - 2 * mt;
+            //创建Gridview并绑定数据
+            CreateArGridView(c, position, x, y, width, height);
+        }
+        //#endregion 单击按钮事件
+
+        //#region 创建Gridview并绑定数据
+        var arSzdwGv = null;
+        function CreateArGridView(namingContainer, position, x, y, width, height) {
+            if (arSzdwGv == null || typeof (arSzdwGv) == "undefined") {
+                //创建SzdwGridViewt实例
+                arSzdwGv = new SzdwGridView(position, x, y, width, height);
+                arSzdwGv.namingContainer = namingContainer;
+                arSzdwGv.fnInitial = InitialArGridview(arSzdwGv);
+            }
+
+            //异步加载数据
+            if (arSzdwGv.pagination != null) {
+                arSzdwGv.pagination.ResetBar();
+            }
+
+            var paramJson = $.parseJSON(SzdwCommon.getUrlParam("paramJson"));
+            paramJson["MethodName"] = "GetEmployeeEmployeeOtherList";
+            arSzdwGv.requestUrl = "EmployeeHandler.ashx";
+            arSzdwGv.paramJson = paramJson;
+            arSzdwGv.DataBind();
+        }
+        //#endregion 创建Gridview并绑定数据
+
+        //#region 初始化Gridview
+        function InitialArGridview(szdwGv) {
+            //分页设置
+            szdwGv.hasPagination = false
+            szdwGv.hasSumRow = false;
+            szdwGv.dataPanelCssJson = { "border": "0px", "background-color": "White" };
+            szdwGv.paginationCssJson = { "background-color": "White", "font-family": "微软雅黑", "font-size": "small", "border": "1px solid Silver", "border-top": "0px" };
+
+            //数据列表表头字段样式
+            szdwGv.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 50 },
+                                    { "Field": "Name", "Text": "人员姓名", "Width": 80, "OrderField": "Name" },
+                                    { "Field": "Nation", "Text": "民族", "Width": 60, "OrderField": "Nation" },
+                                    { "Field": "MaritalStatusName", "Text": "婚姻状态", "Width": 75, "OrderField": "MaritalStatusName" },
+                                    { "Field": "Tel", "Text": "家庭电话", "Width": 80, "OrderField": "Tel" },
+                                    { "Field": "Address", "Text": "现居地址", "Width": 120, "OrderField": "Address" },
+                                    { "Field": "EmergencyMan", "Text": "紧急联系人", "Width": 80, "OrderField": "EmergencyMan" },
+                                    { "Field": "EmergencyTel", "Text": "紧急联系电话", "Width": 100, "OrderField": "EmergencyTel" },
+                                    { "Field": "Education", "Text": "学历", "Width": 75, "OrderField": "Education" },
+                                    { "Field": "Memo", "Text": "人员描述", "Width": 80, "OrderField": "Memo"}];
+
+            //数据列表数据行单元格样式
+            szdwGv.cellCssJson = {
+                "Memo": { "text-align": "left"}
+            };
+        }
+        //#endregion 初始化Gridview
+
+        //#endregion 查询结果 
+    </script>
+</body>
+</html>

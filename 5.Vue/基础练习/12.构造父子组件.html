@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="box">
+        <parent></parent>
+    </div>
+
+
+    <!-- 不用字符串模板，用这个更方便 -->
+    <template id="my-div">
+        <div>
+            <p>今天已经时冬天了！</p>
+        </div>
+    </template>
+
+    <template id="my-date">
+            <div>
+                <input type="date"></input>
+            </div>
+            <slot ></slot>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+
+        //1.子组件构造器
+        let Profile = Vue.extend({
+            //1.1 模板选项
+            template: "#my-div",
+        });
+        let Profile1 = Vue.extend({
+            //1.1 模板选项
+            template: "#my-date",
+        });
+
+        //2.注册成全局父子组件
+        Vue.component("parent", {
+            //2.1子组件有哪些写出来
+            components: {
+                "my-p":Profile ,
+                "my-input": Profile1,
+            },
+            //模板选项
+            template: `
+            <div>
+                <my-p></my-p>
+                <my-input></my-input>
+            </div>
+            `
+        });
+
+        //实例化
+        new Vue({
+            el: "#box",
+        })
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- <body>
+<div id="app">
+    <parent></parent>
+</div>
+<script src="vue.js"></script>
+<script>
+    var childComponent = Vue.extend({
+        template: '<p>this is child template</p>'
+    });
+    Vue.component("parent",{
+        template: '<p>this is parent template</p><child></child><child></child>',
+        components: {
+            'child': childComponent,
+        }
+    });
+    var app = new Vue({
+        el: '#app'
+    });
+</script>
+</body> -->

@@ -1,0 +1,483 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="../Styles/Page.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Query.css" rel="stylesheet" type="text/css" />    
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/domCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwGridView.js" type="text/javascript"></script>
+    <link href="../SzdwControls/SzdwGridView.css" rel="stylesheet" type="text/css" />
+    <script src="../SzdwControls/SzdwPagination.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButton.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwPopupWindow.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwDropDownList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCheckBoxList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwAjaxDataOperate.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="../Scripts/CommonJScript.js" type="text/javascript"></script>
+    <script src="../Scripts/myparm.js" type="text/javascript"></script>
+</head>
+<body style="background-color:#EEEEEE">
+    <div id="queryPanel" class="queryPanelNew" style="border-bottom:1px solid #DDDDDD">        
+        <div id="filterPanel" class="filterPanel" style="border-bottom:0px">
+            <div id="row0">
+                <div id="cell00" class="cellDiv" style="font-size:13pt;color:Green;padding-right:10px;border-right:1px solid #DDDDDD;height:25px">
+                    资源可配置功能
+                </div>
+                <div id="cell01" class="cellDiv" style="padding-left:0px">
+                    <label for="ddlResourceType" class="label">资源类别:</label>
+                    <div id="ddlResourceType" class="dropDownList" style="width:70px;"></div>
+                </div>
+                <div id="cell02" class="cellDiv" style="padding-left:0px">
+                    <label for="txtName" class="label">资源名称:</label>
+                    <input id="txtName" type="text"  class="textBox2"/>
+                </div>
+                <div id="btnPanel" class="cellDiv"></div>
+            </div>                  
+        </div>    
+    </div> 
+    <div id="dataPanel"></div>
+    <script type="text/javascript">
+        //#region 全局变量 
+        var xuserId,xmenuId,permission = null;//用户及权限：json格式 
+        var  pwWidth = 320;//面板最小宽度及弹窗宽度  
+        //#endregion 全局变量
+
+         $(document).ready(function () {
+            var paramJson = SzdwCommon.getJsonParm();
+            xuserId = paramJson.xuserId;
+            xmenuId = paramJson.xmenuId;
+            permission = SzdwCommon.getPermission(paramJson.permissionJsonList);
+            bodyWidth = Math.max($(document.body).width(), minWidth);
+            bodyHeight = Math.max($(document.body).height(), minHeight);
+            //设置查询面板
+            SetQueryPanel();
+            //设置结果面板
+            SetDataPanel();
+            //窗口调整大小
+            $(window).resize(function () {
+                bodyWidth = Math.max($(document.body).width(), minWidth);
+                bodyHeight = Math.max($(document.body).height(), minHeight);
+                RepositionControls();
+                ResizeControls();
+            });
+        });
+
+        //#region 位置尺寸
+        //重设网页元素位置
+        function RepositionControls() {
+            var qh = GetPanelX("queryPanel", "h");
+            var qx = GetPanelX("queryPanel", "x");
+            var qy = GetPanelX("queryPanel", "y");
+            $("#dataPanel").css({ "left": qx, "top": qy + qh });
+
+            var t = document.body;
+            var pw = t.popupWindow;
+            if (pw) {
+                pw.RePosition(bodyWidth - pw.width - ml, qy + qh);
+            }
+        }
+
+        //重设网页元素尺寸
+        function ResizeControls() {
+            var qx = GetPanelX("queryPanel", "x");
+            var qy = GetPanelX("queryPanel", "y");
+            var qw = bodyWidth - 2 * ml;
+            var qh = GetPanelX("queryPanel", "h");
+            var dh = bodyHeight - qy - qh - mt;
+
+            $("#queryPanel").outerWidth(bodyWidth - 2 * ml);
+
+            if (szdwGv) {
+                $("#dataPanel").outerWidth(qw).outerHeight(dh);
+                szdwGv.Resize(qw, dh);
+            }
+
+            var t = document.body;
+            var pw = t.popupWindow;
+            if (pw) {
+                pw.ReSize(pw.width, dh);
+            }
+            var ew = t.exportWindow;
+            if (ew) {
+                var w = Math.min(exportWidth, bodyWidth * 4 / 5);
+                var h = Math.min(exportHeight, bodyHeight * 4 / 5);
+                ew.ReSize(w, h);
+            }
+        }
+        //#endregion
+
+        //#region 用户权限
+        //获取用户Id
+        //#region 查询面板
+
+        //#region 查询条件面板
+
+        //#region 设置查询面板
+        function SetQueryPanel() {
+            $("#queryPanel").outerWidth(bodyWidth - ml * 2);
+
+            //绑定下拉框到目标控件
+            BindDropdownListToTarget();
+
+            //设置按钮面板
+            CreateButton();
+            $("#txtName").keypress(function (e) {
+                var k = e.which;
+                if (k == 13) {
+                    var btnPanel = szdwQueryButton.button;
+                    $(btnPanel).trigger("click");
+                }
+            });
+        }
+        //#endregion 设置查询面板 
+
+        //#region 下拉框
+
+        //绑定下拉框到目标控件
+        var szdwDdlResourceType = null;
+        function BindDropdownListToTarget() {
+            var xuserId = xuserId;
+            var requestUrl = "../ResourceType/ResourceTypeProcess.ashx";
+
+            //部门下拉框
+            var name = null;//"页面";
+            var paramJson = { XuserId: xuserId, name: name, MethodName: "ResourceTypeGetDropDownList" };
+            var paramDdlDep = { requestUrl: requestUrl, paramJson: paramJson, fnInitial: InitialDdl};
+            $("#ddlResourceType").dropDownList(paramDdlDep);
+            $("#ddlResourceType").val("全部").data("value", "0");
+        }
+
+        //通用下拉框初始化设置
+        function InitialDdl(szdwDdl) {
+            szdwDdl.jsonItemAll = { Id: 0, Name: "全部" };
+            szdwDdl.fnItemClick = function (i) {
+                var btnPanel = szdwQueryButton.button;
+                $(btnPanel).trigger("click");
+            }
+        }
+
+        //#endregion 下拉框
+
+        //#endregion 查询条件面板
+
+        //#region 查询按钮面板
+
+        //#region 创建按钮
+        function CreateButton() {
+            //创建按钮
+            CreateQueryButton();
+            //CreateExportButton();
+            CreateResetButton();
+        }
+        //#endregion 设置按钮面板
+        
+        //#region 查询按钮
+        var szdwQueryButton = null;
+        function CreateQueryButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = btnWidth;
+            var h = btnHeight;
+            szdwQueryButton = new SzdwButton(p, x, y, w, h);
+            szdwQueryButton.namingContainer = nc;
+            szdwQueryButton.image = imgFile.query;
+            szdwQueryButton.text = "筛选结果";
+            szdwQueryButton.btnCssJson["border"] = "0px";
+            szdwQueryButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwQueryButton.imageWidth = btnImageWidth;
+            szdwQueryButton.Load();
+
+            //单击事件
+            var btn = szdwQueryButton.button;
+            $(btn).click(function (e) {
+                GetQueryResult();
+                e.stopPropagation();
+            });
+        }
+
+        //查询按钮事件
+        function GetQueryResult() {
+            //设置结果面板相关属性
+            var body = document.body;
+            var c = $("#dataPanel");
+            var position = "absolute";
+            var x = 0;
+            var y = 0;
+            var w = $(c).width();
+            var h = $(c).height();
+
+            //创建Gridview并绑定数据
+            CreateGridView(c, position, x, y, w, h);
+        }        
+        //#endregion 查询按钮
+        
+        //#region 导出按钮
+        var szdwExportButton = null;
+        function CreateExportButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = btnWidth;
+            var h = btnHeight;
+            szdwExportButton = new SzdwButton(p, x, y, w, h);
+            szdwExportButton.namingContainer = nc;
+            szdwExportButton.image = imgFile.report;
+            szdwExportButton.text = "导出打印";
+            //szdwExportButton.btnCssJson["display"] = "none";
+            szdwExportButton.btnCssJson["border"] = "0px";
+            szdwExportButton.btnCssJson["margin-left"] = "5px";
+            szdwExportButton.btnCssJson["border-left"] = "1px solid #EEEEEE";
+            szdwExportButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwExportButton.imageWidth = btnImageWidth;
+            szdwExportButton.Load();
+
+            //单击事件
+            var btn = szdwExportButton.button;
+            $(btn).click(function () {
+                SzdwCommon.hideWin(document.body.popupWindow);
+                var pageUrl = "ContractChainReport.aspx";
+                var paramJson = GetParamJson();
+                var titleText = "资源数据导出打印";
+                var w = Math.min(exportWidth, bodyWidth * 4 / 5);
+                var h = Math.min(exportHeight, bodyHeight * 4 / 5);
+                var x = (bodyWidth - w) / 2;
+                var y = (bodyHeight - h) / 2;
+                var oJson = {
+                    hasLoadingAnimation: false
+                };
+                document.body.exportWindow = SzdwCommon.openExportWindowAssignObj(document.body.exportWindow, pageUrl, paramJson, titleText, x, y, w, h, oJson);
+            });
+        }
+        //#endregion 导出按钮        
+        
+        //#region 重置按钮
+        var szdwResetButton = null;
+        function CreateResetButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = btnWidth;
+            var h = btnHeight;
+            szdwResetButton = new SzdwButton(p, x, y, w, h);
+            szdwResetButton.namingContainer = nc;
+            szdwResetButton.image = imgFile.reset;
+            szdwResetButton.text = "重置条件";
+            szdwResetButton.btnCssJson["border"] = "0px";
+            szdwResetButton.btnCssJson["margin-left"] = "5px";
+            szdwResetButton.btnCssJson["border-left"] = "1px solid #EEEEEE";
+            szdwResetButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwResetButton.imageWidth = btnImageWidth;
+            szdwResetButton.Load();
+
+            //单击事件
+            var btn = szdwResetButton.button;
+            $(btn).click(function () {
+                $("#txtName").val("");
+                $("#ddlResourceType").data("value", null).text("");
+            });
+        }
+        //#endregion 重置按钮
+        
+        //#endregion 查询按钮面板
+        //#endregion 查询面板
+
+        //#region 结果集面板
+
+        //#region 设置结果集面板
+        function SetDataPanel() {
+            var qx = GetPanelX("queryPanel", "x");
+            var qy = GetPanelX("queryPanel", "y");
+            var qw = GetPanelX("queryPanel", "w");
+            var qh = GetPanelX("queryPanel", "h");
+            $("#dataPanel")
+                .css({ "position": "relative", "left": qx, "top": qy + qh})
+                .outerWidth(qw)
+                .outerHeight(bodyHeight - qy - qh - mt);
+
+            //初始加载结果数据
+            GetQueryResult();
+        }
+        //#endregion 设置结果集面板
+        
+        //#region 查询结果
+
+        //#region 获取查询参数
+        function GetParamJson() {
+            var xuserId = xuserId;
+            var name = $.trim($("#txtName").val());
+            var resourceTypeId = $.trim($("#ddlResourceType").data("value"));
+            var paramJson = { xuserId: xuserId };
+            paramJson["name"] = name;
+            paramJson["resourceTypeId"] = resourceTypeId;
+            
+            return paramJson;
+        }
+        //#endregion 获取查询参数
+
+        //#region 创建Gridview并绑定数据
+        var szdwGv = null;
+        function CreateGridView(namingContainer, position, x, y, width, height) {
+            if (szdwGv == null || typeof (szdwGv) == "undefined") {
+                //创建SzdwGridViewt实例
+                szdwGv = new SzdwGridView(position, x, y, width, height);
+                szdwGv.namingContainer = namingContainer;
+                szdwGv.fnInitial = InitialGridview(szdwGv);
+            }
+
+            //异步加载数据
+            if (szdwGv.pagination != null) {
+                szdwGv.pagination.ResetBar();
+            }
+
+            var paramJson = GetParamJson();
+            paramJson["pageSize"] = szdwGv.pageSize;
+            paramJson["MethodName"] = "ResourceGetOperationList";
+            szdwGv.requestUrl = "ResourceProcess.ashx";
+            szdwGv.paramJson = paramJson;
+            szdwGv.DataBind();
+        }
+        //#endregion 创建Gridview并绑定数据
+
+        //#region 初始化Gridview属性
+        function InitialGridview(szdwGv) {
+            //个性样式设置    
+            szdwGv.dataPanelCssJson = { "background-color": "White", "border": "1px solid Silver", "border-top": "0px solid #DDDDDD" };
+            szdwGv.paginationCssJson = { "background-color": "White","font-family": "微软雅黑", "font-size": "small","border":"1px solid Silver","border-top":"0px"};
+            szdwGv.minHeight = 300;
+
+            //dataPanel设置
+            szdwGv.hasSumRow = false;
+            szdwGv.hasButtonPanel = true;
+            szdwGv.freezeCols = 2;
+            szdwGv.scrollKeeingType = 1;
+
+            //head设置
+            szdwGv.headCssName = "gridHead2";
+            szdwGv.headHeight = 30;           
+            szdwGv.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 50},
+                                    { "Field": "Name", "Text": "资源名称", "Width": 200, "OrderField": "Name" },
+                                    { "Field": "ResourceType", "Text": "资源类别", "Width": 80, "OrderField": "ResourceType" },
+                                    { "Field": "ResourceOperation", "Text": "功能操作", "Width": 550, "FnControlColumn": CreateCellControl, "Style": { "Color": "Red" } },
+                                    { "Field": "Memo", "Text": "资源描述", "Width": 260}];
+
+            szdwGv.cellCssJson = {
+                "Name": { "text-align": "left", "font-size": "small", "font-family": "宋体" },
+                "ResourceOperation": { "text-align": "left", "font-size": "small", "font-family": "宋体", "word-wrap": "break-word", "word-break": "break-all" },
+                "Memo": { "text-align": "left", "font-size": "small", "font-family": "宋体" }
+            };
+        }
+        //#endregion 初始化Gridview属性
+
+        //#region 自定义控件列
+
+        //#region 设置控件
+        function CreateCellControl(jsonList, cell) {
+            var rowIndex = $(cell).data("rowIndex");
+            var jsonList = jsonList[rowIndex].OperationList;
+            
+            var c = document.createElement("div");
+            $(c).css({ "height": 25, "line-height": "25px" });            
+
+            //可配置权限Operation列表
+            var chkl = CreateCheckBoxList(jsonList, c);
+           
+            //设置按钮
+            var btn = document.createElement("input");
+            $(btn).attr("type", "button").addClass("button2");
+            $(btn).css({ "float": "right", "width": 45, "height": 25 });
+            var text = "设置";
+            $(btn).val(text).appendTo(c);
+
+            //绑定事件
+            $(btn).click(function () {
+                ResourceOperationSetting(rowIndex,btn);
+                szdwGv.SetSelectedRow(cell.parentNode);
+            });
+
+            return c;
+        }
+
+        //#region 操作列表
+        //创建
+        function CreateCheckBoxList(jsonList,namingContainer) {
+            //位置宽高属性
+            var c = namingContainer;
+            var position = "relative";
+            var cw = $(c).width();
+            var ch = $(c).height();
+            var w = 0;
+            var h = ch;
+            var x = 0;
+            var y = 0;
+
+            //创建CheckBoxList
+            var szdwChkl = new SzdwCheckBoxList(position, x, y, w, h);
+            szdwChkl.namingContainer = c;
+            szdwChkl.backgroundColor = "transparent";
+            szdwChkl.opacity = 1;
+            szdwChkl.allowLeastOne = false;
+            szdwChkl.panelCssJson["float"] = "left";
+            szdwChkl.panelCssJson["color"] = "black";
+            szdwChkl.itemCssJson["padding"] = "0px 5px 0px 5px";
+            szdwChkl.itemCheckedCssJson = { "color": "red" };
+            szdwChkl.checkBoxDisabled = true;
+            szdwChkl.fieldText = "Operation";
+            szdwChkl.fieldValue = "Permissable";
+            szdwChkl.jsonList = jsonList;
+            szdwChkl.Load();
+
+            return szdwChkl;
+        }
+        //#endregion 操作列表 
+
+        //#endregion 设置控件
+
+        //#endregion 自定义控件列        
+        
+        //#region 资源权限弹窗
+
+        //资源权限弹窗
+        function ResourceOperationSetting(rowIndex, targetControl) {
+            var t = targetControl;
+            var jsData = szdwGv.recordSetJson[rowIndex];
+            var resourceId = jsData.Id;
+            var creatorId = xuserId;
+            var opreationList = jsData.OperationList;
+            for (i = 0; i < opreationList.length; i++) {
+                opreationList[i]["ResourceId"] = resourceId;
+                opreationList[i]["CreatorId"] = creatorId;
+            }
+            SzdwCommon.hideWin(document.body.exportWindow);
+            var titleText = "设置资源功能操作：" + jsData.Name;
+            var pageUrl = "ResourceOperationSetting.html";
+            var paramJson = opreationList;
+            var w = pwWidth;
+            var h = GetPanelX("dataPanel", "h");
+            var x = bodyWidth - w - ml;
+            var y = GetPanelX("dataPanel", "y");
+            var oJson = { fnCloseCallBack: RecoverSelectedRow, hasMask: false };
+            document.body.popupWindow = SzdwCommon.openEditWindowAssignObj(document.body.popupWindow, pageUrl, paramJson, titleText, x, y, w, h, oJson);
+        }
+
+        //更新完毕后恢复行样式（无选中底色）
+        function RecoverSelectedRow() {
+            szdwGv.RecoverSelectedRow();
+        }
+
+        //#endregion 资源权限弹窗
+
+        //#endregion 查询结果
+
+        //#endregion 结果集面板
+      
+    </script>
+</body>
+</html>

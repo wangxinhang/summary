@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 500px;
+            height: 100px;
+            background: transparent;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var allBoxs = document.getElementsByTagName("div");
+        var colorArr = ["pink", "orange", "greenyellow","pink", "orange", "greenyellow"];
+        var timer = null;
+        var i = 0;
+
+        // clearInterval(timer);
+        // timer = setInterval(function () {
+        // 随机变换颜色,笨方法
+        // var num1 = Math.floor(Math.random() * 6 );
+        // var num2 = Math.floor(Math.random() * 6 );
+        // var num3 = Math.floor(Math.random() * 6 );
+        // var num4 = Math.floor(Math.random() * 6 );
+        // var num5 = Math.floor(Math.random() * 6 );
+        // allBoxs[0].style.backgroundColor = colorArr[num1];
+        // allBoxs[1].style.backgroundColor = colorArr[num2];
+        // allBoxs[2].style.backgroundColor = colorArr[num3];
+        // allBoxs[3].style.backgroundColor = colorArr[num4];
+        // allBoxs[4].style.backgroundColor = colorArr[num5];
+
+
+        // 第二种方法
+            clearInterval(timer);
+            timer = setInterval(function () {
+                for (var j = 0; j < colorArr.length; j++) {
+                    var numRom = Math.floor(Math.random() * 5);
+                    allBoxs[numRom].style.backgroundColor = colorArr[j];
+                }
+            }, 500)
+
+        // 第三种方法
+            // clearInterval(timer);
+            // timer = setInterval(function () {
+            //     for (var j = 0; j < allBoxs.length; j++) {
+            //         var numRom = Math.floor(Math.random() * 6);
+            //         allBoxs[j].style.backgroundColor = colorArr[numRom];
+            //     }
+            // }, 500)
+
+        // 轮播变换颜色
+        // if (i == 6) {
+        //     i = 0;
+        // }
+        // allBoxs[0].style.backgroundColor = colorArr[i];
+        // allBoxs[1].style.backgroundColor = colorArr[i + 1];
+        // allBoxs[2].style.backgroundColor = colorArr[i + 2];
+        // allBoxs[3].style.backgroundColor = colorArr[i + 3];
+        // allBoxs[4].style.backgroundColor = colorArr[i + 4];
+        // i++;
+        // console.log(i);
+        // }, 500)
+    }
+</script>

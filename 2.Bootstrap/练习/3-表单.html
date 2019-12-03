@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="../bootstrap-3.3.7-dist/js/jquery-3.1.1.min.js"></script>     
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 栅格系统 -->
+    <div  class="container">    <!--此为固定宽度容器-->
+
+        <!-- label元素和对应的input元素宽度均为100%，各自占满一行。 -->
+        <form style="background-color:#dbdbdb;">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+            </div>
+            <div class="checkbox">
+                <label>
+                <input type="checkbox"> Check me out
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+
+        <!-- label元素和对应的input元素宽度共同占满一行。当进入手机端 (宽度<768px时)，才会各自沾满一行。 -->
+        <form class="form-horizontal" style="background-color:pink; margin-top: 50px;">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox"> Remember me
+                    </label>
+                </div>
+                </div>
+            </div>
+            <div class="form-group" >
+                <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+            </div>
+        </form>
+
+
+
+        <!-- 当设备宽度>=768px时，表单内的所有元素都会水平排布，当进入手机端 (宽度<768px时)，才会各自沾满一行。不常用，针对其他表单元素还要继续设置样式。 -->
+        <form class="form-inline" style="background-color:#dbdbdb;margin-top:50px;">
+            <div class="form-group">
+                <label for="exampleInputName2">Name</label>
+                <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+            </div>
+            <button type="submit" class="btn btn-default">Send invitation</button>
+        </form>
+
+
+        <!-- 多选及单选框 -->
+        <form style="background-color:pink;margin-top:50px;">
+            <div class="checkbox"  >
+            <label>
+                <input type="checkbox" value="">
+                Option one is this and that&mdash;be sure to include why it's great
+            </label>
+            </div>
+            <div class="checkbox disabled">
+            <label>
+                <input type="checkbox" value="" disabled>
+                Option two is disabled
+            </label>
+            </div>
+            
+            <div class="radio">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                Option one is this and that&mdash;be sure to include why it's great
+            </label>
+            </div>
+            <div class="radio">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                Option two can be something else and selecting it will deselect option one
+            </label>
+            </div>
+            <div class="radio disabled">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+                Option three is disabled
+            </label>
+        </div>
+        </form>
+
+        <form style="background-color:#dbdbdb;margin-top:50px;">
+        <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+            </label>
+            
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+            </label>
+        </form>
+
+
+        <!-- 下拉列表框 -->
+        <form style="background-color:pink;margin-top:50px;">  
+        <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+        </form>
+
+        <!-- 表单控件的校验状态 -->
+        <form class="form-horizontal" style="margin-top: 50px;">
+                <div class="form-group has-warning">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group has-error">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group has-success">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>               
+        </form>
+
+    </div>
+</body>
+</html>

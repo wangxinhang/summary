@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #container {
+            width: 200px;
+            height: 300px;
+            margin: 100px auto;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 200px;
+            font-size: 30px;
+        }
+
+        #container button:nth-of-type(2) {
+            margin-left: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="box"></div>
+        <button>开始抽奖</button>
+        <button>结束抽奖</button>
+    </div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var Btn = document.getElementsByTagName("button");
+        var Box = document.getElementById("box");
+        var timer = null;
+        // var arr = ["特等奖", "一等奖", "二等奖", "三等奖", "四等奖", "抱歉，未中奖"];
+        // Btn[0].onclick = function () {
+        //     clearInterval(timer);
+        //     timer = setInterval(function () {
+        //         var num = Math.floor(Math.random() * 6);
+        //         Box.innerText = arr[num];
+        //     }, 20)
+        // }
+        // Btn[1].onclick = function () {
+        //     clearInterval(timer);
+        // }
+
+        Btn[0].onclick = function () {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                var num = Math.floor(Math.random() * 3);
+                Box.innerText = num;
+            }, 100)
+        }
+        Btn[1].onclick = function () {
+            clearInterval(timer);
+            if (Box.innerText == 0) {
+                Box.innerText = 1;
+                console.log(Box.innerText);
+                alert(1);
+            } else if (Box.innerText == 1) {
+                alert(1);
+            } else if (Box.innerText == 2) {
+                alert(2);
+            } else  {
+                alert(3);
+            }
+            
+        }
+    }
+</script>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <router-link :to="{ name: 'user', params: { userId: 123 } }">User456</router-link>
+        <router-view></router-view>
+    </div>
+
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+    <script>
+        var News = {
+            template: ` 
+                <div>
+                    <h3>新闻</h3>
+                    <router-link to="/news/yule/article/001">娱乐频道</router-link>
+                    <router-link to="/news/zhibo/article/002">直播频道</router-link>
+                    <div><router-view></router-view></div>
+                </div>`
+        };
+        var User = {
+            template: '<p>获取到数据：{{$route.params}}</p>'
+        };
+        // 配置路由
+        var jump = [{
+            path: '/news',
+            component: News,
+            name: 'user',
+            // 配置二级的路由
+            children: [{
+                // 冒号后面的数据可获取是动态的
+                path: '"/user/:id',
+                component: User
+            }]
+        }, {
+            path: '/',
+            redirect: '/home'
+        }];
+        // 创建实例
+        var router = new VueRouter({
+            routes: jump
+        });
+        // 挂载实例
+        var app = new Vue({
+            el: '#app',
+            router: router
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+
+
+
+
+
+      // 1.if选择语句
+      // 输入成绩，判断学习程度
+      // var a=parseInt(prompt("请输入一个分数"));
+      // if(a>100||a<0||isNaN(a)){
+      // 	alert("输入错误");
+      // }else if (a>=95) {
+      // 	alert("优秀");
+      // }else if (a>=85) {
+      // 	alert("良好");
+      // }else if (a>=75) {
+      // 	alert("一般");
+      // }else if (a>=60) {
+      // 	alert("及格");
+      // }else {
+      // 	alert("不及格");
+      // }
+
+      // 2.for循环语句
+      // 三角形
+      for (var i = 1; i <= 10; i++) {
+      	for (var j = 0; j < i; j++) {
+      		document.write("*");
+      	}
+      	document.write("<br />");
+      }
+      // 奇数型
+      for (var i = 1; i <= 10; i++) {
+      	for (var j = 0; j < i*2-1; j++) {
+      		document.write("*");
+      	}
+      	document.write("<br />");
+      }
+      // 金字塔型
+      for (var i = 1; i <= 10; i++) {
+      	for (var j = 10; j > i; j--) {
+      		document.write("&nbsp;");
+      	};
+      	for (var k = 1; k <= i; k++) {
+      		document.write("*");
+      	}
+      	document.write("<br />");
+      };
+      // 菱型
+      var num = prompt("请输入菱形的行数：");
+      if (num % 2 == 1) {
+      	for (var i = 1; i <= num; i++) {
+      		var topNum = (num + 1)/2;
+      		if (i <= topNum) {
+      		// 上半部
+      			for (var j = topNum; j > i; j--) {
+      				document.write("&nbsp;");
+      			};
+      			for (var k = 1; k <= i; k++) {
+      				document.write("*");
+      			}
+      		// console.log(topNum);
+      		 }else {
+      		// 下半部
+      			for (var j = 0; j < i - topNum; j++) {
+      				document.write("&nbsp;");
+      			};
+      			for (var k = num - topNum; k >= i - topNum; k--) {
+      				document.write("*");
+      			}
+      		};
+      		document.write("<br />");
+      	}
+      }else {
+      	alert("输入无效，请输入一个奇数");
+      }
+
+      // 九九乘法表
+
+      for (var i = 1; i <= 9; i++) {
+      	for (var j = 1; j < i + 1; j++) {
+      		document.write(j+"*"+i+"="+i*j+"&nbsp;&nbsp;&nbsp;");
+      	}
+      	document.write("<br />");
+      }
+    </script>
+  </body>
+</html>

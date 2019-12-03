@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+
+        <p :style="{color:fontColor}">{{msg}}</p>
+        <button v-on:click="msg = '今天天气好热啊'">点击改变内容</button>
+        <!-- 推荐这种写法 -->
+        <button v-on:click="changeFont">点击改变内容1</button>
+        <button v-on:click="changeFontColor">点击改变颜色</button>
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                msg:"今天天气很好",
+                fontColor:"red"
+            },
+            methods: {
+                changeFont(){
+                    this.msg = '今天天气好冷啊'
+                },
+                changeFontColor(){
+                    this.fontColor = 'green'
+                },
+            }
+        })
+    </script>
+</body>
+</html>

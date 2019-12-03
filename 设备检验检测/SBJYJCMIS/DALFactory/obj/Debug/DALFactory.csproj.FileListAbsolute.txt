@@ -1,0 +1,54 @@
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.dll
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.pdb
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.IDAL.dll
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.Model.dll
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.IDAL.pdb
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.Model.pdb
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\obj\Debug\DALFactory.csprojResolveAssemblyReference.cache
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.dll
+E:\设备检验检测平台\SBJYJCMIS\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.pdb
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.Model.dll
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.Model.pdb
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\obj\Debug\DALFactory.csprojResolveAssemblyReference.cache
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.dll
+D:\SBJYJCMIS\SBJYJCMIS\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\obj\Debug\DALFactory.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.Model.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\bin\Debug\SBJYJCMIS.Model.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\obj\Debug\DALFactory.csprojResolveAssemblyReference.cache
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\obj\Debug\DALFactory.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.Model.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\bin\Debug\SBJYJCMIS.Model.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\obj\Debug\DALFactory.csprojResolveAssemblyReference.cache
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\DALFactory\obj\Debug\SBJYJCMIS.DALFactory.pdb

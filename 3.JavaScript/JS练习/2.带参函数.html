@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			background:white;
+		}
+		#box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<button onclick=change("red","url(image/t01bc07baaf1efcf572.jpg)","500px","200px")>变红/变长</button>
+	<button onclick=change("green","url(image/t01d999971031f330df.jpg)","500px","500px")>变绿/再变高</button>
+	<button onclick=change("blue","url(image/t0113d2a551bc036c86.jpg)","200px","200px")>变蓝/恢复</button>
+	<button id="btn">显示/隐藏</button>
+	<div id="box"></div> 
+</body>
+</html>
+
+
+
+<script>
+	var box = document.getElementById("box");
+	var body = document.getElementsByTagName("body")[0];
+	function change(boxBgColor,bodyBgImage,x,y){
+		box.style.background = boxBgColor;
+		body.style.background =bodyBgImage;
+		box.style.width = x;
+		box.style.height = y;
+	}
+	// 点击按钮，显示/隐藏 div
+	$("btn").onclick = function (){
+	    var a = $("box").style.display;
+        if ( a === "block"){
+            $("box").style.display = "none";
+        } else {
+            $("box").style.display = "block";
+        }
+	};
+    function $(id) {
+        return typeof id ==="string" ? document.getElementById(id) : null;
+    }
+</script>

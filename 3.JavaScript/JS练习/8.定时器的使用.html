@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: pink;
+            position: relative;
+        }
+
+        div:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background-color: skyblue;
+            position: absolute;
+            top: 0px;
+            left: 120px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var box = document.getElementsByTagName("div");
+        var timer = null;
+        box[0].onmouseover = toShow;
+        box[0].onmouseout = toHidden;
+        box[1].onmouseover = toShow;
+        box[1].onmouseout = toHidden;
+
+        function toShow() {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                box[1].style.display = "block";
+            }, 1000); 
+            // clearTimeout(timer);
+            // timer = setTimeout(function () {
+            //     box[1].style.display = "block";
+            // }, 1000);
+        }
+
+        function toHidden() {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                box[1].style.display = "none";
+            }, 1000);
+            // clearTimeout(timer);
+            // timer = setTimeout(function () {
+            //     box[1].style.display = "none";
+            // }, 1000);
+        }
+    }
+</script>

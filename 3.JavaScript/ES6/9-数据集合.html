@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    window.onload = function () {
+
+    //Set对象 
+
+       let arr = new Set([1,2,3,4,4,4]);
+       // 一个属性
+       console.log(arr.size);
+       
+       //四个方法
+       //1.添加数据
+       console.log(arr.add(5));
+       //2.删除数据，返回true/false 表示删除是否成功
+       console.log(arr.delete(2));
+       console.log(arr);
+       //3.判断指定的数据是否存在，返回true/false 表示是否存在
+       console.log(arr.has(5));
+       console.log(arr.has(6));
+       //4.清除数据集合
+       console.log(arr.clear(5));
+
+
+    //Map对象
+    
+
+    }
+        
+    </script>
+</body>
+</html>

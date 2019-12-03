@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>错误信息-雨果网</title>
+    <meta name="keywords" />
+    <meta name="description" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta name="applicable-device" content="pc">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    
+    <link rel="apple-touch-icon" sizes="114x114" href="http://pic.cifnews.com/Content/Images/touch-icon-iphone-114.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="http://pic.cifnews.com/Content/Images/touch-icon-ipad-144.png" />
+    <link rel="icon" href="http://static.cifnews.com/favicon.ico">
+    <link rel="stylesheet" href="//static.cifnews.com/yuguo/css/new_base.css?v=201811261010" />
+    <link rel="stylesheet" href="//static.cifnews.com/yuguo/css/new_cifnews.css?v=201811261010" />
+    <link rel="stylesheet" href="//static.cifnews.com/yuguo/css/foota.css?v=201811261010" />
+    <script type="text/javascript" src="//static.cifnews.com/yuguo/js/jquery/jquery-1.11.3.min.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/yuguo/js/jquery/jquery-migrate-1.2.1.min.js?v=201811261010"></script>
+    <script src="//static.cifnews.com/yuguo/js/jquery/jquery.cookie.js?v=201811261010" type="text/javascript"></script>
+    <script type="text/javascript" src="//static.cifnews.com/yuguo/js/jquery/jquery.easing.1.3.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/common/js/a.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/common/js/c.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/common/js/leaveinfo.min.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/common/js/yuGuo.opacityLayer.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/common/js/SSOApi.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/yuguo/js/yuguo/foota.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/yuguo/js/yuguo/new_cifnews.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/yuguo/js/yuguo/YuGuo.LightBox.js?v=201811261010"></script>
+    <script type="text/javascript" src="//static.cifnews.com/yuguo/js/yuguo/DinaRequest.js?v=201811261010"></script>
+    
+    <!--[if lt IE 9]>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+    
+</head>
+<body>
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_491364_9rn6hw3brzt.css">
+<link href="//static.cifnews.com/yuguo3.0/index/css/header.css?v=indexapi.2.6" rel="stylesheet" />
+<div class="header">
+    <div class="header_nav">
+        <div class="logo">
+            <a href="//www.cifnews.com/" title="雨果网-跨境电商智能服务平台">
+                <div class="icon ic-logo"></div>
+                <h1>跨境电商智能服务平台</h1>
+            </a>
+        </div>
+            <div class="nav_box">
+                            <div class="nav_item active">
+                                <div class="label">
+                                    <a target="_blank" href="http://www.cifnews.com/" class="fetch-click">
+                                        首页
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="nav_item hov_box">
+                                <div class="label">
+                                    <a target="_blank" href="http://www.cifnews.com/ccee">
+                                        选品
+                                    </a>
+                                </div>
+                                <div class="hover_wrap">
+                                    <div class="sec">
+                                        <div class="sec_item center">
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/category/Clothing-Accessories">服装配饰</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/category/Electronics">电子</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/category/Home-Garden-Tools">家具家居</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/category/Shoes-Bags">鞋包</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/category/Sports-Outdoors">运动户外</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/category/Mothers-Babies-Toys">母婴玩具</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/category/Beauty-HealthCare">美妆个护</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/product/new">新品发布</a></div>
+                                                <div class="item"><a target="_blank" href="http://www.cifnews.com/ccee/brandfactory">智造工厂</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="more_btn">
+                                        <a target="_blank" href="http://www.cifnews.com/ccee">更多选品</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nav_item hov_box">
+                                <div class="label">
+                                    <a target="_blank" href="http://www.cifnews.com/service">
+                                        服务
+                                    </a>
+                                </div>
+                                <div class="hover_wrap">
+                                        <div class="sec">
+                                            <div class="sec_tit">服务专区</div>
+                                            <div class="sec_item">
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/facebook">Facebook</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/bing">Bing</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/google">Google</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/vcan">Vcan</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/asin">亚速商标</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/obor">欧博品牌营销</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/dhl">DHL</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/sfexpress">顺丰国际</a></div>
+                                                <div class="item it_more"><a target="_blank" href="http://www.cifnews.com/service">更多&gt;</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="sec">
+                                            <div class="sec_tit">平台专区</div>
+                                            <div class="sec_item">
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/amazon">亚马逊</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/aliexpress">速卖通</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/wish">Wish</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/ebay">eBay</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/shopee">Shopee</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/souq">Souq</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/jd">京东全球售</a></div>
+                                                    <div class="item"><a target="_blank" href="http://www.cifnews.com/theme/dulizhan">自建站</a></div>
+                                                <div class="item it_more"><a target="_blank" href="http://www.cifnews.com/platform">更多&gt;</a></div>
+                                            </div>
+                                        </div>
+                                    <div class="more_btn">
+                                        <a target="_blank" href="http://www.cifnews.com/service">更多服务</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nav_item hov_box">
+                                <div class="label">
+                                    <a target="_blank" href="http://www.cifnews.com/yuke?origin=pc_nav">
+                                        雨课
+                                    </a>
+                                </div>
+                                <div class="hover_wrap s">
+                                    <div class="js_item">
+                                            <div class="item"><a target="_blank" href="http://www.cifnews.com/yuke?origin=pc_nav">线上课程</a></div>
+                                            <div class="item"><a target="_blank" href="http://www.cifnews.com/vc">线下课程</a></div>
+                                    </div>
+                                </div>
+<div class="lab_act"></div>                            </div>
+                            <div class="nav_item">
+                                <div class="label">
+                                    <a target="_blank" href="http://www.cifnews.com/live?origin=pc_nav" class="fetch-click">
+                                        直播
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="nav_item">
+                                <div class="label">
+                                    <a target="_blank" href="http://www.cifnews.com/active" class="fetch-click">
+                                        活动
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="nav_item hov_box">
+                                <div class="label">
+                                    <a target="_blank" href="http://www.cifnews.com/ask">
+                                        更多
+                                    </a>
+                                </div>
+                                <div class="hover_wrap s">
+                                    <div class="js_item">
+                                            <div class="item"><a target="_blank" href="http://www.cifnews.com/ask">问答</a></div>
+                                            <div class="item"><a target="_blank" href="http://www.oborad.com/">营销</a></div>
+                                            <div class="item"><a target="_blank" href="http://www.cifnews.com/theme">专题</a></div>
+                                            <div class="item"><a target="_blank" href="http://www.cifnews.com/observers">观察员</a></div>
+                                            <div class="item"><a target="_blank" href="http://www.cifnews.com/tag/82">出口电商</a></div>
+                                            <div class="item"><a target="_blank" href="http://www.cifnews.com/tag/366">进口电商</a></div>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+            <div class="right_box">
+                <!-- 未登录 -->
+                <div class="lnr" id="notlogin">
+                    <a target="_blank" class="login" rel="nofollow" href="javascript:void(0)" onclick="SSOApi.ShowSSOBox()"><span class="iconfont icon-ic_login"></span><br>登录</a>
+                    <a target="_blank" class="register" rel="nofollow" href="javascript:void(0)" onclick="SSOApi.ShowSSOBox(true)"><i class="iconfont icon-ic_register"></i><br>注册</a>
+                </div>
+                <!-- 已登录 -->
+                <div class="lnr none yes-login" id="islogin">
+                    <div class="userbox">  
+                        <div class="img_box"><a target="_blank" href="http://passport.cifnews.com/user" rel="nofollow"><img src="" alt="" id="userHeadImg"></a></div>
+                        <div class="hover_wrap">
+                            <div class="username">
+                                <span id="username"></span><br />
+                            </div>
+                            <div class="user_group">
+                                <div class="item"><a target="_blank" href="http://passport.cifnews.com/user/myorder" rel="nofollow">我的订单</a></div>
+                                <div class="item"><a target="_blank" href="http://www.cifnews.com/vip" rel="nofollow">会员中心</a></div>
+                                <div class="item"><a target="_blank" href="http://www.cifnews.com/yuke/mycourse" rel="nofollow">我的课程</a></div>
+                                <div class="item"><a target="_blank" href="http://passport.cifnews.com/user/myfavorite" rel="nofollow">我的收藏</a></div>
+                                <div class="item"><a target="_blank" href="http://passport.cifnews.com/user/mycoupon" rel="nofollow">我的卡券</a></div>
+                            </div>
+                            <div class="user_group">
+                                <div class="item"><a href="#" onclick="SSOApi.LogOutSSO()">退出</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="member_center">
+                    <a href="http://www.cifnews.com/vip" target="_blank">
+                        <i class="iconfont icon-ic_vip"></i><br>
+                        会员
+                    </a>
+                    <div class="lab_act"></div>
+                </div>
+                <div class="site">
+                    <div class="label icbox">
+                        <i class="iconfont icon-diqiu1"></i><br />中文站
+                        <div class="hover_wrap">
+                            <div class="group">
+                                <div class="item"><a target="_blank" href="https://en.cifnews.com/">English</a></div>
+                                <div class="item"><a target="_blank" href="https://www.cifnews.it">In italia</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile icbox">
+                    <a target="_blank" href="http://www.cifnews.com/appdownload?origin=201701191109131151" rel="nofollow">
+                        <i class="iconfont icon-shouji"></i><br />客户端
+                    </a>
+                        <div class="hover_wrap">
+                            <div class="img_box">
+                                <img src="https://pic.cifnews.com/upload/201808/15/201808151023358161.png">
+                            </div>
+                            <p>下载雨果网APP</p>
+                        </div>
+                </div>
+
+                <div class="hic_search icbox">
+                    <div class="open">
+                        <i class="iconfont icon-sousuo"></i><br />搜索
+                    </div>
+                    <i class="iconfontyyy hic_close none"></i>
+                </div>
+
+            </div>
+    </div>
+</div>
+
+<div id="searchDiv" class="disb none">
+    <div>
+        <input id="keywords" name="keywords" class="search_txt" type="text" placeholder="输入搜索关键词" onclick="this.placeholder=''">
+        <i class="iconfontyyy" onclick="SiteSearch()"></i>
+    </div>
+    <div>
+        <span>热门搜索词</span>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=%E4%BA%9A%E9%A9%AC%E9%80%8A%E5%8D%B0%E5%BA%A6%E7%AB%99" class="fetch-click" data-fetch-type="search" data-fetch-id="亚马逊印度站" data-fetch-title="亚马逊印度站" data-fetch-medium="热门搜索词" data-fetch-action="search">亚马逊印度站</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=%E5%B9%BF%E4%BA%A4%E4%BC%9A" class="fetch-click" data-fetch-type="search" data-fetch-id="广交会" data-fetch-title="广交会" data-fetch-medium="热门搜索词" data-fetch-action="search">广交会</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=shopee" class="fetch-click" data-fetch-type="search" data-fetch-id="shopee" data-fetch-title="shopee" data-fetch-medium="热门搜索词" data-fetch-action="search">shopee</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=Vova" class="fetch-click" data-fetch-type="search" data-fetch-id="Vova" data-fetch-title="Vova" data-fetch-medium="热门搜索词" data-fetch-action="search">Vova</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=%E5%B9%B4%E7%BB%88%E6%97%BA%E5%AD%A3" class="fetch-click" data-fetch-type="search" data-fetch-id="年终旺季" data-fetch-title="年终旺季" data-fetch-medium="热门搜索词" data-fetch-action="search">年终旺季</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=%E4%B8%AD%E7%BE%8E%E8%B4%B8%E6%98%93%E6%88%98" class="fetch-click" data-fetch-type="search" data-fetch-id="中美贸易战" data-fetch-title="中美贸易战" data-fetch-medium="热门搜索词" data-fetch-action="search">中美贸易战</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=%E4%BA%9A%E9%A9%AC%E9%80%8A%E6%96%B0%E6%89%8B%E5%BC%80%E5%BA%97" class="fetch-click" data-fetch-type="search" data-fetch-id="亚马逊新手开店" data-fetch-title="亚马逊新手开店" data-fetch-medium="热门搜索词" data-fetch-action="search">亚马逊新手开店</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=%E5%BC%80%E5%8F%91%E4%BF%A1" class="fetch-click" data-fetch-type="search" data-fetch-id="开发信" data-fetch-title="开发信" data-fetch-medium="热门搜索词" data-fetch-action="search">开发信</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=wish%E5%BC%80%E5%BA%97" class="fetch-click" data-fetch-type="search" data-fetch-id="wish开店" data-fetch-title="wish开店" data-fetch-medium="热门搜索词" data-fetch-action="search">wish开店</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=eBay%E5%BC%80%E5%BA%97" class="fetch-click" data-fetch-type="search" data-fetch-id="eBay开店" data-fetch-title="eBay开店" data-fetch-medium="热门搜索词" data-fetch-action="search">eBay开店</a>
+            <a target="_blank" href="http://www.cifnews.com/search?keyword=%E8%B7%A8%E5%A2%83%E7%94%B5%E5%95%86%E5%B9%B3%E5%8F%B0%E6%8E%92%E5%90%8D" class="fetch-click" data-fetch-type="search" data-fetch-id="跨境电商平台排名" data-fetch-title="跨境电商平台排名" data-fetch-medium="热门搜索词" data-fetch-action="search">跨境电商平台排名</a>
+    </div>
+    <div class="searchleft"></div>
+    <div class="searchright"></div>
+</div>
+<script src="//static.cifnews.com/yuguo3.0/index/js/header.js?v=indexapi.2.6"></script>
+
+            <div class="line20"></div>
+        
+
+
+
+<style type="text/css">
+    .bg
+    {
+        position: relative;
+        height: 500px;
+        color: #666;
+        font-size: 14px;
+    }
+    .icon01
+    {
+        background: url(/Content/Images/404.gif) 0 0;
+        width: 310px;
+        height: 424px;
+        position: absolute;
+        bottom: 0;
+    }
+    .icon02
+    {
+        background: url(/Content/Images/404.gif) 0 -445px;
+        width: 330px;
+        height: 145px;
+        position: absolute;
+        top: 20px;
+        right: 0px;
+    }
+    .con
+    {
+        position: absolute;
+        left: 350px;
+        top: 130px;
+    }
+    
+    a.back, a.home
+    {
+        background: url(/Content/Images/404.gif) no-repeat 0 -593px;
+        display: inline-block;
+        width: 140px;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 43px;
+        font-size: 16px;
+        color: #686868;
+    }
+    a.home
+    {
+        padding-left: 30px;
+        margin-left: 20px;
+        background: url(/Content/Images/404.gif) no-repeat -298px -598px;
+    }
+</style>
+<div class="main">
+    <div class="bg">
+        <div class="icon01">
+        </div>
+        <div class="icon02">
+        </div>
+        <div class="con">
+            <dl style="border-bottom: solid 1px #CCC; width: 500px;">
+                <dt style="font-size: 36px; color: #686868;">我的页面哪去了?</dt>
+                <dd>
+                    Where's my page?</dd>
+            </dl>
+            <div class="line10">
+            </div>
+            <dl style="line-height: 28px;">
+                <dd>
+                    仔细找过了，没有发现您要找的页面。最可能的原因是：</dd>
+                <dd>
+                    1. 在地址中可能存在键入错误。</dd>
+                <dd>
+                    2. 您点击的页面可能已经被管理员或作者删除。</dd>
+                <dd>
+                    3. 后台正在进行维护。</dd>
+            </dl>
+            <div class="line10">
+            </div>
+            <div>
+
+                <script type="text/javascript">
+                    $(function () {
+                        setInterval(function () {
+                            var val = parseInt($("#time").html());
+
+                            if (val > 1) {
+                                $("#time").html(val - 1);
+                            } else {
+                                location.href = $(".back").attr("href");
+                            }
+                        }, 1000);
+                    })
+                </script>
+                <a class="back" href="/">返回上一页&nbsp;&nbsp;&nbsp;<label id="time">5</label>秒</a>
+                <a href="/" class="home">网站首页</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="clear"></div>
+    <div class="weixin_show">
+        <img alt="" src="http://static.cifnews.com/yuguo/image/twocode.gif" />
+        <a rel="nofollow" style="position: absolute; display: block; width: 20px; height: 20px; right: 10px;
+            top: 10px;" href="javascript:" onclick="LightBox.OpacityBackGround.Close(); $('.weixin_show').fadeOut(200)">
+            &nbsp;
+        </a>
+    </div>
+    
+    
+<link href="//static.cifnews.com/yuguo3.0/index/css/footer.css?v=indexapi.2.6" rel="stylesheet" />
+<footer>
+    <div class="container">
+        <div class="ver_band">
+            <div class="item about">
+                <div class="tit">关于雨果</div>
+                <ul>
+                    <li><a target="_blank" href="http://www.cifnews.com/aboutus" rel="nofollow">关于我们</a></li>
+                    <li><a target="_blank" href="http://www.cifnews.com/article/8344" rel="nofollow">加入我们</a></li>
+                    <li><a target="_blank" href="javascript:void(0);" onclick="showBreakNews();" rel="nofollow">爆料投稿</a></li>
+                </ul>
+            </div>
+            <div class="item cooperation">
+                <div class="tit">交流合作</div>
+                <ul>
+                    <li><a target="_blank" href="http://www.cifnews.com/contactus" rel="nofollow">联系我们</a></li>
+                    <li><a target="_blank" href="http://www.cifnews.com/links" rel="nofollow">合作伙伴</a></li>
+                    <li><a target="_blank" href="http://www.cifnews.com/ccee/" rel="nofollow">展会合作</a></li>
+                    <li><a target="_blank" href="javascript:void(0);" onclick="showAdvice()" rel="nofollow">意见反馈</a></li>
+                </ul>
+            </div>
+            <div class="item prod">
+                <div class="tit">产品服务</div>
+                <ul>
+                    <li><a target="_blank" href="http://www.cifnews.com/appdownload?origin=201701191109131151" rel="nofollow">雨果网APP</a></li>
+                    <li><a target="_blank" href="http://www.cifnews.com/ccee/">CCEE选品</a></li>
+                    <li><a target="_blank" href="http://www.cifnews.com/guoyuan/">雨果果园</a></li>
+                    <li><a target="_blank" href="http://www.cifnews.com/vc">雨课商学院</a></li>
+                    <li><a target="_blank" href="http://www.cifnews.com/authorplan">观察员计划</a></li>
+                </ul>
+            </div>
+                <div class="item app">
+                    <div class="tit">下载雨果网app</div>
+                    <div class="img_box">
+                        <img src="https://pic.cifnews.com/upload/201808/15/201808151023358161.png" alt="雨果APP">
+                    </div>
+                </div>
+            <div class="item attention">
+                <div class="tit"><span>关注雨果网社交媒体</span></div>
+                <div class="media">
+                    <div class="logo icon ic-ic_rss"><a target="_blank" href="http://www.cifnews.com/rss" rel="nofollow"></a></div>
+                    <div class="logo icon ic-ic_weibo"><a target="_blank" href="https://weibo.com/cifnewsyuguo" rel="nofollow"></a></div>
+                    <div class="logo icon ic-ic_applets"></div>
+                    <div class="logo icon ic-ic_wechat"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div class="webrecord">
+    <div class="container">
+        ©2013 雨果网 闽ICP备11004599号-1
+    </div>
+</div>
+
+
+<div class="mask none"></div>
+
+<!-- 意见反馈 -->
+<div class="layer mes none">
+    <div class="layer_tit">
+        <span>意见反馈</span>
+    </div>
+    <i class="btn_close"></i>
+    <div class="form">
+        <div action="#">
+
+            <div class="group">
+                <div class="label">联系信息:</div>
+                <div class="input_box">
+                    <input type="text" id="advice_phone" placeholder="请填写您的电话/邮箱，便于与您取得联系" required>
+                </div>
+            </div>
+            <div class="group">
+                <div class="label">反馈问题: </div>
+                <div class="input_box">
+                    <input type="text" id="advice_title" placeholder="请填写您想反馈的问题" required>
+                </div>
+            </div>
+            <div class="group">
+                <div class="label">问题详情:</div>
+                <div class="input_box">
+                    <textarea name="" id="advice_content" placeholder="请详细描述您的问题或建议" cols="30" rows="10" required></textarea>
+                </div>
+            </div>
+            <div class="group">
+                <input type="button" value="提交" class="button" onclick="Advice();">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 我要爆料 -->
+<div class="layer baoliao none">
+    <div class="layer_tit">
+        <span>我要爆料</span>
+    </div>
+    <i class="btn_close"></i>
+    <div class="form">
+        <div action="#">
+
+            <div class="group">
+                <div class="label">联系信息:</div>
+                <div class="input_box">
+                    <input type="text" id="baoliao_phone" placeholder="请填写您的电话/邮箱，便于与您取得联系" required>
+                </div>
+            </div>
+            <div class="group">
+                <div class="label">爆料详情:</div>
+                <div class="input_box">
+                    <textarea id="baoliao_content" name="" cols="30" rows="10" required></textarea>
+                </div>
+            </div>
+            <div class="group">
+                <input type="button" value="提交" class="button" onclick="BreakNews();">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 微信公众号 -->
+<div class="layer wx none">
+    <div class="btn_close"></div>
+    <div class="layer_tit">微信公众号</div>
+    <div class="layer_desc">扫描下方二维码或者搜索微信公众号名称，获取最新最全内容</div>
+        <div class="qr_wrap">
+                <div class="qr_item">
+                    <div class="img_box"><img src="https://pic.cifnews.com/upload/201808/15/201808151028420205.png" alt="雨果网"></div>
+                    <div class="desc">雨果网</div>
+                </div>
+                <div class="qr_item">
+                    <div class="img_box"><img src="https://pic.cifnews.com/upload/201808/15/201808151028420183.png" alt="跨境进口"></div>
+                    <div class="desc">跨境进口</div>
+                </div>
+                <div class="qr_item">
+                    <div class="img_box"><img src="https://pic.cifnews.com/upload/201808/15/201808151030390105.png" alt="雨课"></div>
+                    <div class="desc">雨课</div>
+                </div>
+                <div class="qr_item">
+                    <div class="img_box"><img src="https://pic.cifnews.com/upload/201808/15/201808151028420193.png" alt="CCEE优品全球"></div>
+                    <div class="desc">CCEE优品全球</div>
+                </div>
+        </div>
+</div>
+
+<!-- 微信小程序 -->
+<div class="layer xcx none">
+    <div class="btn_close"></div>
+    <div class="layer_tit">微信小程序</div>
+    <div class="layer_desc">扫描下方二维码或者搜索微信小程序名称，获取最新最全内容</div>
+    <div class="qr_wrap">
+        <div class="qr_item">
+            <div class="img_box"><img src="https://pic.cifnews.com/upload/201808/15/201808151026363191.png" alt="雨果网小程序"></div>
+            <div class="desc">雨果网小程序</div>
+        </div>
+        <div class="qr_item">
+            <div class="img_box"><img src="https://pic.cifnews.com/upload/201808/15/201808151027320124.png" alt="雨课小程序"></div>
+            <div class="desc">雨课小程序</div>
+        </div>
+        <div class="qr_item">
+            <div class="img_box"><img src="https://pic.cifnews.com/upload/201809/14/201809141042550833.jpg" alt="CCEE小程序"></div>
+            <div class="desc">CCEE小程序</div>
+        </div>
+    </div>
+</div>
+
+<script src="//static.cifnews.com/yuguo3.0/index/js/footer.js?v=indexapi.2.6"></script>
+
+    
+
+    
+
+</body>
+</html>

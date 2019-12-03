@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+
+</head>
+
+<body>
+   <div id="box">
+      <p>初始值：{{name}}</p>
+      <p>直接反转值：{{this.name.split('').reverse().join('')}}</p>
+      <p>函数调用：{{this.reverseStr()}}</p>
+      <p>计算属性：{{this.reverseSet}}</p>
+      <p></p>
+   </div>
+   <script src="vue.js"></script>
+   <script>
+      let vm = new Vue({
+         el: "#box",
+         data: {
+            name: "Jack Rose"
+         },
+         methods: {
+            reverseStr() {
+               return this.name.split('').reverse().join('');
+            }
+         },
+         //计算属性
+         computed: {
+            /*默认只有getter：仅读取
+                正常写法
+                reverseSet:function(){
+                  return this.name.split('').reverse().join('');
+               },*/
+            // ES6可以把function省略掉
+            reverseSet() {
+               return this.name.split('').reverse().join('');
+            },
+            //读取加设置,这是一个集合，里面有两种方法
+            reverseGetSet: {
+               //默认只有getter：仅读取
+               get: function () {
+                  return this.name.split('').reverse().join('');
+               },
+               //还可以添加setter：仅设置
+               set: function (v) {
+                  this.name = v + '...';
+               }
+            }
+
+         }
+      })
+      //计算属性的结果会被缓存
+      console.log(vm.name);
+      console.log(vm.reverseSet);
+
+      //当改变属性name的值时，才会重新计算,一般不会使用
+      vm.reverseGetSet = 'wangxinhang';
+      console.log(vm.name);
+      console.log(vm.reverseSet);
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+E:\设备检验检测平台\SBJYJCMIS\DBUtility\bin\Release\SBJYJCMIS.DBUtility.dll
+E:\设备检验检测平台\SBJYJCMIS\DBUtility\bin\Release\SBJYJCMIS.DBUtility.pdb
+E:\设备检验检测平台\SBJYJCMIS\DBUtility\obj\Release\SBJYJCMIS.DBUtility.dll
+E:\设备检验检测平台\SBJYJCMIS\DBUtility\obj\Release\SBJYJCMIS.DBUtility.pdb

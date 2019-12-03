@@ -1,0 +1,90 @@
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.dll
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.pdb
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.dll
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.dll
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.dll
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.dll
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.pdb
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.pdb
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.pdb
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\obj\Debug\SQLServerDAL.csprojResolveAssemblyReference.cache
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.dll
+E:\设备检验检测平台\SBJYJCMIS\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.dll
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.dll
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.dll
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.dll
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.pdb
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\obj\Debug\SQLServerDAL.csprojResolveAssemblyReference.cache
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.dll
+D:\SBJYJCMIS\SBJYJCMIS\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\obj\Debug\SQLServerDAL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\obj\Debug\SQLServerDAL.csprojResolveAssemblyReference.cache
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\obj\Debug\SQLServerDAL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.SQLServerDAL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.BLL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DBUtility.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\bin\Debug\SBJYJCMIS.DALFactory.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\obj\Debug\SQLServerDAL.csprojResolveAssemblyReference.cache
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\SQLServerDAL\obj\Debug\SBJYJCMIS.SQLServerDAL.pdb

@@ -1,0 +1,1651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <meta http - equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>全省网络拓扑图 </title>
+    <script type="text/javascript" src="../resource/lib/twaver/twaver.js"></script>
+    <script type="text/javascript" src="../resource/lib/twaver/demo.js"></script>
+    <link rel="icon" type="image/ico" href="../resource/img/logo.png" />
+    <link href="../resource/lib/datatable/css/jquery.dataTables.css">
+    <link href="../resource/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resource/lib/datatable/css/dataTables.jqueryui.css" rel="stylesheet">
+    <script src="../resource/lib/requirejs/require.js"></script>
+    <link href="../resource/lib/bootstrap/dist/js/bootstrap.min.js" rel="stylesheet">
+    <link href="../resource/lib/bootstrap/dist/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <style type="text/css">
+        /*     调整整体table的行间距 */
+        .table2>tbody>tr>td {
+            padding: 2px;
+        }
+
+        /* 调整整体的横竖线 */
+        .table>tbody>tr>td,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>td,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>thead>tr>th {
+            border-top: 0px solid #ddd;
+        }
+
+        .table {
+            user-select: text;
+        }
+
+        .table>tbody>tr:hover {
+            background: #3fb7da;
+        }
+
+        .dialog {
+            width: 240px;
+            background-color: #0d4981;
+            opacity: 0.95;
+            border-radius: 1px;
+            border: 1px solid #56c5f1;
+            position: absolute;
+        }
+
+        .dialogif_b {
+            width: 240px;
+            background-color: #0d4981;
+            opacity: 0.95;
+            border-radius: 1px;
+            border: 1px solid #56c5f1;
+            position: absolute;
+        }
+
+        .dialogif {
+            width: 290px;
+            background-color: #0d4981;
+            opacity: 0.95;
+            border-radius: 1px;
+            border: 1px solid #56c5f1;
+            position: absolute;
+        }
+
+        .tdbundle {
+            text-align: right;
+            width: 64%;
+            color: #e7e7e7;
+            font-weight: bold;
+        }
+
+        .td11 {
+            text-align: right;
+            width: 34%;
+            color: #e7e7e7;
+            font-weight: bold;
+        }
+
+        .tdif {
+            text-align: right;
+            width: 38%;
+            color: #e7e7e7;
+            font-weight: bold;
+            border: 0px;
+        }
+
+        .td2 {
+            color: #ffffff;
+            border: 0px;
+        }
+
+        .td2 a:link {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .td2 a:visited {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .tdr {
+            text-align: right;
+            font-weight: bold;
+
+        }
+
+        .tdc {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #legendDiv {
+            width: 282px;
+            text-align: center;
+        }
+
+        .tdl {
+            text-align: left;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .tdana {
+            text-align: right;
+            width: 60%;
+            font-weight: bold;
+        }
+
+        .cap {
+            text-align: center;
+            font-weight: bold;
+            padding: 3px
+        }
+
+        /* 下拉按钮宽度 */
+        .dropdown-menu {
+            min-width: 105px;
+        }
+
+        .dropdown-menu>li>a {
+            padding: 3px 14px;
+        }
+
+        .modal-header {
+            border-bottom: 0px solid #0088;
+        }
+
+        /* 去掉概览框横竖线和边框线  */
+        #analysisTable>.table>tbody>tr>td,
+        #analysisTable>.table>tbody>tr>th,
+        #analysisTable>.table>tfoot>tr>td,
+        #analysisTable>.table>tfoot>tr>th {
+            border: 0px;
+        }
+
+        #analysisTable>.table>thead>tr>th {
+            border-width: 0px 0px 2px 0px;
+            border-color: #00a7e4;
+        }
+
+        .tr_underline {
+            border-width: 0px 0px 2px 0px;
+            border-color: #00a7e4;
+        }
+
+        #analysisTable>.table-bordered {
+            border: 0px;
+        }
+
+        #analysisView .btn_style {
+            right: 0px;
+            top: 30%;
+            width: 20px;
+            height: 380px;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .btn4 {
+            background: url(../resource/img/rsing/topoimages/ipv4_acc.png) no-repeat;
+        }
+
+        .btn6 {
+            background: url(../resource/img/rsing/topoimages/ipv6_acc.png) no-repeat;
+        }
+
+        /*  拓扑说明模态的样式 */
+        #waringinfo {
+            position: relative;
+        }
+
+        #waringinfo .alert {
+            padding: 9px;
+            position: relative;
+            top: 40px;
+            width: 98%;
+            margin: 0 auto;
+        }
+
+        #waringinfo .alert .notespan {
+            position: relative;
+            margin: 7px;
+        }
+    </style>
+    <style>
+        td {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body onload="">
+    <div id="loading" style="margin-top: 80px">
+        <p style="text-align: center;color: #6083c2;">
+            <img src="../resource/img/rsing/loading_star.gif" style="width: 60%; height:60%">
+        </p>
+    </div>
+
+    <!-- 	style="width: 100%; height:100%;  class="modal fade" -->
+
+    <div id="toolbar" class="dataTables_title"
+        style="margin-top: 5px;margin-left: 0px; padding-left: 5px; width: 870px">
+    </div>
+    
+    <!-- Model 提示信息  -->
+
+    <div id="waringinfo" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:385px;height:414px;color:#0e4980; border: 0px;opacity:0.95;postion:relative;
+        background:url(../resource/img/rsing/topoimages/note.png)">
+                <h4 class="alert">拓扑图说明:</h4>
+                <p class="alert">1.拓扑中的流量和峰值利用率信息，均为预统计前一天的数据
+                </p>
+                <p class="alert">2.拓扑中的带宽信息均为当天实时的数据</p>
+                <div class="alert"> 3.城域网拓扑中的1跳与多跳
+                    <p class="notespan">
+                        默认:默认展示该城市核心CR设备1跳内的相关设备与链路</p>
+                    <p class="notespan">
+                        多跳:展示城域网设备(CR、SR、BRAS)1跳内的相关设备与链路</p>
+                </div>
+                <p class="alert">
+                    4.承载A/B网中各省内视图,只展示省内各设备(包含AR、BR、CR)1跳内的相关设备和链路
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Model 概览模态框  -->
+    <div id="analysisView" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content"
+                style="width:810px;color:#ffffff; border: 0px;opacity:0.95;postion:relative;background:url(../resource/img/rsing/topoimages/gailan_backg.png)">
+                <div id="btn_ipv4v6" class="btn_style btnall">
+                </div>
+                <button
+                    style="position:absolute;z-index:3; right:1px;outline: none;border-color:transparent;background: transparent;top:35%;width:20px;height:55px;"
+                    onclick="analysis_ipv4v6('4')"> </button>
+                <button
+                    style="position:absolute;z-index:3;right:1px;top:48%;width:20px;height:55px;outline: none;border-color:transparent;background: transparent;"
+                    onclick="analysis_ipv4v6('6')"> </button>
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+                    <h4 class="modal-title" id="analysisTitle" style="padding-left:70px;width:400px">
+                        全省带宽流量利用率</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div>
+                        <p style="padding-top:11px; padding-left: 290px; padding-bottom: 4px; ">
+                            <span
+                                style="width:12px; height:12px; margin-right:5px; display:inline-block; background:url('../resource/img/alert.png')  0 0 no-repeat;"></span>
+                            <span id="analysisHint"> </span>
+                        </p>
+                    </div>
+                    <div id="analysisTable"></div>
+                </div>
+
+                <div id="select_up_div" class="btn-group">
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="dropdown"
+                        style="padding:5px 5px 5px 5px;margin:1px 5px 1px 0px;background-color:#1c68ac;">峰值利用率
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a onclick="select('0','30','all')">
+                                &lt;30% </a></li>
+                        <li><a onclick="select('30','50','all')">30%—50%</a>
+                        </li>
+                        <li><a onclick="select('50','70','all')">50%—70%</a>
+                        </li>
+                        <li><a onclick="select('70','100','all')">&gt;70%</a>
+                        </li>
+                        <li><a onclick="select('0','100','all')">全选</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="select_ipv4v6" class="btn-group">
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="dropdown"
+                        style="padding:5px 5px 5px 5px;margin:1px 5px 1px 0px;background-color:#1c68ac;">链路筛选
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a onclick="selectv4v6('4','10')">
+                                IPV4链路 </a></li>
+                        <li><a onclick="selectv4v6('6','10')">IPV6链路</a>
+                        </li>
+                        <li><a onclick="selectv4v6('all')">
+                                全部链路</a></li>
+                    </ul>
+                </div>
+
+                <div id="topo_multi_hop" class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-info btn-sm" title="默认拓扑展示:城域网cr一跳内的设备及其链路;"
+                        style="padding:5px 5px 5px 5px;margin:1px 0px 1px 0px;background-color:#1c68ac;"
+                        onclick="reLoadTopo('1')">默认拓扑</button>
+                    <button type="button" class="btn btn-info btn-sm" title="多跳拓扑展示:城域网设备一跳内的设备及其链路;"
+                        style="padding:5px 5px 5px 5px;margin:1px 5px 1px 0px;background-color:#1c68ac;"
+                        onclick="reLoadTopo('2')">多跳拓扑</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        require(['../resource/js/main.min.js'], function () {
+            require(["js/topoView.js"]);
+        });
+    </script>
+
+    <script>
+        ;
+        if (network.getCanvasSize) {
+            canvas = network.toCanvas(network.getCanvasSize().width,
+                network.getCanvasSize().height);
+        } else {
+            canvas = network.toCanvas(network.getView().scrollWidth,
+                network.getView().scrollHeight);
+        }
+        if (twaver.Util.isIE) {
+            var w = window.open();
+            w.document.open();
+            w.document.write("<img src='" + canvas.toDataURL() + "' />");
+            w.document.close();
+        } else {
+            window.open(canvas.toDataURL(), 'network.png');
+        }
+        }
+        //-----------------------------------------------------------------
+
+        //-------------------------保存位置信息---------------------------
+        function savelocation() {
+            if (confirm("确认保存拓扑图现在位置？")) {
+                var location = [];
+                box.forEach(function (node) {
+                    if (node.getClassName() == 'twaver.Node' ||
+                        node.getClassName() == 'twaver.SubNetwork' ||
+                        node.getClassName() == 'twaver.Group') {
+                        var loc = node.getLocation();
+                        var temp = node.getId() + ";" + loc.x + ";" + loc.y;
+                        location.push(encodeURIComponent(temp));
+                    }
+                });
+
+
+                $.ajax({
+                    type: "post",
+                    async: false, //同步执
+                    traditional: true,
+                    data: {
+                        "dataArr": location
+                    },
+                    url: "/rsing/topo/savelocation.do?1=1&rsing_id=" + rsing_id +
+                        "&type=0",
+                    success: function (result, status) {
+                        if ("success" == status) {
+                            alert("位置保存成功！");
+                        } else {
+                            alert("位置保存失败！");
+                        }
+                        network.addViewListener(reload);
+                    },
+                    error: function () {
+                        alert("保存位置失败！");
+
+                    }
+                });
+            }
+        }
+        var reload = function (e) {
+            location.reload();
+        }
+        //网元加载完成后network.zoomOverview(true)不生效的解决方案
+        var callback = function (e) {
+            if (e.kind === 'validateEnd') {
+                network.removeViewListener(callback);
+                network.zoomOverview();
+                overend = true; //画图完成标识
+            } else {
+                overend = false;
+            }
+        };
+        //---------------------------------------------------------------------------------------------
+
+        var box;
+        var network;
+        var autoLayouter;
+        var overview;
+        var idfinder;
+        var width;
+        var height;
+        var symbolLocationMap = {};
+        var linkDataList;
+        var resizeTimer = null;
+        var rightPane;
+        var rsing_id, pro;
+        var tree;
+        var overend = false;
+        var whole_color = '#0d4981'; //全局背景色
+        var devids_169;
+        var pro;
+
+        requirejs(["jquery",
+                "jqueryUi", "bootstrap", "datatable", "datetime_zh"
+            ],
+            function ($, jqueryUi, bootstrap, datatable, datetime_zh, twaver2) {
+                $(document).ready(function () {
+                    var requ = getRequest();
+                    rsing_id = requ['rsing_id'];
+                    devids_169 = requ['devids_169'];
+                    pro = requ['pro'];
+                    $(document).attr("title", pro + "骨干网拓扑图")
+                    box = new ElementBox();
+                    network = new twaver.vector.Network(box);
+                    autoLayouter = new twaver.layout.AutoLayouter(box);
+                    overview = new twaver.vector.Overview(network); //鹰眼视图组件
+                    idfinder = new twaver.QuickFinder(box, "id"); //devid
+                    namefinder = new twaver.QuickFinder(box, "name"); //根据name查询
+                    subAuto_list = new twaver.List();
+                    tree = new Tree(box);
+                    data = new twaver.Element();
+                    width = $(window).width();
+                    height = $(window).height();
+                    init();
+                })
+            })
+
+        function init() {
+            $(".modal").draggable({
+                handle: ".modal-header"
+            });
+            var toolbar = document.getElementById("toolbar");
+            initToolbar(toolbar);
+            windowResize();
+            tick();
+        }
+
+        function tick() {
+            var today;
+            $.post("/rsing/topo/howAreYou", function (data) {
+                console.log(data)
+            });
+            window.setTimeout(function () {
+                tick();
+            }, 300000); //5分钟刷一次
+        }
+
+        var cityMap = { //处理直辖市
+            "北京": 1101,
+            "上海": 11022,
+            "天津": 1105,
+            "重庆": 1103
+        }
+
+        function windowResize() {
+            var self = this;
+            initHomeNetwork();
+            init169DataBox_byDevid();
+
+            network.setScrollBarVisible(false); //设置滚动条是否可见
+
+            //监听事件----点击显示设备信息
+            var resizeTimer = 0;
+            network.addInteractionListener(function (e) {
+                if (e.kind == 'clickBackground' || e.kind ==
+                    'enterSubNetwork' ||
+                    e.kind == 'liveMoveStart' || e.kind == 'liveMoveBetween') {
+                    $("#devdiv").hide();
+                    $("#ifinfo").hide();
+                    $("#ifbundle").hide();
+                }
+                if (e.kind == 'clickElement') {
+                    $("#ifinfo").hide();
+                    $("#devdiv").hide();
+                    $("#ifbundle").hide();
+                    if (resizeTimer) {
+                        clearTimeout(resizeTimer) //timeout 控制鼠标连带问题
+                        resizeTimer = 0;
+                    }
+                    resizeTimer = setTimeout(function () { //timeout 控制鼠标连带问题
+                        //------------------------------------------------------------------------
+                        if (e.element.getClassName() == 'twaver.Node') {
+                            var devinfo_node = e.element;
+                            if (devinfo_node.getId() != 0 && devinfo_node
+                                .getToolTip() !=
+                                null) { //处理骨干网的
+                                var dialog = initDialog(devinfo_node);
+                                var s = dialog.style;
+                                s.left = (e.event.clientX - 0.15 * width) +
+                                    'px';
+                                s.top = (e.event.clientY + 24) + 'px';
+                            }
+                        } else if (e.element.getClassName() == 'twaver.Link') {
+                            var tmp_link = e.element;
+                            var expanded =
+                                tmp_link.getStyle(
+                                    'link.bundle.expanded'); //是否展开
+                            if (expanded ||
+                                tmp_link.getBundleCount() == 1
+                            ) { //解决绑定线路为1的时候下不显示链路信息
+                                var dialog = ifDialog(tmp_link); //获取接口性能数据
+                                var s = dialog.style;
+                                s.display = 'block';
+                                s.left = (e.event.clientX - 0.15 * width) +
+                                    'px';
+                                s.top = e.event.clientY + 'px';
+                            } else if (tmp_link.isBundleAgent()) {
+                                var sum = 0;
+                                var tmpMap = {};
+                                var linklist = tmp_link.getBundleLinks()
+                                    .getLinks();
+                                linklist.forEach(function (value) {
+                                    var ifspeed = value.getClient(
+                                        "ifspeed");
+                                    var alpha = value.getStyle(
+                                        'whole.alpha'); //TODO this
+                                    if (alpha == 1) { //TODO this
+                                        var type_name = value.getClient(
+                                            "type_name");
+                                        var ip_ver = value.getClient(
+                                            "ip_ver"); //IPv4v6
+                                        var tmp_str = ipv4v6Map[
+                                                ip_ver] + "_" +
+                                            type_name;
+                                        if (tmpMap[tmp_str] == null) {
+                                            tmpMap[tmp_str] = 1;
+                                        } else {
+                                            tmpMap[tmp_str] += 1;
+                                        }
+                                        sum += ifspeed;
+                                    }
+                                })
+
+                                var result = sum / 1000 / 1000 / 1000 + "G";
+                                var dialog = ifbundleDialog(result, tmpMap);
+                                var s = dialog.style;
+                                s.display = 'block';
+                                s.left = (e.event.clientX - 0.15 * width) +
+                                    'px';
+                                s.top = e.event.clientY + 'px';
+                            }
+                        } else if (e.element instanceof twaver.SubNetwork) {
+
+                        }
+
+                        //------------------------------------------------------------------------
+                    }, 200); //timeout 控制鼠标连带问题
+                } else if (e.kind === 'doubleClickElement') {
+                    if (resizeTimer) {
+                        clearTimeout(resizeTimer);
+                        resizeTimer = 0;
+                    }
+                    if (e.element instanceof twaver.SubNetwork) {
+                        var subNetWork = currentSubnetwork = e.element;
+                        if (subNetWork.getChildrenSize() < 1) {
+                            initSubDataBox(subNetWork, false)
+                        } else {
+                            network.zoomOverview(true);
+                        }
+                    }
+                } else if (e.kind === 'upSubNetwork') {
+                    if (is_query_multi_hop) {
+                        location.reload();
+                    } else {
+                        network.zoomOverview(true);
+                    }
+                }
+            });
+            tree.addInteractionListener(function (evt) {
+                    var node = evt.data;
+                    if (evt.kind == 'click') { //单击
+                        if (node.getClassName() == 'twaver.SubNetwork') {
+                            if (node.getChildrenSize() < 1) {
+                                initSubDataBox(node, false);
+                            } else {
+                                network.zoomOverview(true);
+                            }
+                        } else if (node.getClassName() == 'twaver.Group') {
+                            network.zoomOverview(true);
+                        }
+                    } else
+                    if (evt.kind ==
+                        'collapse'
+                    ) { //合并 if(node.getClassName()=='twaver.SubNetwork' ){ if(is_query_multi_hop){
+                        location.reload();
+                    } else {
+                        network.upSubNetwork(true);
+                    }
+                } else if (node.getClassName() == 'twaver.Group') {
+                    node.setExpanded(false);
+                }
+                network.zoomOverview(true);
+            }
+        });
+        tree.setVisibleFunction(function (element) {
+            return
+            element instanceof twaver.Node;
+        });
+        tree.getIcon = function (element) {
+            return null;
+        }; //选中颜色变化功能
+        network.getSelectionModel().addSelectionChangeListener(function (e) {
+                e.datas.forEach(function (element) {
+                    if (self.box.getSelectionModel().contains(element)) {
+                        element.setStyle('body.type', 'default.vector');
+                        element.setStyle('select.color',
+                            '#ffffff'
+                        ); //选中模型边框颜色 element.setStyle('vector.fill.color', '#185d9e' );//选中模型背景颜色
+                    } else {
+                        element.setStyle('body.type', 'default');
+                    }
+                }, this);
+            },
+            this
+        ); //------------------------------------------------------------------------- //设置链路聚合显示链路条数
+        network.getLinkHandlerLabel = function (
+            link) { //一大堆的条件过滤就是为了减少遍历和计算 if ( link.isBundleAgent()) { var
+            expanded = link.getStyle(
+                'link.bundle.expanded'
+            ); //是否展开 if(expanded || link.getBundleLinks()==null){//展开或展开只有自己一条link
+            return link.getClient("ifspeed") / 1000 / 1000 / 1000;
+        }
+        var sum = 0;
+        var agentFlag = false;
+        var agentLink = null;
+        var
+            linkGouplist = link.getBundleLinks().getLinks();
+        linkGouplist.forEach(function (value) {
+                var
+                    ifspeed = value.getClient("ifspeed");
+                var alpha = value.getStyle(
+                    'whole.alpha'); //TODO this if(alpha==1){//TODO this
+                sum += ifspeed;
+                if (!agentFlag) {
+                    agentFlag = true;
+                    agentLink = value;
+                }
+            } //TODO this }) return sum/1000/1000/1000; }else
+            if (!link.isBundleAgent()) {
+                return link.getClient("ifspeed") / 1000 / 1000 / 1000;
+            } else {
+                alert("111111");
+                return null;
+            }
+            alert("2222222222");
+            return null;
+        }; //------------------------------------------------------------------------- //解决点击网元，显示的div使网元无法拖动的情况
+        network.getView().addEventListener('mouseup', function (e) {
+                var element = network.getElementAt(e);
+                if (element != null &&
+                    element.getClassName() == 'twaver.Node') {
+                    setTimeout(function () {
+                        if (element.getId() != 0 && element.getToolTip() !=
+                            null) {
+                            $("#devdiv").show();
+                        }
+                    }, 200) //延迟0.2秒显示 }
+                }
+            ); //------------------------------------------------------------------------- } //创建工具栏 function initToolbar (div)
+            {
+                var b1 = addButton2(div, "拓扑说明", "", function () {
+                    $("#waringinfo").modal("show");
+                });
+                b1.innerHTML =
+                    "<span class='glyphicon glyphicon-pushpin' aria-hidden='true'></span>"
+                addButton(div, "放大", false,
+                    function () {
+                        network.zoomIn();
+                    });
+                addButton(div, '缩小', false, function () {
+                    network.zoomOut();
+                });
+                addButton(div, '显示全部', false, function () {
+                    network.zoomOverview();
+                });
+                addButton(div, '显示默认', false, function () {
+                    network.setZoom(1);
+                });
+                addButton(div, '自动布局', false, function () { //只布局当前页面的拓扑位置 var
+                    currSub = network.getCurrentSubNetwork();
+                    if (rsing_id == 99 && (devids_169 != null)) {
+                        autoLayouter.setRepulsion(2)
+                        autoLayouter.doLayout('symmetry', function () {
+                            network.zoomOverview(true);
+                        });
+                    } else {
+                        alert("不支持该视图自动布局");
+                    }
+                });
+                addSelect(div,
+                    'select_up_div'
+                ); //ipv4v6切换按钮 addSelect(div,'select_ipv4v6'); addButton(div, '保存当前位置' ,false,function
+                () {
+                    savelocation();
+                }); addButton(div, '刷新', false, function () {
+                location.reload();
+            });
+        }
+
+        function
+        select(s, e, type) {
+            s = s * 1;
+            e = e * 1;
+            var currSub = network.getCurrentSubNetwork() if (currSub != null) {
+                var
+                    chilList = currSub.getChildren();
+                chilList.forEach(function (link) {
+                    if (link.getClassName() == 'twaver.Link') {
+                        var
+                            send = link.getClient("send_rate") * 1;
+                        var rec = link.getClient("rec_rate") * 1;
+                        var flag = false;
+                        if ('all' == type) {
+                            if ((send > = s && send < e) || (rec >= s &&
+                                    rec < e)) flag = true;
+                        } else if ('up' == type) {
+                            if (send >= s &&
+                                send < e) flag = true;
+                        } else if ('down' == type) {
+                            if (rec >= s && rec < e) flag = true;
+                        }
+                        if (flag) {
+                            link.setStyle('whole.alpha', 1);
+                        } else {
+                            link.setStyle('whole.alpha', 0.2);
+                        }
+                    }
+                });
+            } else { //说明是首页
+                box.forEach(function (
+                    ele
+                ) { //China 169骨干网 省网核心 var filter=ele.getClassName()=='twaver.Link' &&
+                    ele.getToNode().getParent().getClassName() == 'twaver.Group';
+                    if (filter) {
+                        var
+                            send = ele.getClient("send_rate") * 1;
+                        var rec = ele.getClient("rec_rate") * 1;
+                        var flag = false;
+                        if ('all' == type) {
+                            if ((send >= s &&
+                                    send < e) || (rec >= s && rec < e)) flag = true;
+                        } else if ('up' == type) {
+                            if (send >= s &&
+                                send < e) flag = true;
+                        } else if ('down' == type) {
+                            if (rec >= s &&
+                                rec < e) flag = true;
+                        }
+                        if (flag) {
+                            ele.setStyle('whole.alpha', 1);
+                        } else {
+                            ele.setStyle('whole.alpha', 0.2);
+                        }
+                    }
+                })
+            }
+        }
+
+        function selectv4v6(args1, args2) {
+            box.forEach(function (ele) {
+                var filter = ele.getClassName() == 'twaver.Link' // &&
+                ele.getToNode().getParent().getClassName() == 'twaver.Group';
+                if (filter) {
+                    var
+                        ip_ver = ele.getClient("ip_ver");
+                    var flag = false;
+                    if ('all' == args1) {
+                        flag = true;
+                    } else
+                    if (args1 == ip_ver || args2 == ip_ver) {
+                        flag = true;
+                    }
+                    if (flag) {
+                        ele.setStyle('whole.alpha', 1);
+                    } else {
+                        ele.setStyle('whole.alpha', 0.2);
+                    }
+                }
+            })
+        } //首页布局 function initHomeNetwork() { network.setZoomManager(new
+        twaver.vector.LogicalZoomManager(network)); //混合缩放视图,使得图标不缩放，只缩放距离 //设置背景颜色
+        box.setStyle('background.type', 'vector');
+        box.setStyle('background.vector.fill', true);
+        box.setStyle('background.vector.fill.color', whole_color); //"#99CCFF"
+        network.setToolTipEnabled(false); //设置tooltip显示 network.adjustBounds({width:
+        width * 0.85 * 2, height: height * 2
+        }); //注册图标
+        registerImage("../resource/img/rsing/topoimages/169ggw.png", network);
+        registerImage("../resource/img/rsing/topoimages/sw.png", network);
+        registerImage("../resource/img/rsing/topoimages/CR.png", network);
+        registerImage("../resource/img/rsing/topoimages/CR-group.png", network);
+        registerImage("../resource/img/rsing/topoimages/SR.png", network);
+        registerImage("../resource/img/rsing/topoimages/SR-group.png", network);
+        registerImage("../resource/img/rsing/topoimages/idccloud-gray.png", network);
+        registerImage("../resource/img/rsing/topoimages/cdncloud-gray.png", network);
+        registerImage("../resource/img/rsing/topoimages/mobcloud-gray.png", network);
+        registerImage("../resource/img/rsing/topoimages/treeC.png", network);
+        registerImage("../resource/img/rsing/topoimages/treeE.png", network);
+        registerImage("../resource/img/rsing/topoimages/dev_background.png", network);
+        registerImage("../resource/img/rsing/topoimages/169group.png",
+            network); //插入图例-----------------------------------------
+        var legend = document.createElement('div');
+        var
+            analysisView = document.getElementById('analysisView');
+        var
+            waringinfo = document.getElementById('waringinfo');
+        rightPane = new
+        twaver.controls.BorderPane(network);
+        demo.Util.appendChild(analysisView, rightPane.getView(), null, null, null,
+            null); //top, right, bottom, left
+        demo.Util.appendChild(waringinfo, rightPane.getView(), 200, 50, null, 50); //top,
+        right, bottom,
+        left //----------------------------------------------------------------------- //-------调整tree的整体样式----------------------------------------------------------
+        var treeview = tree.getView();
+        treeview.setAttribute("style", "background:#282d33;color:#ffffff; " +
+            //#dbdada;设置tree的背景色和字体颜色 font-family:'微软雅黑';
+            " font-size:13px;padding-top:10px;overflow: auto;"
+        ); //overflow是滚动条 tree.setExpandIcon("treeE");//合并图标
+        tree.setCollapseIcon("treeC"); //展开图标 var treePane=new
+        twaver.controls.BorderPane(tree, );
+        treePane.setTopHeight(10);
+        var leftSplit = new
+        twaver.controls.SplitPane(treePane, legend, 'vertical',
+            1); //-------调整tree的整体样式----------------------------------------------------------
+        demo.Util.appendChild(document.getElementById('toolbar'), rightPane.getView(), 0,
+            null, null, 0);
+        var mainSplit = new twaver.controls.SplitPane(leftSplit,
+            rightPane, 'horizontal', 0.13);
+        demo.Util.appendChild(mainSplit.getView(),
+            document.body, 0, 0, 0, 0);
+        initPane(leftSplit);
+        initPane(mainSplit); //----------鹰眼(OverView)
+        overview.setOutlineColor("#020202"); //边框线颜色 overview.setOutlineWidth(1.3);//边框线宽度
+        demo.Util.appendChild(overview.getView(), rightPane.getView(), 0, 0, null, null);
+        var
+            owidth = width * 0.85 * 0.2;
+        var oheight = height * 0.2; //其实overview内的canvas是自动调整的,这个只是设置了边界
+        overview.adjustBounds({
+            width: owidth,
+            height: oheight
+        });
+        }
+
+        function
+        init169DataBox_byDevid() {
+            $.ajaxSetup({
+                async: false
+            }); //ajax 同步-----这是一个全局的
+            box.clear();
+            var autoflag = true; //自动布局标识 var devid_set=new Set(); var
+            the_devids = devids_169.split(",");
+            for (var tmp in the_devids) {
+                devid_set.add(the_devids[tmp] + "");
+            } //加载位置信息 var
+            loc_url = "/rsing/topo/getlocation.do?1=1&rsing_id=" + rsing_id + "&type=3";
+            $.post(loc_url, function (data) {
+                symbolLocationMap = data;
+            }) var
+                url = "/rsing/topo/get169TopoData_byDevid.do?1=1&rsing_id=" + rsing_id +
+                "&devids_169=" +
+                devids_169;
+            $.post(url, function (data) {
+                    devDataList = data.devDataList;
+                    var devsize = devDataList.length
+                    if (devDataList.length > 0) {
+                        $.each(devDataList, function (n, value) {
+                                var id = value.dev_id;
+                                var name = value.symbol_name;
+                                var area = value.area;
+                                var dev_pro = value.pro; //注意区分pro和dev_pro
+                                var city = value.city;
+                                var tmpnode = creatNode(pro + " _" + id + "_169_pro",
+                                    name, "CR", value);
+                                if (devid_set.has(id + "")) {
+                                    var
+                                        group = creat169Group(rsing_id + "_" + dev_pro +
+                                            "_" + value
+                                            .dev_type, pro + "_" + typeMap[value
+                                                .dev_type], "CR-group");
+                                    group.setExpanded(true);
+                                    group.addChild(tmpnode);
+                                } else {
+                                    if (area == "海外节点") {
+                                        tmpnode.setName(city);
+                                    } else {
+                                        var
+                                            area_group = creat169Group("a_" + area,
+                                                area, "169group");
+                                        var
+                                            group = creat169Group(rsing_id + "_" +
+                                                dev_pro + "_" + value
+                                                .dev_type, dev_pro + "_" + typeMap[value
+                                                    .dev_type],
+                                                "CR-group");
+                                        group.addChild(tmpnode);
+                                        area_group.setExpanded(true);
+                                        area_group.addChild(group);
+                                    }
+                                }
+                                if (autoflag && (tmpnode.getClient(
+                                        "flag"))) { //位置表有位置，不会触发自动布局 autoflag=false; }
+                                })
+                        } //链路信息linkDataList linkDataList=data.linkDataList;
+                        $.each(linkDataList, function (n, value) {
+                            var fromNode = null;
+                            var toNode = null; //查找连接点
+                            var fromId = pro + "_" + value.a_dev_id + "_169_pro";
+                            var
+                                toId = pro + "_" + value.z_dev_id + "_169_pro";
+                            toNode = idfinder.findFirst(toId);
+                            fromNode = idfinder.findFirst(fromId);
+                            if (fromNode != null && toNode != null && fromNode !=
+                                toNode) {
+                                var link_id = "pro-" + rsing_id + "-" + value
+                                    .a_dev_id + "-" + value
+                                    .a_ifindex;
+                                var
+                                    link = creatLink(link_id, fromNode, toNode,
+                                        value);
+                            }
+                        });
+                    }); //自动布局 ----围绕布局round
+                对称布局(symmetry) //上下topbottom 下上布局(bottomtop)
+                左右布局(leftright) 左右布局(leftright) 分层布局(hierarchic) if (autoflag) {
+                    autoLayouter.setRepulsion(2) autoLayouter.doLayout('symmetry',
+                        function () {
+                            network.zoomOverview(true);
+                        });
+                } else {
+                    network.addViewListener(callback);
+                }
+                $("#loading").hide();
+            } //创建node结点 function creatNode(id, name, image, devinfo){ var
+            node = new twaver.Node(id); //id为topo图中的symble_id if(devinfo!=null)
+            setDeviceDetail2Node(node, devinfo);
+            node.setName(name);
+            node.setImage(image);
+            node.setStyle('select.style', 'border');
+            node.setStyle('select.width', 1);
+            node.setStyle('select.join', 'round');
+            node.setStyle('select.color', '#000000');
+            node.setStyle('label.color', '#ffffff');
+            if (devinfo != null) {
+                var
+                    nodetooltip = devinfo
+                    .dev_id; //存储结点信息 实际dev_id node.setToolTip(nodetooltip); } var
+                loc = symbolLocationMap[id];
+                var x = 0;
+                var y = 0;
+                var flag = false;
+                if (loc != null) {
+                    x = loc[0];
+                    y = loc[1];
+                    flag = true;
+                }
+                node.setLocation(x, y);
+                node.setClient("flag", flag);
+                box.add(node);
+                return node;
+            } //创建组 function creatGroup(id, name, image){ var
+            group = new twaver.Group(id);
+            group.setName(name);
+            group.s('group.shape',
+                'oval'
+            ); //设置分组边框形状 group.s('group.fill.color', whole_color);//填充色FEF3E2 E0FFFF //
+            group.s('group.fill.color', '#ECF6FB'); //填充色FEF3E2 E0FFFF
+            group.s('group.outline.color', '#3cb2e6'); //F8C374 #0099FF #99caea //
+            group.s('group.outline.color', '#3399FF'); //F8C374 #0099FF #99caea
+            group.s('group.outline.width', '2');
+            group.s('vector.outline.pattern', [10, 0]); //轮廓
+            group.s('group.deep', 0);
+            group.s('select.style', 'border');
+            group.s('select.width', 1);
+            group.s('select.join', 'round');
+            group.s('select.color', '#000000');
+            group.s('label.color', '#ffffff');
+            var
+                loc = symbolLocationMap[id];
+            var x = 0;
+            var y = 0;
+            var flag = false;
+            if (loc != null) {
+                x = loc[0];
+                y = loc[1];
+                flag = true;
+            }
+            group.setLocation(x, y);
+            group.setClient("flag", flag);
+            group.setImage(image);
+            group.setExpanded(false);
+            box.add(group);
+            return group;
+        }
+
+        function creat169Group(id, name, image) {
+            var
+                group = idfinder.findFirst(id);
+            if (group == null) {
+                group = creatGroup(id, name, image);
+                group.setExpanded(false);
+            }
+            return group;
+        }
+
+        function
+        setDeviceDetail2Node(node, devinfo) {
+            node.setClient("devname", devinfo.symbol_name);
+            node.setClient("vendorname", devinfo.vendor_name);
+            node.setClient("devip", devinfo.dev_ip);
+            node.setClient("devipmask", devinfo.dev_ip_mask);
+            node.setClient("typename", devinfo.type_name);
+            node.setClient("net", netMap[devinfo.dev_net]);
+            node.setClient("type", typeMap[devinfo.dev_type]);
+            node.setClient("role", roleMap[devinfo.dev_role]);
+            node.setClient("city", devinfo.city);
+        } //创建链路 function
+        creatLink(link_id, from, to, linkinfo) {
+            var link = new twaver.Link(link_id);
+            link.setFromNode(from);
+            link.setToNode(to);
+            if (linkinfo != null) {
+                autoLinkStyle(link, linkinfo.ifspeed);
+            } else {
+                link.setStyle('link.width', 5);
+                link.setStyle('link.bundle.expanded', false); //设定绑定状态 false为合并
+                link.setStyle('link.color', '#4DA492');
+            };
+            var linkToolTip = "";
+            if (from != null &&
+                to != null && linkinfo != null) {
+                linkToolTip = from.getToolTip() + "=" + to.getToolTip();
+                link.setClient(" a_dev_name", linkinfo.a_dev_name);
+                link.setClient("a_if", linkinfo.a_if);
+                link.setClient("z_dev_name", linkinfo.z_dev_name);
+                link.setClient("z_if", linkinfo.z_if);
+                link.setClient("type_name", linkinfo.type_name);
+                link.setClient("ifspeed", linkinfo.ifspeed);
+                link.setClient("send_rate", linkinfo.send_rate);
+                link.setClient("rec_rate", linkinfo.rec_rate);
+                link.setClient("ip_ver", linkinfo.ip_ver);
+            }
+            link.setToolTip(linkToolTip);
+            box.add(link);
+            return link;
+        } //link颜色 function autoLinkStyle(link,ifspeed){
+        link.setStyle('link.bundle.expanded', false); //设定绑定状态 false为合并 var l_w=0.5; var
+        col = '#14a8e2'; // var spe=ifspeed/1000/1000;//端口带宽MB if(spe<1000){//小于1G l_w=0.6
+        }
+        else if (spe < 2500) { //大于等于1G小于2.5G l_w=0.7 col='#14a8e2' ;//紫色col='#6600CC'; }else
+            if (spe < 10000) { //大于等于2.5G小于10GE l_w=1 col='#37baed' ;//绿色col='#336699' }else
+                if (spe <
+                    40000) { //大于等于10G小于40GE l_w=1.5 col='#56c5f1' ;//绿色col='#66FF66' }else
+                    if (spe < 100000) { //大于等于40G小于100GE l_w=2 col='#70d5fd' ;//col='#0099CC';
+                    } else { //大于等于100GE l_w=3; col='#90dffe' ;//深蓝col='#006699'; }
+                        link.setStyle('link.width', l_w);
+                        link.setStyle('link.color', col);
+                        link.setStyle('link.handler.color', '#ffffff');
+                    } //初始化代理,代理链路需要显示总带宽 function
+                    initAgentLink(linklist) {
+                        for (var link of linklist) { // 遍历linklist
+                            if (link.isBundleAgent()) {
+                                var sum = 0;
+                                var
+                                    linkGouplist = link.getBundleLinks().getLinks();
+                                linkGouplist.forEach(function (value) {
+                                    var ifspeed = value.getClient("ifspeed");
+                                    sum += ifspeed;
+                                })
+                                link.setClient("sumbandwidth", sum / 1000 / 1000 / 1000);
+                            }
+                        }
+                    }
+
+                    function
+                    addButton(div, name, src, callbackfun) {
+                        var button = document.createElement('input');
+                        button.setAttribute('type', src ? 'image' : 'button');
+                        button.setAttribute('title',
+                            name);
+                        if ("放大" == name || "缩小" == name)
+                            button.setAttribute('title', "转动鼠标滚轮可快捷操作放大或缩小视图");
+                        button.style.verticalAlign = 'top';
+                        if (src) {
+                            button.style.padding = '4px 4px 4px 4px';
+                            if (src.indexOf('/') < 0) {
+                                src = '../resource/img/rsing/toolbar/' + src + '.png';
+                            }
+                            button.setAttribute('src', src);
+                        } else {
+                            button.setAttribute("class", "btn
+                                btn - info btn - sm "); button.setAttribute("
+                                style ","
+                                padding: 5 px 5 px 5 px 5 px; margin:
+                                1 px 5 px 1 px 0 px; background - color:
+                                #1c68ac;");// button.value= name;
+                            }
+                            button.addEventListener('click', callbackfun, false);
+                            div.appendChild(button);
+                            return button;
+                        }
+
+                        function addButton2(div, title, name, callbackfun) {
+                            var
+                                button = document.createElement('button');
+                            button.setAttribute('title', title);
+                            button.style.verticalAlign = 'top';
+                            button.setAttribute("class", "btn btn-info
+                                btn - sm "); button.setAttribute("
+                                style ","
+                                padding: 5 px 5 px 5 px 5 px; margin:
+                                1 px 5 px 1 px 0 px; background - color:
+                                #1c68ac;");// button.value= name; button.addEventListener(
+                                    'click', callbackfun,
+                                    false); //
+                                button.setAttribute('onclick', callbackfun); div
+                                .appendChild(button);
+                                return button;
+                            }
+
+                            function addSelect(div, chr_divid) {
+                                var
+                                    select_div = document.getElementById(chr_divid);
+                                div.appendChild(select_div);
+                            }
+
+                            function getImageFormDev(net, type, role) {
+                                if (net == 1) {
+                                    return imgtypeMap[type];
+                                } else
+                                if (net == 2) {
+                                    return "SR";
+                                } else if (net == 3) {
+                                    return "SR";
+                                } else {
+                                    return "169ggw";
+                                }
+                            }
+
+                            function getGroupImageFormDev(net, type, role) {
+                                if (net == 1) {
+                                    if (type == 1 && role == 3) {
+                                        return "sw";
+                                    }
+                                    return imgtypeMap[type] + "-group";
+                                } else if (net == 2) {
+                                    return "idccloud-gray";
+                                } else if (net == 3) {
+                                    return "cdncloud-gray";
+                                } else
+                                if (net == 4) {
+                                    return "169ggw";
+                                } else {
+                                    return "mobcloud-gray";
+                                }
+                            }
+                            var
+                                ipv4v6Map = {
+                                    "-1": "未知",
+                                    "0": "未知",
+                                    "4": "IPv4",
+                                    "6": "IPv6",
+                                    "10": "双栈"
+                                }
+                            var
+                                netMap = {
+                                    "1": "IP城域网",
+                                    "2": "IDC网络",
+                                    "3": "CDN网络",
+                                    "4": "China169骨干网",
+                                    "5": "国际网络",
+                                    "6": "移动网",
+                                    "-1": "未知"
+                                }
+                            var typeMap = { //TODO 需要改为去数据库读取 "1" :"CR", "2"
+                                : "BRAS",
+                                "3": "SR",
+                                "4": "独立NAT44",
+                                "5": "出口路由器",
+                                "6": "出口交换机",
+                                "7": "汇聚路由器",
+                                "8": "汇聚交换机",
+                                "9": "接入交换机",
+                                "10": "省中心",
+                                "11": "地市中心",
+                                "12": "边缘节点",
+                                "13": "GI",
+                                "14": "默认",
+                                "15": "核心交换机",
+                                "16": "169A",
+                                "17": "169C",
+                                "18": "169I",
+                                "19": "169IX",
+                                "20": "169NAP",
+                                "21": "169RR",
+                                "22": "169S",
+                                "23": "169T",
+                                "24": "169NMS",
+                                "25": "169SDN",
+                                "-1": "未知"
+                            }
+                            var roleMap = {
+                                "1": "核心路由器",
+                                "2": "汇聚路由器",
+                                "3": "省网路由器",
+                                "4": "宽带",
+                                "5": "宽带+专线",
+                                "6": "宽带+IPTV",
+                                "7": "宽带+专线+IPTV",
+                                "8": "专线",
+                                "9": "IPTV",
+                                "10": "专线+IPTV",
+                                "11": "RR",
+                                "12": "ASBR",
+                                "13": "RR+ASBR",
+                                "14": "蜜罐",
+                                "-1": "未知"
+                            }
+                            var
+                                imgtypeMap = {
+                                    "1": "SR",
+                                    "2": "SR",
+                                    "3": "SR",
+                                    "4": "SR",
+                                    "13": "SR"
+                                } //画云用的 var
+                            imgnetMap = {
+                                "2": "idccloud-gray",
+                                "3": "cdncloud-gray",
+                                "6": "mobcloud-gray"
+                            } //加载获取图片 svg为network function registerImage(url, svg) { var image=new Image();
+                            image.src = url;
+                            var views = arguments;
+                            image.onload = function () {
+                                twaver.Util.registerImage(getImageName(url), image, image
+                                    .width, image.height,
+                                    svg === true);
+                                image.onload = null;
+                                for (var i = 1; i < views.length; i++) {
+                                    var
+                                        view = views[i];
+                                    if (view.invalidateElementUIs) {
+                                        view.invalidateElementUIs();
+                                    }
+                                    if (view.invalidateDisplay) {
+                                        view.invalidateDisplay();
+                                    }
+                                }
+                            };
+                        }
+
+                        function
+                        getImageName(url) {
+                            var index = url.lastIndexOf('/');
+                            var name = url;
+                            if (index > = 0) {
+                                name =
+                                    url.substring(index +
+                                        1);
+                            }
+                            index =
+                                name.lastIndexOf('.');
+                            if (index >= 0) {
+                                name = name.substring(0,
+                                    index);
+                            }
+                            return name;
+                        }
+
+                        //--------设备详情-----------
+                        function
+                        initDialog(node) {
+                            var div =
+                                document.getElementById("devdiv");
+                            if (div == null) {
+                                div =
+                                    document.createElement('div');
+                                div.setAttribute("id", "devdiv");
+                                //
+                                div.setAttribute("style",
+                                    "height:230px;width:243px;padding-top:15px;
+                                    opacity: 0.9;
+                                    " +
+                                    //
+                                    "background:url(../resource/img/rsing/topoimages/dev_background.png)"
+                                );
+                                div.style.display =
+                                    'none';
+                                div.style.zIndex = 100;
+                                demo.Util.appendChild(div, rightPane.getView(), 0, 0, null,
+                                    null);
+                            }
+                            var
+                                devname = node.getClient("devname");
+                            //table-bordered
+                            background - color: #FFFFCC
+                            div.innerHTML = "<table class='dialog table table2 table-hover'>
+                            "+
+                            "<tr> <
+                            td class = 'td11' >
+                                设备名称： < /td> <
+                            td class = 'td2' >
+                                "+
+                            "<a href=\"deviceInfo.html?dev_name=" + devname + " \"
+                            target = \"_blank\">" + devname + "</a> < /
+                            td > <
+                                /tr>"+
+                            "<tr> <
+                            td class = 'td11' >
+                                设备厂家： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            vendorname ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'td11' >
+                                设备型号： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            typename ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'td11' >
+                                IP地址： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            devip ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'td11' >
+                                掩码： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            devipmask ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'td11' >
+                                网络类型： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            net ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'td11' >
+                                设备类型： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            type ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'td11' >
+                                设备角色： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            role ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'td11' >
+                                省份 / 城市： < /td> <
+                            td class = 'td2' >
+                                "+node.getClient("
+                            city ")+" <
+                                /td> < /
+                            tr > "+
+                            "</table>";
+
+                            return div;
+                        }
+
+                        //绘制接口详情
+                        function
+                        ifDialog(tmp_link) {
+                            var div =
+                                document.getElementById("ifinfo");
+                            if (div == null) {
+                                div =
+                                    document.createElement('div');
+                                div.setAttribute("id", "ifinfo");
+                                //
+                                div.setAttribute("style",
+                                    "height:183px;width:290px;padding-top:15px;
+                                    opacity: 0.9;
+                                    " +
+                                    //
+                                    "background:url(../resource/img/rsing/topoimages/link_background.png)"
+                                );
+                                div.style.display =
+                                    'none';
+                                div.style.zIndex = 100;
+                                demo.Util.appendChild(div, rightPane.getView(), 0, 0, null,
+                                    null);
+                            }
+                            var
+                                a_name = tmp_link.getClient("a_dev_name");
+                            var
+                                a_if = tmp_link.getClient("a_if");
+                            var
+                                z_name = tmp_link.getClient("z_dev_name");
+                            var
+                                z_if = tmp_link.getClient("z_if");
+                            div.innerHTML = "<table class='dialogif table table2 table-hover'>
+                            "+
+                            "<tbody>" +
+                            "<tr> <
+                            td class = 'tdif tdiftop' >
+                                A端设备： <
+                                /td> <
+                            td class = 'td2' >
+                                " +
+                            "<a href=\"deviceInfo.html?dev_name=" + a_name + " \"
+                            target = \"_blank\">" + a_name + "</a> < /
+                            td > <
+                                /tr>"+
+                            "<tr> <
+                            td class = 'tdif' >
+                                A端接口： <
+                                /td> <
+                            td class = 'td2' >
+                                "+
+                            "<a href=\"instanceInfo_dev.html?dev_name=" + a_name + " &
+                            inf_name = "+a_if+"\
+                            " target=\"_blank\">" + a_if + "</a> < /
+                            td > <
+                                /tr>"+
+                            "<tr> <
+                            td class = 'tdif' >
+                                Z端设备： <
+                                /td> <
+                            td class = 'td2' >
+                                "+
+                            "<a href=\"deviceInfo.html?dev_name=" + z_name + " \"
+                            target = \"_blank\">" + z_name + "</a> < /
+                            td > <
+                                /tr>"+
+                            "<tr> <
+                            td class = 'tdif' >
+                                Z端接口： <
+                                /td> <
+                            td class = 'td2' >
+                                "+
+                            "<a href=\"instanceInfo_dev.html?dev_name=" + z_name + " &
+                            inf_name = "+z_if+"\
+                            " target=\"_blank\">" + z_if + "</a> < /
+                            td > <
+                                /tr>"+
+                            "<tr> <
+                            td class = 'tdif' >
+                                接口带宽： <
+                                /td> <
+                            td class = 'td2' >
+                                "+tmp_link.getClient("
+                            type_name ")+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'tdif' >
+                                链路类型： <
+                                /td> <
+                            td class = 'td2' >
+                                "+ipv4v6Map[tmp_link.getClient("
+                            ip_ver ")]+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'tdif' >
+                                利用率峰值A - Z： <
+                                /td> <
+                            td class = 'td2' >
+                                "+tmp_link.getClient("
+                            send_rate ")+" % "+" <
+                                /td> < /
+                            tr > "+
+                            "<tr> <
+                            td class = 'tdif' >
+                                利用率峰值Z - A： <
+                                /td> <
+                            td class = 'td2' >
+                                "+tmp_link.getClient("
+                            rec_rate ")+" % "+" <
+                                /td> < /
+                            tr > "+
+                            "</tbody>" + " < /
+                            table > ";
+                            return div;
+                        }
+
+                        //绘制接口详情
+                        function
+                        ifbundleDialog(result, tmpMap) {
+                            var div =
+                                document.getElementById("ifbundle");
+                            if (div == null) {
+                                div =
+                                    document.createElement('div');
+                                div.setAttribute("id", "ifbundle");
+                                div.style.display =
+                                    'none';
+                                div.style.zIndex = 100;
+                                demo.Util.appendChild(div, rightPane.getView(), 0, 0, null,
+                                    null);
+                            }
+                            var tmphtml = "";
+                            var linksum = 0;
+                            for (var key in tmpMap) {
+                                tmphtml += " <
+                                tr >
+                                    <
+                                    td class = 'tdbundle' >
+                                    "+key+"
+                                链路： < /td> <
+                                td class = 'td2' >
+                                    "+tmpMap[key]+" < /td> < /
+                                tr > ";
+                                linksum += tmpMap[key];
+                            }
+
+                            if (tmpMap["undefined_undefined"] > 1) {
+                                div.innerHTML =
+                                    "<table class='dialogif table table2 table-hover'>
+                                "+
+                                "<tbody>" + "<tr> <
+                                td class = 'td2' >
+                                    双击展开链路两端逻辑视图后展示详细信息 <
+                                    /td> <
+                                td > < /td> < /
+                                tr > "+ " < /tbody > "+" < /
+                                table > ";
+                            } else {
+                                div.innerHTML =
+                                    "<table class='dialogif_b table table2 table-hover'>
+                                "+
+                                "<tr> <
+                                td class = 'tdbundle' >
+                                    链路总数： < /td> <
+                                td class = 'td2' >
+                                    "+linksum+" < /td> < /
+                                tr > "+
+                                "<tr> <
+                                td class = 'tdbundle' >
+                                    链路总带宽： < /td> <
+                                td class = 'td2' >
+                                    "+result+" < /td> < /
+                                tr > "+
+                                tmphtml + "</table>";
+                            }
+                            return div;
+                        }
+
+                        function
+                        initPane(splitPane) {
+                            splitPane.setDividerBackground("#ffffff")
+                            //劈分条的背景色#0d4981
+                            splitPane.setDividerOpacity(0.7)
+                            //设置劈分条的透明度
+                            splitPane.setDividerWidth(0.05)
+                            //劈分条的宽度
+                        }
+
+                        //-------------------------保存位置信息---------------------------
+                        function savelocation() {
+                            if (confirm("确认保存拓扑图现在位置？")) {
+                                var location = [];
+                                box.forEach(function (node) {
+                                    if (node.getClassName() == 'twaver.Node' ||
+                                        node.getClassName() ==
+                                        'twaver.SubNetwork' ||
+                                        node.getClassName() ==
+                                        'twaver.Group') {
+                                        var loc = node.getLocation();
+                                        var
+                                            temp = node.getId() + ";" + loc.x + ";" +
+                                            loc.y;
+                                        location.push(encodeURIComponent(temp));
+                                    }
+                                });
+
+
+                                $.ajax({
+                                    type: "post",
+                                    async: false, //同步执
+                                    traditional: true,
+                                    data: {
+                                        "dataArr": location
+                                    },
+                                    //---------------------------------------------注意这里type=3-----
+                                    url: "/rsing/topo/savelocation.do?1=1&rsing_id=" +
+                                        rsing_id + "&type=3",
+                                    success: function (result, status) {
+                                        if ("success" == status) {
+                                            alert("位置保存成功！");
+                                        } else {
+                                            alert("位置保存失败！");
+                                        }
+                                        network.addViewListener(reload);
+                                    },
+                                    error: function () {
+                                        alert("保存位置失败！");
+
+                                    }
+                                });
+                            }
+                        }
+                        var reload = function (e) {
+                            location.reload();
+                        }
+                        //网元加载完成后network.zoomOverview(true)不生效的解决方案
+                        var callback = function (e) {
+                            if (e.kind === 'validateEnd') {
+                                network.removeViewListener(callback);
+                                network.zoomOverview();
+                                overend = true; //画图完成标识
+                            } else {
+                                overend = false;
+                            }
+                        };
+                        //---------------------------------------------------------------------------------------------
+    </script>
+    
+</body>
+
+</html>

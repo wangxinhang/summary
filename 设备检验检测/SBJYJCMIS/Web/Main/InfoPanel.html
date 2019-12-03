@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../Styles/Query.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/ScrollBar.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/domCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwAjaxDataOperate.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwPopupWindow.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <style type="text/css">
+        .list{
+ 	margin:0px 5px;
+	padding:0px;
+        }
+            .list li {
+        display:block;
+        height:30px;
+        line-height:30px;
+        width:33%;
+        float:left;
+		list-style:none;
+		margin:0px;
+            }
+            .list div {
+        height:30px;
+        line-height:30px;
+        text-align:center;
+        color:white;
+        font-size: small; 
+        background-color:#AAAAAA;
+        cursor:pointer;
+            }
+        .list .first {
+           border-radius:3px 0px 0px 3px ;
+           -moz-border-radius:3px 0px 0px 3px ; /* 老的 Firefox */
+        }
+        .list .last {
+           border-radius:0px 3px 3px 0px ;
+           -moz-border-radius:3px 0px 0px 3px ; /* 老的 Firefox */
+        }
+
+        .list .first .actived,
+        .list .last .actived,
+        .list .actived {
+               background-color:#ef473a;
+         }
+        #contentPanel {
+            margin:0px 5px;
+            color:white;
+        }
+        #contentPanel ul {
+            color:white;
+            margin:0px;
+            padding:0px 10px 0px 10px;
+        }
+            #contentPanel ul li {
+            	list-style:none;
+		        margin-left:10px;
+                font-family: 微软雅黑;
+                font-size: small;
+                cursor:pointer;
+            }
+
+    </style>
+</head>
+<body>
+    <div id="titlePanel" style="position:relative;top:0px;left:0px;margin:10px 0 0 0;padding:0;height:32px;overflow:hidden;">
+        <ul class="list">
+            <li><div class="first" style="width:100%;height:100%;">预警</div></li>
+            <li><div style="width:100%;height:100%;">公告</div></li>
+            <li><div class="last" style="width:100%;height:100%;">邮件</div></li>
+            <!--<li>消息</li>-->
+        </ul>
+    </div>
+    <div id="contentPanel" style="position:relative;top:0px;left:0px;margin:0 auto;padding:0;">
+        <div id="contentItem0" class="scrollBar3" style="display:none;overflow:auto;">
+        </div>
+        <div id="contentItem1" style="display:none;">
+        </div>
+        <div id="contentItem2" style="display:none;">
+        </div>
+        <div id="contentItem3" style="display:none;">
+        </div>
+    </div>
+    <div id="divBottom" style="position:absolute;margin:0 auto;padding-top:5px;text-align:center;height:30px;">
+        <img id="upDown" src="../Styles/image/upDown/down.png" style="cursor:pointer;" />
+    </div>
+    <div id="mask" style="position:relative;top:0px;left:0px;margin:0 auto;padding:0;"></div>
+    <script type="text/javascript">
+        var i;
+        var bodyWidth = $(document).width(); bodyHeight = $(document).height();
+        var noticeAry = [], mailAry = [], equipmentAry = [];
+        var xuserId;
+        var hh = 32, fh = 30;
+        var isUp = 0;
+        $(document).ready(function () {
+            var paramJson = SzdwCommon.getJsonParm();
+            xuserId = paramJson.xuserId;
+            var infoType = paramJson.infoType;
+            i = infoType;
+
+            $(window).resize(function () {
+                bodyWidth = $(document.body).width();
+                bodyHeight = $(window).height();
+                $("#contentPanel")
+                    .outerHeight(bodyHeight - 10-hh - fh)
+                    .children()
+                    .outerHeight(bodyHeight - 10-hh - fh);
+
+                $("#divBottom").css({ "left": 0, "top": bodyHeight - fh });
+            });
+
+            $("#upDown").click(function(){
+                if (isUp == 0) {
+                    $(this).attr("src", "../Styles/image/upDown/up.png");
+                    isUp = 1;
+                    parent.document.body.infoWindow.ReSize(parent.document.body.infoWindow.width, 500);
+                    //$("#contentPanel").outerHeight(bodyHeight - 22 - 20);
+                    //$("#divBottom").css({ "top": bodyHeight - 20 });
+                }
+                else{
+                    $(this).attr("src", "../Styles/image/upDown/down.png");
+                    isUp = 0;
+                    parent.document.body.infoWindow.ReSize(parent.document.body.infoWindow.width, 350);
+                    //$("#contentPanel").outerHeight(bodyHeight - 22 - 20);
+                    //$("#divBottom").css({ "top": bodyHeight - 20 });
+                }
+            });
+
+            $(".list div").eq(infoType).addClass("actived");
+            $("#contentPanel")
+                .outerHeight(bodyHeight - 10-hh - fh)
+                .children()
+                .outerHeight(bodyHeight - 10-hh - fh)
+                .outerWidth(bodyWidth)
+                .eq(i)
+                .show();
+
+            $("#divBottom").css({ "left": 0, "top": bodyHeight - fh }).outerWidth(bodyWidth);
+            switch (parseInt(i)) {
+                case 0:
+                    getExpireEquipment();
+                    break;
+                case 1:
+                    getNotice();
+                    break;
+                case 2:
+                    getMail();
+                    break;
+            }
+
+            $(".list div").click(function () {
+                $(".list div").removeClass("actived");
+                $(this).addClass("actived");
+                $("#contentPanel")
+                    .children()
+                    .outerHeight(bodyHeight - 10-hh - fh)
+                    .outerWidth(bodyWidth)
+                    .eq(i).hide();
+                i = $(this).index();
+                $("#contentPanel")
+                    .children()
+                    .outerHeight(bodyHeight - 10-hh - fh)
+                    .outerWidth(bodyWidth)
+                    .eq(i).show();
+                switch (i) {
+                    case 0:
+                        getExpireEquipment();
+                        break;
+                    case 1:
+                        getNotice();
+                        break;
+                    case 2:
+                        getMail();
+                        break;
+                }
+            });
+        });
+
+        function getExpireEquipment() {
+            $.ajax({
+                url: "../Analyze/AnalyzeHandler.ashx",
+                type: "post",
+                data: {
+                    xuserId: 0,
+                    MethodName: "GetExpireEquipment"
+                },
+                dataType: "json",
+                success: function (jsData) {
+                    if ((jsData instanceof Array) && (jsData.length > 0)) {
+                        var len = jsData.length;
+                        var html = "";
+                        for (var i = 0; i < len; i++) {
+                            html = html + "<li><div "
+                            if (i != 0) {
+                                html = html + " style=\"border-top:solid 1px #999;\"";
+                            }
+                            html = html + " onclick=\"openEquipmentWin(" + jsData[i].EquipmentId + ");\"><br/>";
+                            html = html + jsData[i].MineName + jsData[i].UsingLocation + " " + jsData[i].EquipmentType + " " + jsData[i].ModelNumber + "<br />"
+                            html = html + "<span style=\"color:#ccc;\">有效期截止:" + jsData[i].ValidEndDate.substring(0, jsData[i].ValidEndDate.indexOf("T"));
+                            switch (jsData[i].RunStatus) {
+                                case -1:
+                                    html = html + " <span style=\"color:#ef473a;\"><b>逾期</b></span>";
+                                    break;
+                                case 1:
+                                    html = html + " <span style=\"color:#ef473a;\">一级预警</span>";
+                                    break
+                                case 2:
+                                    html = html + " <span style=\"color:#ef473a;\">二级预警</span>";
+                                    break
+                                case 3:
+                                    html = html + " <span style=\"color:#ef473a;\">三级预警</span>";
+                                    break
+                            }
+                            html=html+"</span></div><br/></li>";
+                        }
+                        $("#contentItem0").html("<ul>" + html + "</ul>");
+                    }
+                    else {
+                        $("#contentItem0").html("");
+                    }
+                }
+            });
+        }
+
+        function getNotice() {
+            $.ajax({
+                url: "../Notice/NoticeHandler.ashx",
+                type: "post",
+                data: {
+                    xuserId: xuserId,
+                    theType: 1,
+                    MethodName: "GetNoticeList"
+                },
+                dataType: "json",
+                success: function (jsData) {
+                    if ((jsData instanceof Array) && (jsData.length > 0)) {
+                        noticeAry = jsData;
+                        var len = jsData.length;
+                        var html = "";
+                        for (var i = 0; i < len; i++) {
+                            html = html + "<li><div ";
+                            if (i != 0) {
+                                html = html + " style=\"border-top:solid 1px #999;\"";
+                            }
+                            html = html + " onclick=\"openNoticeWin('" + jsData[i].Id + "');\"><br/>" + jsData[i].Title + "<br/>";
+                            html = html + "<span style=\"color:#ccc;\">" + jsData[i].SendTime.substring(0, jsData[i].SendTime.indexOf("T")) + "</span></div><br/></li>";
+                        }
+                        $("#contentItem1").html("<ul>" + html + "</ul>");
+                    }
+                    else {
+                        $("#contentItem1").html("");
+                    }
+                }
+            });
+        }
+
+        function getMail() {
+            $.ajax({
+                url: "../Notice/NoticeHandler.ashx",
+                type: "post",
+                data: {
+                    xuserId: xuserId,
+                    theType: 2,
+                    MethodName: "GetNoticeList"
+                },
+                dataType: "json",
+                success: function (jsData) {
+                    if ((jsData instanceof Array) && (jsData.length > 0)) {
+                        mailAry = jsData;
+                        var len = jsData.length;
+                        var html = "";
+                        for (var i = 0; i < len; i++) {
+                            html = html + "<li><div "
+                            if (i != 0) {
+                                html = html + " style=\"border-top:solid 1px #999;\"";
+                            }
+                            html = html + " onclick=\"openNoticeWin('" + jsData[i].Id + "');\"><br/>" + jsData[i].Title + "<br/>";
+                            html = html + "<span style=\"color:#ccc;\">" + jsData[i].SendTime.substring(0, jsData[i].SendTime.indexOf("T")) + "</span></div><br/></li>";
+                        }
+                        $("#contentItem2").html("<ul>" + html + "</ul>");
+                    }
+                    else {
+                        $("#contentItem2").html("");
+                    }
+                }
+            });
+        }
+
+        function openEquipmentWin(id) {
+            var paramJson = { xuserId: xuserId, id: id };
+            parent.openDetailsWin("ViewEquipment.html", "设备信息", paramJson, 800, 400);
+        }
+
+        function openNoticeWin(id) {
+            var paramJson = { id: id };
+            parent.openDetailsWin("ViewNotice.html", "查看详情", paramJson, 660, 400);
+        }
+    </script>
+</body>
+</html>

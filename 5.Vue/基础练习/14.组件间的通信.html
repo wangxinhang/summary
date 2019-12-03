@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="box">
+        <mybox msg="你好" src="img/20190130201555.jpg"></mybox>
+        <mybox msg="vue" src="img/20190130201944.jpg"></mybox>
+    </div>
+ 
+    <!-- 1.创建一个组件,不用字符串模板，用这个更方便 -->
+    <template id="my-div">
+            <div>
+               <p>{{msg}}</p>
+               <img :src="src" alt="">
+            </div>
+    </template>     
+    
+    <script src="vue.js"></script>
+
+    <script>
+
+        //2.组件实例化
+        Vue.component("mybox",{
+            template:"#my-div",
+            props:["msg","src"]
+        });
+
+        //实例化
+        new Vue({
+            el: "#box",
+        });
+        
+        // function fn1(x,y) {  
+        //     return x+y;
+        // }
+        // fn1(1,2);
+
+    </script>
+</body>
+
+</html>

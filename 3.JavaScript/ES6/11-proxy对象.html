@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+                //声明一个对象                                                                                                       
+                let   target = { name: "Tom", age: 24 }                                                                                                                      
+                //定义一个headler对象，用于处理外界对其所代理的对象的操作
+                let   handler = {
+                    get: function(target, key) {
+                        console.log('getting '+key);  
+                        return  Reflect.get(target,key);  // 不是target.key
+                    },
+                    set: function(target, key, value) {
+                        console.log("'setting '+key");
+                    }
+                }
+
+                let proxy = new Proxy(target, handler);
+                proxy.name ;     // 实际执行 handler.get
+                proxy.age = 25; // 实际执行 handler.set
+                // getting name
+                // setting age
+                // 25
+                console.log(proxy.age) ;     // 实际执行 handler.get
+
+let exam = {
+    name: "Tom",
+    age: 24
+}
+let handler1 = {
+    get: function(target, key){
+        console.log("getting "+key);
+        return Reflect.get(target,key);
+    },
+    set: function(target, key, value){
+        console.log("setting "+key+" to "+value)
+        Reflect.set(target, key, value);
+    }
+}
+let proxy1 = new Proxy(exam, handler1)
+proxy1.name = "Jerry"
+console.log(proxy1.name)
+// setting name to Jerry
+// getting name 
+// "Jerry"
+
+        }     
+    </script>
+</body>
+</html>

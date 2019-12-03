@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+
+        <p v-for="(item,index) in msg">{{index}}:{{item}}</p>
+        <p v-for="item in dd">{{item}}</p>
+        <p v-for="(item,index) in ff">{{item}}</p>
+
+
+        <!-- 示例 -->
+        <table>
+            <thead> 
+                <tr>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>年龄</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in persons">
+                    <td >{{item.name}}</td>
+                    <td >{{item.sex}}</td>
+                    <td >{{item.age}}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                msg:[1,2,3,4],
+                dd:{name:"wang",age:20,tel:1234545677},
+                ff:"adsfaew",
+                persons:[
+                    {name:"wang",sex:"男",age:24},
+                    {name:"xin",sex:"女",age:22},
+                    {name:"hang",sex:"男",age:20}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

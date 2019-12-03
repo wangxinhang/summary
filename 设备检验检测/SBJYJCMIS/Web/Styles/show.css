@@ -1,0 +1,186 @@
+﻿body{margin:0px;padding:0px;font-family:微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;color:#000000;}
+*{margin:0;padding:0;}
+select{outline:none;}
+ul{list-style:none;}
+.box{margin:0px;padding:0px;height:auto;border:0px solid #ccc;}
+.box_title{height:27px;line-height:27px;text-indent:7px;border-bottom:1px solid #ccc; background-color:#F2F2F2;background:-webkit-linear-gradient(top,#ffffff 0,#F2F2F2 100%);background:-moz-linear-gradient(top,#ffffff 0,#F2F2F2 100%);background:-o-linear-gradient(top,#ffffff 0,#F2F2F2 100%);background:linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0);}
+.box_title img{padding-bottom:3px;vertical-align:middle;}
+.box_content{height:auto;padding:0px;}
+.box_content a{color:#000; text-decoration:none;}
+.sumList0 {
+	margin:0px;
+	padding:0px;
+}
+
+.sumList0 li {
+		float:left;
+		list-style:none;
+		margin:0px;
+}
+.Task{
+	position: relative;
+	height: 120px;
+	padding:0px;
+	margin:0 auto;
+	display: block;
+    padding:0px 20px;
+    border-left:1px solid #E0E0E0;
+}
+.Task .header {
+	position:relative;
+	width:100%;
+	margin-right:20px;
+	color: #555;
+	height:20px;
+	line-height:20px;
+	font-size: 14px;
+	font-family: Microsoft Yahei;
+}
+.Task .centre{
+	position:relative;
+	margin-left: auto; 
+	height:60px;
+	font-size:36px;
+}
+.Task .centre1{
+	position:relative;
+	width:100%;
+	margin-right: auto;
+	margin-left: auto; 
+	height:30px;
+	font-size:30px;
+	color: #000;
+}
+
+.Task .footer {
+	position:relative;
+    margin-top:20px;
+    clear:both;
+	height:50px;
+	font-size:12px;
+	color: #555;    
+}
+.Task .footer1 {
+	position:relative;
+	top:1px;
+	clear:both;
+	width:100%;
+	margin-right: 0px;
+	margin-left: 0px; 
+	height:13px;
+	font-size:13px;
+	color: #000;
+}
+.bd a {
+	color:#000000;
+	text-decoration: none;
+}
+	.bd a:hover {
+	color:silver;
+	text-decoration: underline;
+	}
+.Task .Number{position: absolute;top: 5px;left: 56px;margin-bottom: 5px;color: #fff;font-size: 45px;font-family: Microsoft Yahei;width: 85px;text-align: center;}
+
+.Task .text{position: absolute;top: 70px;left: 18px;color: #fff; font-size: 13px; font-family: Microsoft Yahei;}
+.grid{margin:0px;font-size:13px;border-collapse:collapse;table-layout:fixed;}/**/
+.grid thead td{border:1px dotted #ccc;text-align:left;text-overflow:ellipsis; font-weight:normal;word-break:keep-all;overflow:hidden;background-color:#F7F7F7;}
+.grid thead td .table-header{padding:6px 2px; background-color:#F2F2F2;background:-webkit-linear-gradient(top,#ffffff 0,#F2F2F2 100%);background:-moz-linear-gradient(top,#ffffff 0,#F2F2F2 100%);background:-o-linear-gradient(top,#ffffff 0,#F2F2F2 100%);background:linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0); text-align:center;}
+.grid tbody td{ height:30px;text-align:left;border:1px dotted #ccc;word-break:break-all;}
+	.grid tr {cursor:pointer;}
+.dropDown
+{
+   width:110px;height:22px;line-height:22px;background-color:#FFF;border:1px solid #9A9A9A;padding:0px 0px 0px 0px;
+}
+
+.chartOrTableTitle {
+    float:left;margin-top:10px;padding:0px 10px;height:20px;line-height:20px;font-family:微软雅黑; font-size:12pt;color:#000;
+    border-left:4px solid #222;/*background-color:#555;*/
+}
+
+.sumIconPanel{
+    float:left;width:40px;height:60px;padding-top:5px;
+}
+
+.sumIconBox{
+    margin:0 auto;width:40px;height:40px; border-radius:50%;moz-border-radius:50%;-webkit-border-radius:50%;background-color:#ef473a;text-align:center;
+}
+
+.sumIconPlus{
+    color:#fff;position:relative;bottom:10px;
+}
+
+.sumTextPanel{
+    float:right;text-align:right;
+}
+
+.sumText{
+    float:left;height:42px;line-height:42px;text-align:right;font-size:32px;padding:0px 5px;font-family:'Microsoft YaHei';color:#222;
+}
+
+.measure{
+   float:right;font-size:14px;padding-top:15px;text-align:left;color:#555;
+}
+
+.detailMarkPanel{
+    margin-bottom:10px;height:6px;
+}
+
+.detailMark{
+    float:left;width:10px;height:10px;background-color:#ef473a;
+}
+
+.detailText{
+    float:left;margin-left:10px;height:10px;line-height:10px;
+}
+
+.detailBarPanel{
+    height:6px; background-color:#BBB;
+}
+
+.detailBar{
+    float:left;height:100%;background-color:#ef473a;
+}
+.table-body{clear:both;margin:0px;padding:0px;}  
+.table-head{clear:both;margin:0px;padding-right:17px;color:#000;}  
+.table-head table,.table-body table{width:100%;}
+/*overflow-y:scroll;*/
+.tabText1
+{
+   width:90px;height:24px;line-height:24px;background-color:#D8D8D8;border:1px solid #D8D8D8;padding:0px 2px 0px 2px;cursor:pointer;
+   text-align:center;font-size:small;
+}
+.actived1{
+	color:#fff;
+	border-color:#ef473a;
+	background-color:#ef473a;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+}
+		.liYear {
+		float:left;width:40px;height:24px;border-bottom:2px solid #FFFFFF;cursor:pointer;
+		}
+		.actived2 {
+			border-color: #ef473a;
+		}
+
+.tabText
+{
+   width:26px;height:24px;line-height:24px;background-color:#D8D8D8;border:1px solid #D8D8D8;padding:0px;cursor:pointer;
+   float:left;text-align:center;
+}
+.tabActived{
+	color:#fff;
+	border-color:#ef473a;
+	background-color:#ef473a;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+}
+.btnRadiusLeft{
+   border-radius:3px 0px 0px 3px ;
+    -moz-border-radius:3px 0px 0px 3px ; /* 老的 Firefox */
+}
+
+.btnRadiusRight{
+   border-radius:0px 3px 3px 0px ;
+    -moz-border-radius:0px 3px 3px 0px ; /* 老的 Firefox */
+}

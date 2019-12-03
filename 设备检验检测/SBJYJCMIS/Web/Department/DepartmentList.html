@@ -1,0 +1,726 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../Styles/Page.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Query.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/ScrollBar.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwAjaxDataOperate.js" type="text/javascript"></script>
+    <script src="../SzdwControls/domCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwGridView.js" type="text/javascript"></script>
+    <link href="../SzdwControls/SzdwGridView.css" rel="stylesheet" type="text/css" />
+    <script src="../SzdwControls/SzdwPagination.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButton.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwDropDownList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButtonGroup.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwDropDownList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwAutoComplete.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwPopupWindow.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwInfoPanel.js" type="text/javascript"></script>
+    <script src="../Scripts/CommonJScript.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="../Scripts/myparm.js" type="text/javascript"></script>
+    <style type="text/css">
+        input::-ms-clear
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body style="background-color: #EEEEEE">
+    <div id="queryPanel" class="queryPanelNew">
+        <div id="filterPanel" class="filterPanel">
+            <div id="row0">
+                <div id="cell00" class="cellDiv">
+                    <label for="txtName" class="label">
+                        部门名称:</label>
+                    <input id="txtName" type="text" class="textBox2" />
+                </div>
+                <div id="cell01" class="cellDiv" style="display:none;">
+                    <label for="ddlDepartmentType" class="label">
+                        单位类别:</label>
+                    <input id="ddlDepartmentType" type="text" class="dropDownList" style="width: 120px;">
+                </div>
+                <div id="cell02" class="cellDiv" style="display:none;">
+                    <label for="txtLeader" class="label">
+                        负责人:</label>
+                    <input id="txtLeader" type="text" class="textBox2" />
+                </div>
+                <div id="cell03" class="cellDiv">
+                    <label for="ddlParentDepartment" class="label">
+                        上级部门:</label>
+                    <input id="ddlParentDepartment" type="text" class="dropDownList" style="width: 120px;">
+                </div>
+                <div id="cell01" class="cellDiv" style="display:none;">
+                    <label for="ddlProperty" class="label">
+                        单位性质:
+                    </label>
+                    <input id="ddlProperty" type="text" class="dropDownList" style="width: 80px;" />
+                </div>
+            </div>
+        </div>
+        <div id="btnPanel" class="btnPanel2">
+        </div>
+    </div>
+    <div id="dataPanel"></div>
+    <script type="text/javascript">
+        //#region 全局变量 
+        var xuserId, xmenuId, permission = null; //用户及权限：json格式
+        //#endregion 全局变量
+
+        //#region 初始加载
+        $(document).ready(function () {
+            //获取用户Id和MenuId
+            var paramJson = SzdwCommon.getJsonParm();
+            xuserId = paramJson.xuserId;
+            xmenuId = paramJson.xmenuId;
+            permission = SzdwCommon.getPermission(paramJson.permissionJsonList);
+            bodyWidth = Math.max($(document.body).width(), minWidth);
+            bodyHeight = Math.max($(document.body).height(), minHeight);
+            //设置查询面板
+            SetQueryPanel();
+            //设置结果面板
+            SetDataPanel();
+            //窗口调整大小
+            $(window).resize(function () {
+                bodyWidth = Math.max($(document.body).width(), minWidth);
+                bodyHeight = Math.max($(document.body).height(), minHeight);
+                ResizeControls();
+                RepositionControls();
+                
+            });
+        });
+        //#endregion 初始加载
+
+        //#region 重设位置尺寸
+        //重设网页元素位置
+        function RepositionControls() {
+            var qh = GetPanelX("queryPanel", "h");
+            var qx = GetPanelX("queryPanel", "x");
+            var qy = GetPanelX("queryPanel", "y");
+            $("#dataPanel").css({ "left": qx, "top": qy + qh + mt });
+
+            //重设弹窗位置
+            var t = document.body;
+            var pw = t.popupWindow;
+            if (pw) {
+                pw.RePosition(bodyWidth - pw.width - ml, qy + qh + mt);
+            }
+            var ew = t.exportWindow;
+            if (ew) {
+                var w = Math.max(exportWidth, bodyWidth * 4 / 5);
+                var h = bodyHeight * 4 / 5;
+                var x = (bodyWidth - w) / 2;
+                var y = (bodyHeight - h) / 2;
+                ew.RePosition(x, y);
+            }
+        }
+
+        //重设网页元素尺寸
+        function ResizeControls() {
+            var qx = GetPanelX("queryPanel", "x");
+            var qy = GetPanelX("queryPanel", "y");
+            var qw = bodyWidth - 2 * ml;
+            var qh = GetPanelX("queryPanel", "h");
+            var dh = bodyHeight - qy - qh - 2 * mt;
+
+            $("#queryPanel").outerWidth(qw);
+
+            if (szdwGv) {
+                $("#dataPanel").outerWidth(qw).outerHeight(dh);
+                szdwGv.Resize(qw, dh);
+            }
+
+            var t = document.body;
+            var pw = t.popupWindow;
+            if (pw) {
+                pw.ReSize(pw.width, dh);
+            }
+            var ew = t.exportWindow;
+            if (ew) {
+                var w = Math.max(exportWidth, bodyWidth * 4 / 5);
+                var h = bodyHeight * 4 / 5;
+                ew.ReSize(w, h);
+            }
+        }
+        //#endregion 重设位置尺寸
+
+        //#region 查询面板
+        function SetQueryPanel() {
+            $("#queryPanel").outerWidth(bodyWidth - ml * 2);
+            //绑定下拉框到目标控件
+            BindDropDownLists();
+            //设置按钮面板
+            CreateButton();
+            //单位名称回车
+            $("#txtName").keypress(function (e) {
+                var k = e.which;
+                if (k == 13) {
+                    var btnPanel = szdwQueryButton.button;
+                    $(btnPanel).trigger("click");
+                }
+            });
+
+            //单位负责人回车
+            $("#txtLeader").keypress(function (e) {
+                var k = e.which;
+                if (k == 13) {
+                    var btnPanel = szdwQueryButton.button;
+                    $(btnPanel).trigger("click");
+                }
+            });
+
+        }
+
+        //#region 下拉框
+        function BindDropDownLists() {
+            //绑定下拉框到目标控件
+            BindDdlParentDepartment();
+            BindDdlDepartmentType();
+             //BindDdlProperty();
+        }
+
+        function BindDdlParentDepartment() {
+            
+            var requestUrl = "../Department/DepartmentHandler.ashx";
+
+            //单位下拉框
+            var paramJson = { xuserId: xuserId,departmentTypeId:5, MethodName: "GetParentDepartmentList" };
+            var paramDdlDep = { requestUrl: requestUrl, width: 240, paramJson: paramJson, fnInitial: InitialDdlParentDepartment };
+            $("#ddlParentDepartment").dropDownList(paramDdlDep);
+            $("#ddlParentDepartment").val("全部");
+            $("#ddlParentDepartment").data("value", "0");
+        }
+        function InitialDdlParentDepartment(szdwDdl) {
+            szdwDdl.hasSearchBox = 1;
+            szdwDdl.jsonItemAll = { Id: 0, Name: "全部" };
+            szdwDdl.fnItemClick = function () {
+                var btnPanel = szdwQueryButton.button;
+                $(btnPanel).trigger("click");
+            }
+        }
+
+        //绑定下拉框到目标控件
+        var szdwDdlDepartmentType = null;
+        function BindDdlDepartmentType() {
+            //var requestUrl = "../Department/DepartmentHandlerType.ashx";
+
+            //单位下拉框
+            //var paramJson = { XuserId: xuserId, MethodName: "DepartmentTypeGetNameList" };
+            //var paramDdlDep = { requestUrl: requestUrl, paramJson: paramJson, fnInitial: InitialDdlDepartmentType };
+            //$("#ddlDepartmentType").dropDownList(paramDdlDep);
+            $("#ddlDepartmentType").val("全部");
+            $("#ddlDepartmentType").data("value", "1");
+        }
+
+        //通用下拉框初始化设置
+        function InitialDdlDepartmentType(szdwDdl) {
+            szdwDdl.jsonItemAll = { Id: 0, Name: "全部" };
+            szdwDdl.fnItemClick = function () {
+                var btnPanel = szdwQueryButton.button;
+                $(btnPanel).trigger("click");
+            }
+        }
+
+        var szdwDdlProperty = null;
+        function BindDdlProperty() {
+            //var requestUrl = "../Department/CollectDepartmentProperty.ashx";
+
+            //单位下拉框
+            //var paramJson = { XuserId: xuserId, MethodName: "DepartmentPropertyGetNameList" };
+            //var paramDdlDep = { requestUrl: requestUrl, paramJson: paramJson, fnInitial: InitialDdlProperty };
+            //$("#ddlProperty").dropDownList(paramDdlDep);
+            $("#ddlProperty").val("全部");
+            $("#ddlProperty").data("value", "1");
+        }
+
+        //通用下拉框初始化设置
+        function InitialDdlProperty(szdwDdl) {
+            szdwDdl.width = 120;
+            szdwDdl.jsonItemAll = { Id: 0, Name: "全部" };
+            szdwDdl.fnItemClick = function () {
+                var btnPanel = szdwQueryButton.button;
+                $(btnPanel).trigger("click");
+            }
+        }
+        //#endregion 下拉框
+
+        //#region 创建按钮
+        function CreateButton() {
+            //创建按钮
+            CreateQueryButton();
+            if (permission.exportPrintPermission) { CreateExportButton(); }
+            CreateResetButton();
+            CreateRetractButton();
+            if (permission.insertPermission) { CreateInsertButton(); }
+        }
+
+        //#region 查询按钮
+        var szdwQueryButton = null;
+        function CreateQueryButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = btnWidth;
+            var h = btnHeight;
+            szdwQueryButton = new SzdwButton(p, x, y, w, h);
+            szdwQueryButton.namingContainer = nc;
+            szdwQueryButton.image = imgFile.query;
+            szdwQueryButton.text = "查询数据";
+            szdwQueryButton.btnCssJson["border"] = "0px";
+            szdwQueryButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwQueryButton.imageWidth = btnImageWidth;
+            szdwQueryButton.Load();
+
+            //单击事件
+            var btn = szdwQueryButton.button;
+            $(btn).click(function (e) {
+                //                GetQueryResult();
+                e.stopPropagation();
+                var parentId = $.trim($("#ddlParentDepartment").data("value"));
+                var departmentTypeId = $.trim($("#ddlDepartmentType").data("value"));
+                var leader = $.trim($("#txtLeader").val());
+                var name = $.trim($("#txtName").val());
+                // var tradeTypeId = $.trim($("#ddlTradeType").data("value"));
+                //var propertyId = $.trim($("#ddlProperty").data("value"));
+                if (szdwGv) {
+                    szdwGv.paramJson["parentId"] = parentId;
+                    szdwGv.paramJson["departmentTypeId"] = departmentTypeId;
+                    //if (tradeTypeId >= 0) {
+                    //    szdwGv.paramJson["tradeTypeId"] = tradeTypeId;
+                    //}
+                    //if (propertyId >= 0) {
+                    //    szdwGv.paramJson["propertyId"] = propertyId;
+                    //}
+                    szdwGv.paramJson["leader"] = leader;
+                    szdwGv.paramJson["name"] = name;
+                    szdwGv.DataBind();
+                }
+            });
+        }
+
+        //#region 导出按钮
+        var szdwExportButton = null;
+        function CreateExportButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = btnWidth;
+            var h = btnHeight;
+            szdwExportButton = new SzdwButton(p, x, y, w, h);
+            szdwExportButton.namingContainer = nc;
+            szdwExportButton.image = imgFile.report;
+            szdwExportButton.text = "导出打印";
+            szdwExportButton.btnCssJson["border"] = "0px";
+            szdwExportButton.btnCssJson["margin-left"] = "5px";
+            szdwExportButton.btnCssJson["border-left"] = "1px solid #EEEEEE";
+            szdwExportButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwExportButton.imageWidth = btnImageWidth;
+            szdwExportButton.Load();
+
+            //单击事件
+            var btn = szdwExportButton.button;
+            $(btn).click(function () {
+                var pageUrl = "DepartmentQueryReport.aspx";
+                var paramJson = GetReportParamJson();
+                var titleText = "数据导出打印";
+                var w = Math.max(exportWidth, bodyWidth * 4 / 5);
+                var h = bodyHeight * 4 / 5;
+                var x = (bodyWidth - w) / 2;
+                var y = (bodyHeight - h) / 2;
+                var oJson = {};
+                document.body.exportWindow = SzdwCommon.openExportWindowAssignObj(document.body.exportWindow, pageUrl, paramJson, titleText, x, y, w, h, oJson);
+            });
+        }
+        //#endregion 导出按钮        
+
+        //#region 重置按钮
+        var szdwResetButton = null;
+        function CreateResetButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = btnWidth;
+            var h = btnHeight;
+            szdwResetButton = new SzdwButton(p, x, y, w, h);
+            szdwResetButton.namingContainer = nc;
+            szdwResetButton.image = imgFile.reset;
+            szdwResetButton.text = "重置条件";
+            szdwResetButton.btnCssJson["border"] = "0px";
+            szdwResetButton.btnCssJson["margin-left"] = "5px";
+            szdwResetButton.btnCssJson["border-left"] = "1px solid #EEEEEE";
+            szdwResetButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwResetButton.imageWidth = btnImageWidth;
+            szdwResetButton.Load();
+
+            //单击事件
+            var btn = szdwResetButton.button;
+            $(btn).click(function () {
+                $("#txtName").val("");
+                $("#txtLeader").val("");
+                $("#ddlDepartmentType").data("value", 5).val("全部");
+              //  $("#ddlTradeType").data("value", 0).val("全部");
+                //$("#ddlProperty").data("value", 0).val("全部");
+                $("#ddlParentDepartment").data("value", 0).val("全部");
+
+                if (szdwGv) {
+                    szdwGv.paramJson["parentId"] = "0";
+                    szdwGv.paramJson["departmentTypeId"] = "5";
+                   // szdwGv.paramJson["tradeTypeId"] = "0";
+                    //szdwGv.paramJson["propertyId"] = "0";
+                    szdwGv.paramJson["leader"] = "";
+                    szdwGv.paramJson["name"] = "";
+                    szdwGv.DataBind();
+                }
+            });
+        }
+        //#endregion 重置按钮
+
+        //#region 新增按钮
+        var szdwInsertButton = null;
+        function CreateInsertButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = 0; // btnWidth;
+            var h = btnHeight;
+            szdwInsertButton = new SzdwButton(p, x, y, w, h);
+            szdwInsertButton.namingContainer = nc;
+            szdwInsertButton.image = imgFile.insert;
+            szdwInsertButton.text = "新增部门";
+            szdwInsertButton.btnCssJson["border"] = "0px";
+            szdwInsertButton.btnCssJson["margin-left"] = "5px";
+            szdwInsertButton.btnCssJson["border-left"] = "1px solid #EEEEEE";
+            szdwInsertButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwInsertButton.imageWidth = btnImageWidth;
+            szdwInsertButton.Load();
+
+            //单击事件
+            var btn = szdwInsertButton.button;
+            $(btn).click(function () {
+                InsertDepartment();
+            });
+        }
+        //#endregion 重置按钮
+
+        //#region 收起条件按钮
+        var szdwRetractButton = null;
+        function CreateRetractButton() {
+            var nc = $("#btnPanel");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = 0; //btnWidth;
+            var h = btnHeight;
+            szdwRetractButton = new SzdwButton(p, x, y, w, h);
+            szdwRetractButton.namingContainer = nc;
+            szdwRetractButton.btnCssJson["float"] = "right";
+            szdwRetractButton.btnCssJson["border"] = "0px";
+            szdwRetractButton.btnCssJson["margin-left"] = "5px";
+            szdwRetractButton.btnHoverCssJson = { "color": "#017BBA" };
+            szdwRetractButton.imageWidth = btnImageWidth;
+
+            szdwRetractButton.isToggle = true;
+            szdwRetractButton.imageWidth = btnImageWidth;
+            szdwRetractButton.image = imgFile.retractUp;
+            szdwRetractButton.imageToggle = imgFile.retractDown;
+            szdwRetractButton.title = "收起或展开条件";
+            szdwRetractButton.text = "";
+
+            szdwRetractButton.Load();
+
+            //单击事件
+            var btn = szdwRetractButton.button;
+            $(btn).click(function () {
+                //设置控件位置尺寸
+                var fp = $("#filterPanel");
+                if (fp != null) {
+                    if ($(fp).css("display") == "none") {
+                        $(fp).fadeIn();
+                        $(fp).css("display", "block");
+                    } else {
+                        $(fp).fadeOut();
+                        $(fp).css("display", "none");
+                    }
+                    RepositionControls();
+                    ResizeControls();
+                }
+            });
+        }
+        //#endregion 收起条件按钮
+        //#endregion 查询面板
+
+        //#region 结果集面板
+        function SetDataPanel() {
+            var q = $("#queryPanel");
+            var qw = $(q).outerWidth();
+            var qh = $(q).outerHeight();
+            var qt = $(q).offset().top;
+            var x = $(q).offset().left;
+            var y = qh + qt + mt;
+            var w = qw;
+            var h = bodyHeight - y - mt;
+
+            var d = $("#dataPanel");
+            $(d).css({ "position": "relative", "left": x, "top": y }).outerWidth(w).outerHeight(h);
+
+            //初始加载结果数据
+            GetQueryResult();
+        }
+        //#region 查询结果
+
+        //#region 获取查询参数
+        function GetParamJson() {
+            var parentId = $.trim($("#ddlParentDepartment").data("value"));
+            var departmentTypeId = $.trim($("#ddlDepartmentType").data("value"));
+            //var propertyId = $.trim($("#ddlProperty").data("value"));
+            var leader = $.trim($("#txtLeader").val());
+            var name = $.trim($("#txtName").val());
+
+            var paramJson = { xuserId: xuserId };
+
+            paramJson["parentId"] = parentId;
+            paramJson["departmentTypeId"] = departmentTypeId;
+            //if (propertyId > 0) {
+            //    paramJson["propertyId"] = propertyId;
+            //}
+            paramJson["leader"] = leader;
+            paramJson["name"] = name;
+            return paramJson;
+        }
+        //#endregion 获取查询参数
+
+        //#region 获取报表查询参数
+        function GetReportParamJson() {
+            var parentId = $.trim($("#ddlParentDepartment").data("value"));
+            var departmentTypeId = $.trim($("#ddlDepartmentType").data("value"));
+            //var propertyId = $.trim($("#ddlProperty").data("value"));
+            var leader = $.trim($("#txtLeader").val());
+            var name = $.trim($("#txtName").val());
+            var paramJson = { xuserId: xuserId };
+            paramJson["parentId"] = parentId;
+            paramJson["departmentTypeId"] = departmentTypeId;
+            //if (propertyId > 0) {
+            //    paramJson["propertyId"] = propertyId;
+            //}
+            paramJson["leader"] = encodeURI(leader);
+            paramJson["name"] = encodeURI(name);
+
+            return paramJson;
+        }
+        //#endregion 获取报表查询参数
+        //查询按钮事件
+        function GetQueryResult() {
+            //设置结果面板相关属性
+            var body = document.body;
+            var c = $("#dataPanel");
+            var position = "absolute";
+            var x = 0;
+            var y = 0;
+            var w = $(c).width();
+            var h = $(c).height();
+
+            //创建Gridview并绑定数据
+            CreateGridView(c, position, x, y, w, h);
+        }
+        //#endregion 查询按钮
+        //#region 创建Gridview并绑定数据
+        var szdwGv = null;
+        function CreateGridView(namingContainer, position, x, y, width, height) {
+            if (szdwGv == null || typeof (szdwGv) == "undefined") {
+                //创建SzdwGridViewt实例
+                szdwGv = new SzdwGridView(position, x, y, width, height);
+                szdwGv.namingContainer = namingContainer;
+                szdwGv.fnInitial = InitialGridview(szdwGv);
+                szdwGv.fnEditing = UpdateDepartment;
+                szdwGv.fnDeleting = DeleteDepartmentTran;
+                szdwGv.fnOperationColumnCreated = AdjustOperationColumn;
+            }
+
+            //异步加载数据
+            if (szdwGv.pagination != null) {
+                szdwGv.pagination.ResetBar();
+            }
+
+            var paramJson = GetParamJson();
+            paramJson["pageSize"] = szdwGv.pageSize;
+            paramJson["MethodName"] = "GetDepartmentList";
+            szdwGv.requestUrl = "DepartmentHandler.ashx";
+            szdwGv.paramJson = paramJson;
+            szdwGv.DataBind();
+        }
+        //#endregion 创建Gridview并绑定数据
+
+        //#region 初始化Gridview属性
+        function InitialGridview(szdwGv) {
+            //个性样式设置    
+            szdwGv.dataPanelCssJson = { "background-color": "White", "border": "1px solid Silver" };
+            szdwGv.paginationCssJson = { "background-color": "White", "font-family": "微软雅黑", "font-size": "small", "border": "1px solid Silver", "border-top": "0px" };
+
+            //dataPanel设置
+            szdwGv.hasSumRow = false;
+            szdwGv.hasButtonPanel = true;
+            szdwGv.hasOperationColumn = true;
+            szdwGv.permission.modifyPermission = permission.modifyPermission;
+            szdwGv.permission.deletePermission = permission.deletePermission;
+
+            //head设置
+            szdwGv.headCssName = "gridHead2";
+            szdwGv.headHeight = 30;
+            szdwGv.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 50 },
+                                    { "Field": "Name", "Text": "部门名称", "Width": 167, "OrderField": "Name" },
+									{ "Field": "ShortName", "Text": "简称", "Width": 100, "OrderField": "Name" },
+                                    //{ "Field": "DepartmentType", "Text": "单位类别", "Width": 100, "OrderField": "DepartmentType" },
+                                    //{ "Field": "Property", "Text": "单位性质", "Width": 75, "OrderField": "Property" },
+                                    //{ "Field": "Leader", "Text": "负责人", "Width": 90, "OrderField": "Leader" },
+                                    { "Field": "ParentDepartment", "Text": "上级部门", "Width": 140, "OrderField": "ParentDepartment" },
+                                    { "Field": "FullName", "Text": "部门全称", "Width": 180, "OrderField": "FullName" },
+                                    //{ "Field": "Region", "Text": "行政单位", "Width": 120, "OrderField": "AdministrativeDivision" },
+                                    //{ "Field": "Longitude", "Text": "经度", "Width": 80, "OrderField": "FullName" },
+									//{ "Field": "Latitude", "Text": "纬度", "Width": 80, "OrderField": "FullName" },
+                                    { "Field": "Memo", "Text": "部门描述", "Width": 110, "OrderField": "Memo" },
+                                    { "Field": "Lock", "Text": "状态", "Width": 50 }];
+            szdwGv.cellCssJson = {
+                //"Leader": { "text-align": "center", "font-size": "small", "font-family": "宋体" },
+                "FullName": { "text-align": "left", "font-size": "small", "font-family": "宋体", "title": "FullName" },
+                "ParentDepartment": { "text-align": "center", "font-size": "small", "font-family": "宋体" },
+                "Name": { "text-align": "left", "font-size": "small", "font-family": "宋体" },
+                //"DepartmentType": { "text-align": "left", "font-size": "small", "font-family": "宋体" },
+                "Memo": { "text-align": "left", "font-size": "small", "font-family": "宋体" }
+            };
+        }
+
+        function AdjustOperationColumn(td) {
+            var i = $(td).data('rowIndex');
+            var jsonList = szdwGv.recordSetJson;
+            if (jsonList[i].IsLocked) {
+                $($(td).children()[0])
+                    .data("disabled", false)
+                    .css(szdwGv.operationBtnCssJson);
+                $($(td).children()[1])
+                    .data("disabled", true)
+                    .css(szdwGv.operationBtnDisabledCssJson);
+            } else {
+                $($(td).children()[0])
+                    .data("disabled", false)
+                    .css(szdwGv.operationBtnCssJson);
+                $($(td).children()[1])
+                    .data("disabled", false)
+                    .css(szdwGv.operationBtnCssJson);
+            }
+        }
+        //#endregion 初始化Gridview属性
+
+        //#endregion 查询结果
+
+        //#endregion 结果集面板
+
+        //#region 数据操作：增删改
+        //#region 新增
+        function InsertDepartment() {
+            var body = document.body;
+            var bw = $(body).width();
+            var bh = $(body).height();
+            var titleText = "新增部门"
+            var pageUrl = "DepartmentInsert.html";
+            var paramJson = {
+                departmentTypeId : $.trim($("#ddlDepartmentType").data("value"))
+            };
+            var w = 350;
+            var h = $(dataPanel).height() - 4;
+            var x = bw - w - ml - 2;
+            var y = $(dataPanel).offset().top + 2;
+            var hasAnimation = false;
+            SzdwCommon.openPopupWindow(titleText, pageUrl, paramJson, x, y, w, h);
+        }
+
+        //写入后刷新数据
+        function RefreshDataAfterInsert() {
+            SzdwCommon.refreshDataAfterInsert(szdwGv);
+        }
+
+        //#endregion 新增
+
+        //#region 删除
+        function DeleteDepartment(rowIndex) {
+            var jsData = szdwGv.recordSetJson[rowIndex];
+            var id = jsData.Id;
+            var modifierId = xuserId;
+
+            var objDataBind = szdwGv;
+            var requestUrl = "DepartmentHandler.ashx";
+            var paramJson = { id: id, modifierId: modifierId, MethodName: "DeleteDepartment" };
+            SzdwAjaxDataOperate.ajaxDelete(objDataBind, requestUrl, paramJson);
+        }
+
+        //#endregion 删除
+
+        //#region 编辑
+        function UpdateDepartment(rowIndex) {
+            //设置编辑行的样式（加底色）
+            szdwGv.SetSelectedRow(szdwGv.bodyRows[rowIndex]);
+
+            //弹出更新窗口
+            var jsData = szdwGv.recordSetJson[rowIndex];
+            var body = document.body;
+            var bw = $(body).width();
+            var bh = $(body).height();
+            var titleText = "编辑部门信息"
+            var pageUrl = "DepartmentUpdate.html";
+            //  var paramJson = { id: jsData.Id, name: jsData.Name, parentId: jsData.ParentId, parentDepartment: jsData.ParentDepartment, tradeTypeId: jsData.TradeTypeId, tradeType: jsData.TradeType, propertyId: jsData.PropertyId, property: jsData.Property, departmentTypeId: jsData.DepartmentTypeId, leader: jsData.Leader, leaderId: jsData.LeaderId, departmentType: jsData.DepartmentType, administrativeDivision: jsData.AdministrativeDivision, administrativeDivisionId: jsData.AdministrativeDivisionId, memo: jsData.Memo, modifierId: xuserId };
+            var paramJson = {
+                id: jsData.Id, name: jsData.Name, shortName: jsData.ShortName, parentId: jsData.ParentId, parentDepartment: jsData.ParentDepartment, leader: jsData.Leader, leaderId: jsData.LeaderId, region: jsData.Region, regionId: jsData.RegionId, departmentTypeId: jsData.DepartmentTypeId, departmentType: jsData.DepartmentType,property:jsData.Property,propertyId:jsData.PropertyId, memo: jsData.Memo, modifierId: xuserId
+            };
+            var w = 350;
+            var h = $(dataPanel).height() - 4;
+            var x = bw - w - ml - 2;
+            var y = $(dataPanel).offset().top + 2;
+            var hasAnimation = false;
+            var oJson = { fnCloseCallBack: RecoverSelectedRow };
+            SzdwCommon.openPopupWindow(titleText, pageUrl, paramJson, x, y, w, h, oJson);
+        }
+
+        //更新完毕后恢复行样式（无选中底色）
+        function RecoverSelectedRow() {
+            szdwGv.RecoverSelectedRow();
+        }
+
+        //#endregion 编辑
+
+        //#region 数据操作提示信息面板
+        var opInfoPanel = null;
+        function CreateOperateInfoPanel() {
+            opInfoPanel = SzdwCommon.createOperateInfoPanel({ backColor: themeColor, namingContainer: document.body });
+            return opInfoPanel;
+        }
+        //#endregion 数据操作提示信息面板
+
+        //#region 先判断单位下是否存在人员，在进行单位删除操作
+        function DeleteDepartmentTran(rowIndex) {
+            var jsData = szdwGv.recordSetJson[rowIndex];
+            var id = jsData.Id;
+            var url = "../Employee/EmployeeHandler.ashx";
+            var paramJson = { id: id, MethodName: "IsExistedEmployeeUnderDepartment" };
+            //重置密码
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json",
+                success: function (jsonData) {
+                    if (jsonData.isExisted) {
+                        alert("单位下存在人员信息，请先清空单位下人员数据后，再操作");
+                    }
+                    else {
+                        DeleteDepartment(rowIndex);
+                    }
+                }
+            });
+        }
+        //#endregion 先判断单位下是否存在人员，在进行单位删除操作 结束 
+
+        //#endregion 数据操作：增删改
+    </script>
+</body>
+</html>

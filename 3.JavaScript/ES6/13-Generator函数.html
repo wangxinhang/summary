@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    window.onload = function () {
+        function* func(){
+            console.log("one");
+            yield '1';
+            console.log("two");
+            yield '2'; 
+            console.log("three");
+            return '3';
+        }
+        let f = func();
+        f.next("2");
+        // one
+        // {value: "1", done: false}
+
+        f.next("2");
+        // two
+        // {value: "2", done: false}
+
+        f.next("2");
+        // three
+        // {value: "3", done: true}
+
+        f.next();
+        // {value: undefined, done: true}
+
+        function* G() {
+            const a = yield 100;
+            console.log('a', a) ; // a aaa
+            const b = yield 200;
+            console.log('b', b) ; // b bbb
+            const c = yield 300;
+            console.log('c', c) ; // c ccc
+        }
+        const g = G();
+        g.next()    // value: 100, done: false
+        g.next('aaa') // value: 200, done: false
+        g.next('bbb') // value: 300, done: false
+        g.next('ccc') // value: undefined, done: true
+    }      
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="file">
+        <button @click="show">点击年份加1</button>
+        <p id="box">{{msg}}</p>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+        // filter
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 2019,
+                view: 1
+            },
+            methods: {
+                show() {
+                    this.msg += 1;
+                }
+            },
+            beforeCreate() {
+                console.log("1.beforeCreate()是在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。");
+                console.log(this.msg); // undefined
+                console.log(this.show); // undefined
+            },
+            created() {
+                console.log("2.create()是实例已经创建完成之后被调用。");
+                console.log(this.msg); // undefined
+                console.log(this.show); // undefined
+            },
+            beforeMount() {
+                console.log("3.create()是实例已经创建完成之后被调用。");
+                console.log(document.getElementById('box').innerHTML) //空的
+            },
+            mounted() {
+                console.log("4.create()是实例已经创建完成之后被调用。");
+                console.log(document.getElementById('box').innerHTML) //#app里的内容
+            },
+            beforeUpdate() {
+                console.log("5.beforeUpdate()组件更新前调用。");
+                console.log(document.getElementById('box').innerHTML) //1
+            },
+            updated() {
+                console.log("6.updated()是组件更新后调用。");
+                console.log(document.getElementById('box').innerHTML) //2          
+            }
+
+
+        })
+    </script>
+
+</body>
+
+</html>

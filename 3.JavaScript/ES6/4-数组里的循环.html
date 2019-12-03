@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+        
+        let json = [
+            {title:'a',read:100,hot:true},
+            {title:'b',read:100,hot:true},
+            {title:'c',read:100,hot:false},
+            {title:'d',read:100,hot:true}
+        ];
+        // 1.foreach()就是用来替换普通for循环的
+        json.forEach((item,index,arr) => {
+            // console.log(item,index,arr);
+        });
+
+        // 2.map()配合return使用，返回一个新的数组
+        let newArr = json.map((item,index,arr) => {
+            let json1 = {};
+            json1.t = `title:${item.title}`;
+            json1.r = item.read + 100;
+            return json1;
+        })
+        console.log(newArr);
+
+        // 3.fiter()过滤掉不合格的item
+        let newArr1 = json.filter((item,index,arr) => {
+            return item.hot == true;
+            // 或者
+            // return item.title == 'a';
+        })
+        console.log(newArr1);
+
+        // 4.some()类似查找，当有一个符合条件就返回true
+        let a = json.some((item,index,json) => {
+            return item.title == 'a';
+        })
+        console.log(a);
+        // 5.every()是所有的都符合条件才返回true
+        let b = json.every((item,index,json) => {
+            return item.title == 'a';
+        })
+        console.log(b);
+
+
+
+        }
+        
+    </script>
+</body>
+</html>

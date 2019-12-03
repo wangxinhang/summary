@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="box">
+        <button @click="show='first'">加载第一个组件</button>
+        <button @click="show='second'">加载第二个组件</button>
+        <button @click="show='third'">加载第三个组件</button>
+        <div :is="show"></div>                 <!-- 第一种方式：指定已有的html元素来动态切换组件  -->                     
+        <component :is="show"></component>     <!-- 第二种方式：或者使用内置的抽象组件 component  -->  
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+        Vue.component("first", {
+            template:`<div>这是第一个组件</div>`
+        })
+        Vue.component("second", {
+            template:`<div>这是第二个组件</div>`
+        })
+        Vue.component("third", {
+            template:`<div>这是第三个组件</div>`
+        })
+        new Vue({
+            el: "#box",
+            data:{
+                show:"first"
+            }           
+        })
+    </script>
+</body>
+
+</html>

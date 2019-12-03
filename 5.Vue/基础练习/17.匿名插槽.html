@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <my-slot>
+            <img src="img/20190130201555.jpg" alt="">
+        </my-slot>
+    </div>
+
+    <template id="slot">
+        <div>
+            <header>这是头部</header>
+            <slot>这是插槽,不写内容按默认显示</slot>
+            <footer>这是尾部</footer>
+        </div>
+
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        Vue.component('my-slot', {
+            template: "#slot",
+
+        })
+        new Vue({
+            el: "#box",
+        })
+    </script>
+</body>
+
+</html>

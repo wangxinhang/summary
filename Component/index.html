@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="iconfont/font_vs9jrpewn0s/iconfont.css">
+  <script src="js/jquery-3.1.1.js"></script>
+  <script src="js/Switch.js"></script>
+  <script src="js/Counter.js"></script>
+  <script src="js/Carousel.js"></script>
+  <script src="js/DropDownList.js"></script>
+  <style>
+    ::-webkit-scrollbar{  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/ 
+        width: 10px;  
+        height: 10px;  
+    }  
+    ::-webkit-scrollbar-track { /*定义滚动条轨道 内阴影+圆角*/  
+        background-color: rgba(0, 0, 0, 0.7); 
+    }   
+    ::-webkit-scrollbar-thumb {  /*定义滑块 内阴影+圆角*/ 
+        border-radius: 10px;  
+        background-color: rgba(255,255,255,.4);  
+    }
+    #box9{
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 1.开关按钮容器 -->
+  <div id="box1" style="width: 100px; height: 300px; border: 1px solid #000;">
+    <div id="box101" style="position:relative; height:30px"></div>
+    <div id="box102" style="width: 100px; height: 270px; background-color: pink; display:none;"></div>
+  </div>
+  <!-- 2.计数器容器 -->
+  <div id="box2" style="width: 350px; height:50px; border:1px solid #000; margin-top:20px; position:relative;"></div>
+  <!-- 3.下拉框容器 -->
+  <div style="width: 500px;height: 300px;border: 1px solid #000; margin-top:20px;">
+    <div id="box5" style="margin:20px 50px 0 ;position:relative;">
+      <input id="iuput1" type="text" style="width: 150px;box-sizing: border-box;">
+    </div>
+    <!-- <div id="box9"></div> -->
+  </div>
+  <!-- 4.轮播图容器 -->
+  <div id="box3" style="width: 600px; height:400px; margin-top:20px; position:relative;"></div>
+  <div id="box4" style="width: 800px; height:300px; margin-top:20px; position:relative;"></div>
+  
+  <script>
+    $(function () {
+      // $("#box9").click(function () {  
+      //   // $(this).css({"transform": "rotate(-30deg)"});
+      //   $(this).rotate({animateTo: "30deg"});
+      // })
+      //1.1 开关按钮组件
+      createSwitch(); //创建开关按钮组件
+      function createSwitch() {
+        var obj = new Switch();
+        obj.parentContainer = "#box101"; //更改父容器
+        obj.fnClickCallBack = CallBack; //添加回调函数
+        obj.load(); //初始化加载按钮组件
+      }
+      //开关按钮组件的回调函数
+      function CallBack() {
+        $("#box102").slideToggle();
+      }
+      //1.2 性别按钮组件      
+      createSex(); //创建性别按钮组件
+      function createSex() {
+        var obj = new Switch(70, 30, "absolute", 120, 0);
+        obj.onText = "女"; //更改文本
+        obj.offText = "男";
+        obj.bgColorOn = "pink"; //更改背景颜色
+        obj.bgColorOff = "skyblue";
+        obj.speed = 200; //定义动画速度
+        obj.boxCssJson = {"borderRadius": "5px"}; //更改box的css样式
+        obj.textPanelCssJson = {"fontSize": "18px"}; //更改textPanel的css样式
+        obj.sliderCssJson = {"borderRadius": "2px","fontSize": "20px"}; //更改slider的css样式
+        obj.sliderClassName = "iconfont icon-caidan"; //更改小滑块显示的内容
+        obj.load(); //初始化加载按钮组件
+      }
+
+
+
+      //2.计数器组件        
+      createCounter1(); //创建计数器组件1
+      createCounter2(); //创建计数器组件2
+      createCounter3(); //创建计数器组件3
+      function createCounter1() {
+        var obj = new Counter(70,20,"absolute",10,10);
+        obj.parentContainer = "#box2";//更改父容器
+        obj.closeClassName = "iconfont icon-guanbi";//设置蒙版弹出框的关闭按钮图标
+        obj.load();//初始化加载计数器组件
+      }
+      function createCounter2() {
+        var obj = new Counter(100,30,"absolute",100,10);
+        obj.parentContainer = "#box2";//更改父容器
+        obj.boxCssJson = {"border": "1px solid #cacbcb","border-radius":"5px"};//更改box的css样式
+        obj.inputCssJson = {"border-width": "0 1px"};//更改input的css样式
+        obj.closeClassName = "iconfont icon-guanbi";//设置蒙版弹出框的关闭按钮图标
+        obj.load();//初始化加载计数器组件
+      }
+      function createCounter3() {
+        var obj = new Counter(90,30,"absolute",220,10);
+        obj.parentContainer = "#box2";//更改父容器
+        obj.inputCssJson = {"border":"none","fontSize":"20px"};//更改input的css样式
+        obj.subBoxCssJson = {"borderRadius":"30px","backgroundColor":"moccasin"};//更改减法按钮的css样式
+        obj.addBoxCssJson = {"borderRadius":"30px","backgroundColor":"moccasin"};//更改加法按钮的css样式
+        obj.subBoxTextColor = "red";//设置减法文本颜色
+        obj.addBoxTextColor = "green";//设置加法文本颜色
+        obj.closeClassName = "iconfont icon-guanbi";//设置蒙版弹出框的关闭按钮图标
+        obj.load();//初始化加载计数器组件
+      }
+
+
+      //下拉框组件 
+      // ！！！！！！！！！！使用说明！！！！！！！！！！！！！！！
+      var json6 = {
+        basicSetting:{
+          width:150, //可传属性：设置下拉框组件的宽度,默认500
+          height:150,//可传属性：设置下拉框组件的高度,默认300
+          x:0,//可传属性：设置轮播图的定位属性left值，默认0
+          y:20,//可传属性：设置轮播图的定位属性top值，默认0
+          parentContainer:"#box5",//可传属性：定义父容器，默认body，注意：使用时父容器必须设置相对定位、绝对定位或者固定定位其中的一种
+          relatedInput:"#iuput1"//外部相关联的input输入框
+        },
+        searchPanelSetting:{
+          searchPanel:{
+            // className:"",//必传属性(与下一个属性至少要传入一个，也可以都传，用于定义控制图标)：定义通过class类名添加的右按钮图标容器css样式, 注意：字体图标也是通过class类名添加到右按钮容器上的
+            // cssJson:{}//必传属性：定义通过cssJson添加的右按钮图标容器css样式, 注意：背景图片也是通过cssJson添加到右按钮容器上的
+          },
+          searchBox:{
+            // className:"",//必传属性(与下一个属性至少要传入一个，也可以都传，用于定义控制图标)：定义通过class类名添加的右按钮图标容器css样式, 注意：字体图标也是通过class类名添加到右按钮容器上的
+            // cssJson:{}//必传属性：定义通过cssJson添加的右按钮图标容器css样式, 注意：背景图片也是通过cssJson添加到右按钮容器上的
+          },
+          clearBox:{
+            className:"iconfont icon-guanbi",//必传属性(与下一个属性至少要传入一个，也可以都传，用于定义控制图标)：定义通过class类名添加的右按钮图标容器css样式, 注意：字体图标也是通过class类名添加到右按钮容器上的
+            // cssJson:{}//必传属性：定义通过cssJson添加的右按钮图标容器css样式, 注意：背景图片也是通过cssJson添加到右按钮容器上的
+          }
+        },
+        dataPanelSetting:{//定义数据面板设置
+          dataPanel:{//定义数据面板属性
+            // className:"",
+            // cssJson:{},
+          },
+          item:{//定义数据项属性
+            // className:"",
+            // cssJson:{},            
+          },
+          iconBox:{//定义展开按钮属性
+            className:"iconfont icon-xiangyoujiantou",
+            // cssJson:{},   
+          }
+        },
+        data:{
+        //有无引号都可以， localData格式：[{Id:1,Name:"XXXX",ParentId:0,Pinyin:xxxxx,Jianpin:Jianpin}]
+          localData:[{
+            Id: 1,
+            Name: "河南省",
+            ParentId: 0,
+            PinYin: "henansheng",
+            JianPin: "hns"
+        },
+        {
+            Id: 2,
+            Name: "河北省",
+            ParentId: 0,
+            PinYin: "hebeisheng",
+            JianPin: "hbs"
+        },
+        {
+            Id: 3,
+            Name: "湖南省",
+            ParentId: 0,
+            PinYin: "hunansheng",
+            JianPin: "hns"
+        },
+        {
+            Id: 4,
+            Name: "湖北省",
+            ParentId: 0,
+            PinYin: "hubeisheng",
+            JianPin: "hbs"
+        },
+        {
+            Id: 5,
+            Name: "海南省",
+            ParentId: 0,
+            PinYin: "hainansheng",
+            JianPin: "hns"
+        },
+        {
+            Id: 6,
+            Name: "郑州市",
+            ParentId: 1,
+            PinYin: "zhengzhoushi",
+            JianPin: "zzs"
+        },
+        {
+            Id: 7,
+            Name: "高新区",
+            ParentId: 6,
+            PinYin: "gaoxinqu",
+            JianPin: "gxq"
+        },
+        {
+            Id: 8,
+            Name: "中原区",
+            ParentId: 6,
+            PinYin: "zhongyuanqu",
+            JianPin: "zyq"
+        },
+        {
+            Id: 9,
+            Name: "金水区",
+            ParentId: 6,
+            PinYin: "jinshuiqu",
+            JianPin: "jsq"
+        }
+    ],
+          ajaxData:{
+            // url: url, 
+            // type: "post",
+            // data: paramJson, 
+            // dataType: "json"
+          }
+        }
+      }
+      var dropDownList1 = new DropDownList(json6);
+
+
+
+      // 4.轮播图组件
+      // ！！！！！！！！！！使用说明！！！！！！！！！！！！！！！
+      var json1 = {
+        basicSetting:{//轮播图的基本设置
+          widthHeightPosition:{//可传属性：设置轮播图的宽高以及定位
+            width:600, //可传属性：设置轮播图的宽度,默认500
+            height:400,//可传属性：设置轮播图的高度,默认300
+            x:0,//可传属性：设置轮播图的定位属性left值，默认0
+            y:0,//可传属性：设置轮播图的定位属性top值，默认0
+            parentContainer:"#box3"////可传属性：定义父容器，默认body，注意：使用时父容器必须设置相对定位、绝对定位或者固定定位其中的一种
+          },
+          carouselSetting:{//设置轮播图的参数
+            pattern:1,//可传属性：1表示缓动轮播，2表示渐隐渐变轮播
+            speedTime:20,//可传属性：定义轮播图片移动(渐隐渐变)速度，单位：毫秒
+            intervalTime:1500//可传属性：定义轮播图间隔时间，单位：毫秒 
+          }
+        },
+        imgJson:{//轮播图片的基本设置
+          imgSrc:["img/test1.jpg","img/test2.jpg","img/test3.jpg","img/test4.jpg"],//必传属性：定义存放图片路径的数组
+          pText:["我是第一张","我是第二张","我是第三张","我是第四张"],//可传属性：定义图片上的文本内容的数组
+          aHref:["http://www.huanqiu.com","http://www.baidu.com","http://www.baidu.com","http://www.baidu.com"],//可传属性：定义包含图片的a标签href属性值的数组
+          pCssJson:{"fontSize":"20px","left":"50px"}//可传属性：定义图片上的文本的css样式
+        },
+        ctrlIconJson:{//控制图标的基本设置
+          prevIcon:{//左控制图标的基本设置
+            className:"iconfont icon-xiangzuojiantou",//必传属性(与下一个属性至少要传入一个，也可以都传，用于定义控制图标)：定义通过class类名添加的左按钮图标容器css样式, 注意：字体图标也是通过class类名添加到左按钮容器上的
+            cssJson:{"fontSize":"30px"},//必传属性：定义通过cssJson添加的左按钮图标容器css样式, 注意：背景图片也是通过cssJson添加到左按钮容器上的
+            mouseEnterCssJson:{"backgroundColor":"black","opacity":"0.4","color":"white"}//可传属性：定义当鼠标移入左按钮图标后，改变的css样式
+          },
+          nextIcon:{//右控制图标的基本设置
+            className:"iconfont icon-xiangyoujiantou",//必传属性(与下一个属性至少要传入一个，也可以都传，用于定义控制图标)：定义通过class类名添加的右按钮图标容器css样式, 注意：字体图标也是通过class类名添加到右按钮容器上的
+            cssJson:{"fontSize":"30px"},//必传属性：定义通过cssJson添加的右按钮图标容器css样式, 注意：背景图片也是通过cssJson添加到右按钮容器上的
+            mouseEnterCssJson:{"backgroundColor":"black","opacity":"0.4","color":"white"}//可传属性：定义当鼠标移入右按钮图标后，改变的css样式            
+          },
+          smallIcon:{//下方小控制图标的基本设置
+            iconBoxCssJson:{"bottom":"10px","left":"400px"},//可传属性：定义通过cssJson添加的小图标容器样式
+            iconCssJson:{"width":"20px","height":"4px","borderRadius":0,"border":"2px solid grey","backgroundColor":"white"},//可传属性：定义通过cssJson添加的小图标样式
+            iconSelectedCssJson:{"backgroundColor":"hotpink"}//可传属性：定义通过cssJson添加的小图标选中样式
+          } 
+        }
+      }
+      var Carousel1 = new Carousel(json1);
+    
+      var json2 = {
+        basicSetting:{//轮播图的基本设置
+          widthHeightPosition:{//可传属性：设置轮播图的宽高以及定位
+            width:800, //可传属性：设置轮播图的宽度,默认500
+            height:300,//可传属性：设置轮播图的高度,默认300
+            parentContainer:"#box4"////可传属性：定义父容器，默认body，注意：使用时父容器必须设置相对定位、绝对定位或者固定定位其中的一种
+          },
+          carouselSetting:{//设置轮播图的参数
+            pattern:2,//可传属性：1表示缓动轮播，2表示渐隐渐变轮播
+            speedTime:800,//可传属性：定义轮播图片移动(渐隐渐变)速度，单位：毫秒
+            intervalTime:2000//可传属性：定义轮播图间隔时间，单位：毫秒 
+          }
+        },
+        imgJson:{//轮播图片的基本设置
+          imgSrc:["img/1.jpg","img/2.jpg","img/3.jpg"],//必传属性：定义存放图片路径的数组
+          pText:["你在干嘛","我也不知道","你又再干嘛"],//可传属性：定义图片上的文本内容的数组
+          pCssJson:{"fontSize":"30px","left":"50%","width":"200px","marginLeft":"-100px","textAlign":"center","color":"orange"}//可传属性：定义图片上的文本的css样式
+        },
+        ctrlIconJson:{//控制图标的基本设置
+          prevIcon:{//左控制图标的基本设置
+            className:"iconfont icon-xiangzuojiantou",//必传属性(与下一个属性至少要传入一个，也可以都传，用于定义控制图标)：定义通过class类名添加的左按钮图标容器css样式, 注意：字体图标也是通过class类名添加到左按钮容器上的
+            cssJson:{"fontSize":"40px"},//必传属性：定义通过cssJson添加的左按钮图标容器css样式, 注意：背景图片也是通过cssJson添加到左按钮容器上的
+          },
+          nextIcon:{//右控制图标的基本设置
+            className:"iconfont icon-xiangyoujiantou",//必传属性(与下一个属性至少要传入一个，也可以都传，用于定义控制图标)：定义通过class类名添加的右按钮图标容器css样式, 注意：字体图标也是通过class类名添加到右按钮容器上的
+            cssJson:{"fontSize":"40px"},//必传属性：定义通过cssJson添加的右按钮图标容器css样式, 注意：背景图片也是通过cssJson添加到右按钮容器上的
+          },
+          smallIcon:{//下方小控制图标的基本设置
+            iconBoxCssJson:{"bottom":"10px","left":"50%","marginLeft":"-34px"},//可传属性：定义通过cssJson添加的小图标容器样式
+            iconSelectedCssJson:{"backgroundColor":"orange"}//可传属性：定义通过cssJson添加的小图标选中样式
+          } 
+        }
+      }
+      var Carousel2 = new Carousel(json2);
+    });
+
+  </script>
+</body>
+
+</html>

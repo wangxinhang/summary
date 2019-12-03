@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <p>{{msg}}</p>
+        <h1>{{price}}</h1>
+        <h1>{{price | myCurrency('￥')}}</h1>
+    </div>
+    
+    <script src="vue.js"></script>
+    <script>
+        // filter
+        new Vue({
+            el: '#container',
+            data: {
+                msg: 'Hello Vue',
+                price: 356
+            },
+            //过滤器的本质 就是一个有参数有返回值的方法
+            filters: {
+                myCurrency: function (myInput, arg1) {
+                    console.log(arg1);
+                    console.log(myInput);//myInput指price
+                    //根据业务需要，对传来的数据进行处理
+                    // 并返回处理后的结果
+                    var result = arg1 + myInput;
+                    return result;
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

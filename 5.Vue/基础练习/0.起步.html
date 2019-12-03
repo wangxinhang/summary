@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- View层  -->
+    <div id="box">
+        <input type="text" v-model="msg">
+        <p>{{msg}}</p>
+        <p v-if="msg >= 90">优秀</p>
+        <p v-else-if="msg >= 75">良好</p>
+        <p v-else-if="msg >= 60">及格</p>
+        <p v-else>不及格</p>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+
+        // Model层  
+        var myData = {msg:60};
+
+        // VM层  创建一个Vue实例
+        new Vue({
+            el:"#box",         //挂载View层中的元素
+            data:myData        //绑定Model层中的数据
+        });
+
+    </script>
+</body>
+</html>

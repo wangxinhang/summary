@@ -1,0 +1,605 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="../Styles/Page.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Query.css" rel="stylesheet" type="text/css" />    
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/domCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwDropDownList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwGridView.js" type="text/javascript"></script>
+    <link href="../SzdwControls/SzdwGridView.css" rel="stylesheet" type="text/css" />
+    <script src="../SzdwControls/SzdwPagination.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButton.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwPopupWindow.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCheckBoxList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwAjaxDataOperate.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="../Scripts/CommonJScript.js" type="text/javascript"></script>
+    <script src="../Scripts/myparm.js" type="text/javascript"></script>
+</head>
+<body style="background-color:#EEEEEE">
+    <form action="">
+        <div id="leftFilterPanel" style="height:25px;padding-bottom:10px;">
+            <div id="rfpCell00" class="cellDiv" style="color:#1B60C3;font-size:12pt; font-family:微软雅黑;">角色列表</div>
+            <div id="rfpCell01" class="cellDiv" style="border-left:1px solid #DDDDDD;margin-left:10px;">                    
+                <input id="txtRoleName" type="text" class="textBox2" style="background-color:transparent;border-right:0px;" />
+            </div>
+        </div>
+        <div id="leftDataPanel"></div>
+        <div id="rightFilterPanel" style="height:25px;padding-bottom:10px;">
+            <div id="rpfpCell00" class="cellDiv" style="color:#1B60C3;font-size:12pt; font-family:微软雅黑;">权限设置</div>
+            <div id="rpfpCell01" class="cellDiv" style="border-left:1px solid #DDDDDD;margin-left:5px;">
+                <div id="ddlPermissionType" class="dropDownList" style="width:50px;"></div>
+            </div>
+            <div id="rpfpCell02" class="cellDiv" style="padding-left:0px">
+                <div id="ddlModule" class="dropDownList" style="width:60px;"></div>
+            </div>
+            <div id="rpfpCell03" class="cellDiv" style="padding-left:0px">
+                <div id="ddlAssignType" class="dropDownList" style="width:60px;"></div>
+            </div>
+            <div id="rpfpCell04" class="cellDiv" style="padding-left:0px">
+                <div id="ddlResourceType" class="dropDownList" style="width:60px;"></div>
+            </div>
+            <div id="rpfpCell05" class="cellDiv" style="padding-left:0px">
+                <input id="txtResourceName" type="text" class="textBox2" style="background-color:transparent;border-right:0px;width:80px;" />
+            </div>
+        </div>
+        <div id="rightDataPanel"></div>
+    </form>  
+    <script type="text/javascript">
+        //#region 全局变量
+        var xuserId, xmenuId, permission = null;//用户及权限：json格式 
+        var leftWidth = 270,pwWidth=320;
+        btnHeight = 26;
+        //#endregion 全局变量
+
+         $(document).ready(function () {
+            var paramJson = SzdwCommon.getJsonParm();
+            xuserId = paramJson.xuserId;
+            xmenuId = paramJson.xmenuId;
+            permission = SzdwCommon.getPermission(paramJson.permissionJsonList);
+            bodyWidth = Math.max($(document.body).width(), minWidth);
+            bodyHeight = Math.max($(document.body).height(), minHeight);
+            //设置查询面板
+            SetLeftPanel();
+            //设置结果面板
+            SetRightPanel();
+            //窗口调整大小
+            $(window).resize(function () {
+                bodyWidth = Math.max($(document.body).width(), minWidth);
+                bodyHeight = Math.max($(document.body).height(), minHeight);
+                ResizeControls();
+                RepositionControls();
+            });
+        });
+        //#region 位置尺寸
+         function RepositionControls() {
+             var dy = GetPanelX("rightDataPanel", "y");
+             //重设弹窗位置
+             var t = document.body;
+             var pw = t.popupWindow;
+             if (pw) {
+                 pw.RePosition(bodyWidth - pw.width - ml, dy);
+             }
+             var ew = t.exportWindow;
+             if (ew) {
+                 var w = Math.min(exportWidth, bodyWidth * 4 / 5);
+                 var h = Math.min(exportHeight, bodyHeight * 4 / 5);
+                 var x = (bodyWidth - w) / 2;
+                 var y = (bodyHeight - h) / 2;
+                 ew.RePosition(x, y);
+             }
+         }
+        function ResizeControls() {
+            $("#rightFilterPanel").outerWidth(bodyWidth - leftWidth - 3 * mt);
+            $("#leftDataPanel").outerHeight(bodyHeight - 25 - 3 * mt);
+            $("#rightDataPanel").outerWidth(bodyWidth - leftWidth - 3 * mt).outerHeight(bodyHeight - 25 - 3 * mt);
+
+            if (szdwRole) {
+                szdwRole.Resize(leftWidth, bodyHeight - 25 - 3 * mt);
+            }
+
+            if (szdwGvRp) {
+                szdwGvRp.Resize(bodyWidth - leftWidth - 3 * mt, bodyHeight - 25 - 3 * mt);
+            }
+            //重设弹窗尺寸
+            var t = document.body;
+            var pw = t.popupWindow;
+            if (pw) {
+                pw.ReSize(pw.width, bodyHeight - 25 - 3 * mt);
+            }
+        }
+        //#endregion
+
+        //获取用户Id
+        //获取导出打印权限
+        function GetExportPrintPermission() {
+            var xUserId = xuserId;
+            var xMenuId = xmenuId;
+            var url = "../Permission/XuserPermissionProcess.ashx";
+            var paramJson = { xUserId: xUserId, xMenuId: xMenuId, MethodName: "GetXUserPermission" };
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json", async: false,
+                success: function (jsData) {
+                    if (!$.isEmptyObject(jsData)) {
+                        permission = jsData;
+                        ShowExportButton();
+                        ShowSubtotalButton();
+                    }
+                }
+            });
+        }
+        
+        //#region 左面板
+        function SetLeftPanel() {
+            $("#leftFilterPanel")
+                .css({ "position": "absolute", "left": ml, "top": mt })
+                .outerWidth(leftWidth)
+                .outerHeight(25);
+            $("#leftDataPanel")
+                .css({ "position": "absolute", "left": ml, "top": 25 + 2 * mt })
+                .outerWidth(leftWidth)
+                .outerHeight(bodyHeight - 3 * mt - 25);
+            //角色筛选按钮
+            CreateRoleSearchButton();
+            //角色名称回车筛选
+            $("#txtRoleName").keypress(function (e) {
+                var k = e.which;
+                if (k == 13) {
+                    $(szdwRoleSearchButton.button).trigger("click");
+                }
+            });
+            //初始加载结果数据
+            GetRoleList();
+        }
+
+        var szdwRoleSearchButton = null;
+        function CreateRoleSearchButton() {
+            //var nc = $("#rfpCell02");
+            var nc = $("#txtRoleName").parent();
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = 0;
+            var h = btnHeight;
+            szdwRoleSearchButton = new SzdwButton(p, x, y, w, h);
+            szdwRoleSearchButton.namingContainer = nc;
+            szdwRoleSearchButton.imageWidth = btnImageWidth;
+            szdwRoleSearchButton.image = imgFile.query;
+            szdwRoleSearchButton.title = "角色名称筛选";
+            szdwRoleSearchButton.Load();
+            //单击事件
+            var btn = szdwRoleSearchButton.button;
+            $(btn).click(function (e) {
+                szdwRole.paramJson["name"] = $("#txtRoleName").val();
+                szdwRole.DataBind();
+                e.stopPropagation();
+            });
+        }
+
+        function GetRoleList() {
+            var c = $("#leftDataPanel");
+            var position = "absolute";
+            var x = 0;
+            var y = 0;
+            var w = c.width();
+            var h = c.height();
+            //创建Gridview并绑定数据
+            CreateRoleGridView(c, position, x, y, w, h);
+        }
+
+        function GetRoleParamJson() {
+            var xuserId = xuserId;
+            var roleName = $.trim($("#txtRoleName").val());
+            var paramJson = { xuserId: xuserId };
+
+            if (roleName.length > 0) {
+                paramJson["name"] = roleName;
+            }
+            return paramJson;
+        }
+
+        var szdwRole = null;
+        function CreateRoleGridView(namingContainer, position, x, y, width, height) {
+            if (szdwRole == null || typeof (szdwRole) == "undefined") {
+                //创建SzdwGridViewt实例
+                szdwRole = new SzdwGridView(position, x, y, width, height);
+                szdwRole.namingContainer = namingContainer;
+                szdwRole.fnInitial = InitialSzdwRole(szdwRole);
+                szdwRole.fnRowClick = szdwRoleRowClick;
+                szdwRole.fnDataBindCallBack = InitialRowClick;
+            }
+
+            //异步加载数据
+            if (szdwRole.pagination != null) {
+                szdwRole.pagination.ResetBar();
+            }
+
+            var paramJson = GetRoleParamJson();
+            paramJson["pageSize"] = szdwRole.pageSize;
+            paramJson["MethodName"] = "RoleGetList";
+            szdwRole.requestUrl = "../Role/RoleProcess.ashx";
+            szdwRole.paramJson = paramJson;
+            szdwRole.DataBind();
+        }
+
+        //初次加载时默认选中第一行，并加载该Group对应的用户数据
+        function InitialRowClick() {
+            $(szdwRole.bodyRows[0]).trigger("click");
+        }
+
+        function InitialSzdwRole(szdwRole) {
+            //个性样式设置    
+            szdwRole.dataPanelCssJson = { "background-color": "White", "border": "1px solid Silver" };
+            szdwRole.paginationCssJson = {"background-color": "White", "font-family": "微软雅黑", "font-size": "small", "border": "1px solid Silver", "border-top": "0px"}; 
+            szdwRole.minHeight = 300;
+            szdwRole.allowRowClickEvent = true;
+
+            //dataPanel设置
+            szdwRole.hasSumRow = false;
+            szdwRole.hasPagination = false;
+            szdwRole.hasButtonPanel = true;
+            szdwRole.pageSize = 1000;
+
+            //head设置
+            szdwRole.headCssName = "gridHead2";
+            szdwRole.headHeight = 30;
+            szdwRole.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 40 },
+                                      { "Field": "Name", "Text": "角色名称", "Width": 200,"OrderField": "Name" }];
+            szdwRole.cellCssJson = {
+                "Name": { "text-align": "left" }
+            };
+        }
+
+        function szdwRoleRowClick(rowIndex) {
+            var jsonList = szdwRole.recordSetJson;
+            if (jsonList) {
+                var jsonData = jsonList[rowIndex];
+                if (szdwGvRp) {
+                    szdwGvRp.paramJson["roleId"] = jsonData.Id;
+                    szdwGvRp.paramJson["role"] = jsonData.Name;
+                    szdwGvRp.DataBind();
+                }   
+            }
+        }
+        //#endregion
+
+        //#region 右面板
+        function SetRightPanel() {
+            $("#rightFilterPanel")
+                .css({ "position": "absolute", "left": leftWidth + 2 * ml, "top": mt })
+                .outerWidth(bodyWidth - leftWidth - 3 * ml)
+                .outerHeight(25);
+            $("#rightDataPanel")
+                .css({ "position": "absolute", "left": leftWidth + 2 * ml, "top": 25 + 2 * mt })
+                .outerWidth(bodyWidth - leftWidth - 3 * ml)
+                .outerHeight(bodyHeight - 3 * mt - 25);
+            //角色权限筛选控件加载
+            CreateRolePermissionFilter();            
+            //初始加载结果数据
+            GetRolePermissionList();
+        }
+
+        function CreateRolePermissionFilter() {
+            BindDdlPermissionType();
+            BindDdlModule();
+            BindDdlAssingType();
+            BindDdlResourceType();
+            CreateResourceSearchButton();
+
+            //角色名称回车筛选
+            $("#txtResourceName").keypress(function (e) {
+                var k = e.which;
+                if (k == 13) {
+                    $(szdwResourceSearchButton.button).trigger("click");
+                }
+            });
+        }
+
+        function RefreshSzdwGvRp() {
+            $(szdwResourceSearchButton.button).trigger("click");
+        }
+
+        function BindDdlPermissionType() {
+            var jsonList = [{ Id: 1, Name: "功能" }, { Id: 2, Name: "数据"}];
+            var paramDdl = { jsonList: jsonList, fnInitial: InitialDdlPt };
+            $("#ddlPermissionType").dropDownList(paramDdl);
+            $("#ddlPermissionType").text("功能").data("value", 1);
+        }
+
+        function InitialDdlPt(szdwDdl) {
+            var pt = szdwDdl.value;
+            if (pt == 1) {
+                szdwGvRp.paramJson["MethodName"] = "PermissionGetRolePermissionList";
+            } else {
+                szdwGvRp.paramJson["MethodName"] = "PermissionGetRoleDepartmentList";
+            }
+            szdwDdl.fnItemClick = ReLoadGridview;
+        }
+
+         //重新加载不同权限设置的数据列表
+        function ReLoadGridview() {
+            //设置下拉框控件
+            SetDdlCtrl()
+
+            //加载权限设置的数据列表
+            var rc = $("#rpDataPanel");
+            $(rc).empty();
+            szdwGvRp = null;
+            GetRolePermissionList();
+
+            var rowIndex = szdwRole.selectedRow.rowIndex;
+            var jsonData = szdwRole.recordSetJson[rowIndex];
+            szdwGvRp.paramJson["roleId"] = jsonData.Id;
+            szdwGvRp.paramJson["role"] = jsonData.Name;
+            szdwGvRp.DataBind();
+        }
+
+        //设置下拉框控件
+        function SetDdlCtrl() {
+            var disabled = $("#ddlPermissionType").data("value") == 1 ? false : true;
+            var txtColor = $("#ddlPermissionType").data("value") == 1 ? "Black" : "Silver";
+            $("#ddlModule").attr("disabled", disabled).css("color", txtColor);
+            $("#ddlResourceType").attr("disabled", disabled).css("color", txtColor);
+            $("#txtResourceName").val("");
+            $("#ddlAssignType").text("全部").data("value", 0);
+        }
+
+        function BindDdlModule() {
+            var requestUrl = "../Xmenu/XmenuProcess.ashx";
+            var paramJson = { parentId: 0, MethodName: "XmenuGetDropDownListByParentId" };
+            var paramDdl = { requestUrl: requestUrl, width: 100, paramJson: paramJson, fnInitial: InitialDdl };
+            $("#ddlModule").dropDownList(paramDdl);
+            $("#ddlModule").text("全部").data("value", 0);
+        }
+
+        function BindDdlAssingType() {
+            var jsonList = [{ Id: 1, Name: "已指派" }, { Id: 2, Name: "未指派"}];
+            var paramDdl = { jsonList: jsonList, fnInitial: InitialDdl };
+            $("#ddlAssignType").dropDownList(paramDdl);
+            $("#ddlAssignType").text("全部").data("value", 0);
+        }
+
+        function BindDdlResourceType() {
+            var requestUrl = "../ResourceType/ResourceTypeProcess.ashx";
+            var paramJson = {MethodName: "ResourceTypeGetDropDownList" };
+            var paramDdl = { requestUrl: requestUrl, paramJson: paramJson, fnInitial: InitialDdl };
+            $("#ddlResourceType").dropDownList(paramDdl);
+            $("#ddlResourceType").text("全部").data("value", 0);
+        }
+
+        function InitialDdl(szdwDdl) {
+            szdwDdl.jsonItemAll = { Id: 0, Name: "全部" };
+            szdwDdl.nonCascadeItemLength = 0;
+            szdwDdl.fnItemClick = RefreshSzdwGvRp;
+        }
+
+        var szdwResourceSearchButton = null;
+        function CreateResourceSearchButton() {
+            var nc = $("#txtResourceName").parent();
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = 0;
+            var h = btnHeight;
+            szdwResourceSearchButton = new SzdwButton(p, x, y, w, h);
+            szdwResourceSearchButton.namingContainer = nc;
+            szdwResourceSearchButton.imageWidth = btnImageWidth;
+            szdwResourceSearchButton.image = imgFile.query;
+            szdwResourceSearchButton.title = "资源名称筛选";
+            szdwResourceSearchButton.Load();
+
+            //单击事件
+            var btn = szdwResourceSearchButton.button;
+            $(btn).click(function (e) {
+                szdwGvRp.paramJson["xmenuId"] = $("#ddlModule").data("value");
+                szdwGvRp.paramJson["assignType"] = $("#ddlAssignType").data("value");
+                szdwGvRp.paramJson["resourceTypeId"] = $("#ddlResourceType").data("value");
+
+                var pt = $("#ddlPermissionType").data("value");
+                if (pt == 1) {
+                    szdwGvRp.paramJson["resourceName"] = $("#txtResourceName").val();
+                } else {
+                    szdwGvRp.paramJson["departmentName"] = $("#txtResourceName").val();
+                }
+                szdwGvRp.DataBind();
+                e.stopPropagation();
+            });
+        }
+
+        function GetRolePermissionList() {
+            var c = $("#rightDataPanel");
+            var position = "absolute";
+            var x = 0;
+            var y = 0;
+            var w = c.width();
+            var h = c.height();
+            //创建Gridview并绑定数据
+            CreateRpGridView(c, position, x, y, w, h);
+        }
+            
+        function GetRolePermissionParamJson() {
+            var xuserId = xuserId;
+            var paramJson = { xuserId: xuserId };
+            var xmenuId = $("#ddlModule").data("value");
+            var assignType = $("#ddlAssignType").data("value");
+            var resourceTypeId = $("#ddlResourceType").data("value");
+            var resourceName = $("#txtResourceName").val();
+
+            return paramJson;
+        }
+
+        var szdwGvRp = null;
+        function CreateRpGridView(namingContainer, position, x, y, width, height) {
+            if (szdwGvRp == null || typeof (szdwGvRp) == "undefined") {
+                //创建SzdwGridViewt实例
+                szdwGvRp = new SzdwGridView(position, x, y, width, height);
+                szdwGvRp.namingContainer = namingContainer;
+                szdwGvRp.fnInitial = InitialSzdwGvRp(szdwGvRp);
+            }
+
+            //异步加载数据
+            if (szdwGvRp.pagination != null) {
+                szdwGvRp.pagination.ResetBar();
+            }
+
+            var pt = $("#ddlPermissionType").data("value");
+            var paramJson = GetRolePermissionParamJson();
+            paramJson["pageSize"] = szdwGvRp.pageSize;
+            paramJson["MethodName"] = pt == 1 ? "PermissionGetRolePermissionList" : "PermissionGetRoleDepartmentList";
+            szdwGvRp.requestUrl = "../Permission/PermissionProcess.ashx";
+            szdwGvRp.paramJson = paramJson;
+            //szdwGvRp.DataBind();
+        }
+
+        function InitialSzdwGvRp(szdwGvRp) {            
+            //个性样式设置    
+            szdwGvRp.dataPanelCssJson = { "background-color": "White", "border": "1px solid Silver"};
+            szdwGvRp.paginationCssJson = { "background-color": "White", "font-family": "微软雅黑", "font-size": "small", "border": "1px solid Silver", "border-top": "0px" };
+            szdwGvRp.minHeight = 300;
+
+            //dataPanel设置
+            szdwGvRp.hasSumRow = false;
+            szdwGvRp.hasButtonPanel = true;
+            szdwGvRp.freezeCols = 2;
+            szdwGvRp.scrollKeeingType = 1;
+
+            //head设置
+            szdwGvRp.headCssName = "gridHead2";
+            szdwGvRp.headHeight = 30;
+
+            var pt = $("#ddlPermissionType").data("value");
+            if (pt == 1) {
+                szdwGvRp.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 50 },
+                                    { "Field": "Resource", "Text": "资源名称", "Width": 200, "OrderField": "Name" },
+                                    { "Field": "ResourceType", "Text": "资源类别", "Width": 80, "OrderField": "ResourceType" },
+                                    { "Field": "RolePermission", "Text": "角色权限", "Width": 500, "FnControlColumn": CreateCellControl, "Style": { "Color": "Red"}}];
+
+                szdwGvRp.cellCssJson = {
+                    "Resource": { "text-align": "left", "font-size": "small", "font-family": "宋体" },
+                    "RolePermission": { "text-align": "left", "font-size": "small", "font-family": "宋体", "word-wrap": "break-word", "word-break": "break-all" }
+                };
+            } else {
+                szdwGvRp.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 50 },
+                                    { "Field": "Department", "Text": "部门名称", "Width": 200, "OrderField": "Department" },
+                                    { "Field": "RolePermission", "Text": "角色权限：部门权限", "Width": 530, "FnControlColumn": CreateCellControl, "Style": { "Color": "Red"}}];
+
+                szdwGvRp.cellCssJson = {
+                    "Department": { "text-align": "left", "font-size": "small", "font-family": "宋体" },
+                    "RolePermission": { "text-align": "left", "font-size": "small", "font-family": "宋体", "word-wrap": "break-word", "word-break": "break-all" }
+                };
+            }
+        }
+
+        function CreateCellControl(jsonList, cell) {
+            var pt = $("#ddlPermissionType").data("value");
+            var rowIndex = $(cell).data("rowIndex");
+            var chkJsonList = null;
+            if (pt == 1) {
+                chkJsonList = jsonList[rowIndex].RolePermissionOperationList;
+            } else {
+                chkJsonList = [{ Text: "已授权", Value: jsonList[rowIndex].Permissable }, { Text: "包含子部门", Value: jsonList[rowIndex].IsIncludingChildren}];
+            }
+
+            var c = document.createElement("div");
+            $(c).css({ "height": 25, "line-height": "25px" });
+
+            //可配置权限Operation列表
+            var chkl = CreateCheckBoxList(chkJsonList, c, pt);
+
+            //设置按钮
+            var btn = document.createElement("input");
+            $(btn).attr("type", "button").addClass("button2");
+            $(btn).css({ "float": "right", "width": 45, "height": 25 });
+            var text = "设置";
+            $(btn).val(text).appendTo(c);
+
+            //绑定事件
+            $(btn).click(function () {
+                RolePermissionSetting(rowIndex, btn, pt);
+                szdwGvRp.SetSelectedRow(cell.parentNode);
+            });
+
+            return c;
+        }
+
+        function CreateCheckBoxList(jsonList, namingContainer,permissionType) {
+            //位置宽高属性
+            var c = namingContainer;
+            var pt = permissionType;
+            var position = "relative";
+            var cw = $(c).width();
+            var ch = $(c).height();
+            var w = 0;
+            var h = ch;
+            var x = 0;
+            var y = 0;
+
+            //创建CheckBoxList
+            var szdwChkl = new SzdwCheckBoxList(position, x, y, w, h);
+            szdwChkl.namingContainer = c;
+            szdwChkl.backgroundColor = "transparent";
+            szdwChkl.opacity = 1;
+            szdwChkl.allowLeastOne = false;
+            szdwChkl.panelCssJson["float"] = "left";
+            szdwChkl.panelCssJson["color"] = "black";
+            szdwChkl.itemCssJson["padding"] = "0px 5px 0px 5px";
+            szdwChkl.itemCheckedCssJson = { "color": "red" };
+            szdwChkl.checkBoxDisabled = true;
+            if (pt == 1) {
+                szdwChkl.fieldText = "Operation";
+                szdwChkl.fieldValue = "Permissable";
+            }
+            szdwChkl.jsonList = jsonList;
+            szdwChkl.Load();
+
+            return szdwChkl;
+        }
+        
+        //角色权限弹窗
+        function RolePermissionSetting(rowIndex, targetControl, permissionType) {
+            //#region 参数paramJson
+            var pt = permissionType;
+            var t = targetControl;
+            var jsData = szdwGvRp.recordSetJson[rowIndex];
+            var roleId = szdwGvRp.paramJson["roleId"];
+            var rpList = new Array();
+            if (pt == 1) {
+                var resourceId = jsData.ResourceId;
+                var creatorId = xuserId;
+                rpList = jsData.RolePermissionOperationList;
+                for (i = 0; i < rpList.length; i++) {
+                    rpList[i]["RoleId"] = roleId;
+                    rpList[i]["ResourceId"] = resourceId;
+                    rpList[i]["CreatorId"] = creatorId;
+                }
+            } else {
+                var departmentId = jsData.DepartmentId;
+                var department = jsData.Department;
+                rpList.push({ "Text": "已授权", "Value": jsData.Permissable, "RoleId": roleId, "DepartmentId": departmentId, "CreatorId": xuserId, "Department": department });
+                rpList.push({ "Text": "包含子部门", "Value": jsData.IsIncludingChildren, "RoleId": roleId, "DepartmentId": departmentId, "CreatorId": xuserId, "Department": department });
+            }
+            //#endregion 参数paramJson
+            SzdwCommon.hideWin(document.body.exportWindow);
+            var titleSuffix = pt == 1 ? " 的功能权限" : " 的部门权限";
+            var titleText = "设置 " + szdwGvRp.paramJson["role"] + titleSuffix;
+            var pageUrl = "RolePermissionSetting.html";
+            var paramJson = rpList;
+            var w = pwWidth;
+            var h = GetPanelX("rightDataPanel", "h");
+            var x = bodyWidth - w - ml;
+            var y = GetPanelX("rightDataPanel", "y");
+            var oJson = { fnCloseCallBack: RecoverSelectedRow, hasMask: true };
+            document.body.popupWindow = SzdwCommon.openEditWindowAssignObj(document.body.popupWindow, pageUrl, paramJson, titleText, x, y, w, h, oJson);
+        }
+
+        //更新完毕后恢复行样式（无选中底色）
+        function RecoverSelectedRow() {
+            szdwGvRp.RecoverSelectedRow();
+        }
+        //#endregion
+    </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1 a {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-decoration: none;
+            color: black;
+            background-color: gainsboro;
+        }
+        .box1 a:hover,.box3 a:hover {
+            color: white;
+            background-color: orange;
+        }
+        .box2 {
+            width: 600px;
+            height: 400px;
+            background-color: #eee;
+        }
+        .box3{
+            float: left;
+            width: 200px;
+            height: 100px;
+            background-color: skyblue;
+        }
+        .box3 a{
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-decoration: none;
+            color: white;
+        }
+        .box4{
+            float: right;
+            width: 380px;
+            height:340px;
+            line-height: 300px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 30px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- html部分：两步 -->
+        <div class="box1">
+            <!-- 使用 router-link 组件来导航. -->
+            <!-- 通过传入 `to` 属性指定链接. -->
+            <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+            <router-link to="/html">我是一级路由:HTML</router-link>
+            <router-link to="/css">我是一级路由:CSS</router-link>
+        </div>
+
+        <div class="box2">
+            <!-- 路由出口: 路由匹配到的组件将渲染在这里-->
+            <router-view></router-view>
+        </div>
+    </div>
+
+    <!-- html字符串模板 -->
+    <template id="html">
+        <div>
+            <h2>这里是HTML板块</h2>
+            <div>
+                <div class="box3">
+                    <router-link to="/html/xhtml">我是二级路由:XHTML</router-link>
+                    <router-link to="/html/html5">我是二级路由:HTML5</router-link>
+                </div>
+                <router-view></router-view>
+            </div>
+        </div>
+    </template>
+
+    <!-- css字符串模板 -->
+    <template id="css">
+            <div>
+                <h2>这里是CSS板块</h2>
+                <div>
+                    <div class="box3">
+                        
+                        <!-- <router-link to="/css/css2">我是二级路由:CSS2</router-link>
+                        <router-link to="/css/css3">我是二级路由:CSS3</router-link> -->
+
+                        <!-- 如果path路径较长的话，可以使用name属性代替path，需要动态绑定to -->
+                        <router-link :to="{name:'css2'}">我是二级路由:CSS2</router-link>
+                        <router-link :to="{name:'css3'}">我是二级路由:CSS3</router-link>
+                    </div>
+                    <router-view></router-view>
+                </div>
+            </div>
+        </template>
+
+
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+    <script>
+        //定义一级组件
+        const HTML = Vue.extend({
+            template:'#html'
+        });
+        const CSS = Vue.extend({
+            template:'#css'
+        });
+        //定义二级路由组件
+        const XHTML = Vue.extend({
+            template:'<div class="box4">这里是XHTML板块</div>'
+        });
+        const HTML5 = Vue.extend({
+            template:'<div class="box4">这里是HTML5板块</div>'
+        });
+        const CSS2 = Vue.extend({
+            template:'<div class="box4">这里是CSS2板块</div>'
+        });
+        const CSS3 = Vue.extend({
+            template:'<div class="box4">这里是CSS3板块</div>'
+        });
+
+
+        // js部分：两步
+
+        //1.定义一级路由组
+        const routes = [{
+                path: '/html',
+                component: HTML,            //因为只有一个组件，所以使用component，如果有多个组件的话，必须使用components，并给每个组件命名
+                children:[                  //定义二级路由
+                    {path: 'xhtml',component: XHTML},
+                    {path: 'html5',component: HTML5},
+                    {path: '/',redirect: 'xhtml'},    //设置默认二级路由路径
+                ]
+            },
+            {
+                path: '/css',
+                component: CSS,
+                // children:[                  //定义二级路由
+                //     {path: 'css2',component: CSS2},
+                //     {path: 'css3',component: CSS3},
+                //     {path: '/',redirect: 'css2'},    //设置默认二级路由路径
+                // ]
+                // 如果path路径较长的话，可以使用name属性代替path
+                children:[                  //定义二级路由
+                    {path: 'css2',name:'css2',component: CSS2},
+                    {path: 'css3',name:'css3',component: CSS3},
+                    {path: '/',redirect: 'css2'},    //设置默认二级路由路径
+                ]
+            },
+            {path: '/',redirect: '/html'},    //设置默认一级路由路径
+        ];
+
+        // 2.创建路由实例（即创建路由管理器：router）
+        const router = new VueRouter({
+            routes              //ES6中routes: routes可以简写为 routes
+        });
+
+        // 3.挂载根实例
+        new Vue({
+            router
+        }).$mount("#app");
+        //或者原来的写法也可以
+        // new Vue({
+        //     el:"#app",
+        //     router
+        // })
+    </script>
+
+</body>
+
+</html>

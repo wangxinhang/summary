@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <script>
+        var sum = 0;
+        var k = 0;
+        for (var i = 100; i < 1000; i++) {
+            var j = String(i);
+            if (j[0] * j[0] * j[0] + j[1] * j[1] * j[1] + j[2] * j[2] * j[2] == j) {
+                document.write("水仙花数：" + j + "<br />");
+                sum += Number(j);
+                k++;
+            }
+        }
+        document.write("水仙花个数：" + k + "<br />");
+        document.write("水仙花数总和：" + sum + "<br />" +  "<br />");
+        for (var i = 1000; i < 10000; i++) {
+            var j = String(i);
+            if (j[0] * j[0] * j[0] * j[0] + j[1] * j[1] * j[1] * j[1] + j[2] * j[2] * j[2] * j[2] + j[3] * j[3] * j[3] *j[3] == j) {
+                document.write("四叶玫瑰数：" + j + "<br />");
+            }
+        }
+    </script>
+</body>
+
+</html>

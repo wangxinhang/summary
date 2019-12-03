@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="../../Styles/query.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/show.css" rel="stylesheet" type="text/css" />
+    <link href="../../Styles/ScrollBar.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <style type="text/css">
+        input::-ms-clear {
+            display: none;
+        }
+    </style>
+</head>
+<body style="font-family:微软雅黑;font-size:13px;">
+    <div style="overflow:hidden;margin:5px;border:solid 0px silver;overflow:auto">
+        <div id="divExpireEquipment" style="height:290px;margin:0;padding:0;overflow-x:hidden;"></div>
+    </div>
+    <script type="text/javascript">
+        //#region 全局变量
+        var xuserId, permission = null;
+        var bodyWidth = $(document).width();
+        var ml = 10; mt = 10; btnHeight = 32; btnPanelHeight = 35;
+        var panelWidth = bodyWidth - ml * 2;
+        var info, id;
+        //#endregion
+        $(document).ready(function () {
+            xuserId = parent.xuserId;
+            getExpireEquipment();
+        });
+
+        function getExpireEquipment() {
+            $.ajax({
+                url: "../Analyze/AnalyzeHandler.ashx",
+                type: "post",
+                data: {
+                    xuserId: xuserId,
+                    MethodName: "GetExpireEquipment"
+                },
+                dataType: "json",
+                success: function (jsData) {
+                    if (jsData instanceof Array) {
+                        refreshData(jsData);
+                    }
+                }
+            });
+        }
+
+        function refreshData(list) {
+            var len = list.length;
+            var strHeader = "<div"
+            if (list.length <= 7) {
+                strHeader += " class=\"table-body\" "
+                if (list.length == 0) {
+                    strHeader += "style=\"height:31px;border-top:1px dotted #ccc;border-right:1px dotted #ccc;overflow-y:none;\">"
+                }
+                else {
+                    strHeader += "style=\"height:31px;border-top:1px dotted #ccc;border-right:1px dotted #ccc;overflow-y:none;\">"
+                }
+            }
+            else {
+                strHeader += " class=\"table-head\" "
+                strHeader += "style=\"height:31px;border-top:1px dotted #ccc;border-right:1px dotted #ccc;overflow-y:auto;\">"
+            }
+
+            strHeader += "<table class='grid' style=\"margin-top:-3px;\">";
+            strHeader += "<colgroup>";
+            strHeader += "<col style=\"width: 40px;\" /><col style=\"width: 140px;\" /><col style=\"width: 60px;\" /><col style=\"width: 80px;\" />";
+            strHeader += "<col style=\"width: 80px;\" /><col style=\"width: 100px;\" /><col style=\"width: 80px;\" />";
+            strHeader += "</colgroup>";
+            strHeader += "<tr>";
+            strHeader += "<td width='40px' style=\"text-align:center;\">序号</td><td width='140px' style=\"text-align:center;\">煤矿</td><td width='60px' style=\"text-align:center;\">预警状态</td><td width='80px' style=\"text-align:center;\">设备编号</td>";
+            strHeader += "<td width='80px' style=\"text-align:center;\">设备类型</td><td width='100px' style=\"text-align:center;\">安装地点</td><td width='80px' style=\"text-align:center;\">有效期止</td>";
+            strHeader += "</tr></table></div>";
+            strHeader += "<div class=\"table-body\" style=\"height:250px;border-top:1px dotted #ccc;border-bottom:1px dotted #ccc;border-left:1px dotted #ccc;border-right:1px dotted #ccc;overflow-y:auto;\">"
+            strHeader += "<table class='grid' style=\"margin-top:-3px;\">";
+            strHeader += "<colgroup>";
+            strHeader += "<col style=\"width: 40px;\" /><col style=\"width: 140px;\" /><col style=\"width: 60px;\" /><col style=\"width: 80px;\" />";
+            strHeader += "<col style=\"width: 80px;\" /><col style=\"width: 100px;\" /><col style=\"width: 80px;\" />";
+            strHeader += "</colgroup>";
+            var str = "";
+            for (var i = 0; i < len; i++) {
+                var item = list[i]
+                str = "<tr>";
+                str += "<td><div style=\"width:40px;padding-left:3px;\">" + item.RowNumber + "</div></td>";
+                str += "<td><div style=\"width: 140px;\">" + item.MineName + "</div></td>";
+                switch (item.RunStatus) {
+                    case -1:
+                        s = "<span style=\"color:red;\"><b>逾期</b></span>";
+                        break;
+                    case 0:
+                        s = "<span style=\"color:green;\">正常</span>"
+                        break;
+                    case 1:
+                        s = "<span style=\"color:orange;\">一级预警</span>"
+                        break
+                    case 2:
+                        s = "<span style=\"color:orange;\">二级预警</span>"
+                        break
+                    case 3:
+                        s = "<span style=\"color:orange;\">三级预警</span>"
+                        break
+                }
+                str += "<td><div style=\"width: 60px;\">" + s + "</div></td>";
+                str += "<td><div style=\"width: 80px;\">" + item.ModelNumber + "</div></td>";
+                str += "<td><div style=\"width: 80px;\">" + item.EquipmentType + "</div></td>";
+                str += "<td><div style=\"width: 100px;\">" + item.UsingLocation + "</div></td>";
+                str += "<td><div style=\"width: 80px;\">" + item.ValidEndDate.substring(0, item.ValidEndDate.indexOf("T")) + "</div></td>";
+                str += "</tr>";
+                strHeader += str;
+            }
+            strHeader += "</table>"
+            $("#divExpireEquipment").html(strHeader);
+        }
+    </script>
+</body>
+</html>

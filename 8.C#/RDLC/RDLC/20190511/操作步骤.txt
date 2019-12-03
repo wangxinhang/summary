@@ -1,0 +1,6 @@
+1.新建表tblContract、tblContractDepartment
+2.打开表设计 把主键去掉  导入Excel数据
+3.导入之后恢复表设计
+4.分别添加Model、IDAL、DAL\DALFactory\BLL\WEB层文件
+5.添加资源 ../Contract/ContractSubtotalQuery.html
+添加资源对应的菜单 合同统计  菜单与资源关联  设置可以查询的权限

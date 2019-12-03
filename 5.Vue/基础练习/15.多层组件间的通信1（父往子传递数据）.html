@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="box">
+        <!-- 父组件有参数，所以要传值 ，而且全部要动态绑定传值！！！！-->
+        <mybox :msg="msgs" :src="srcs"></mybox>
+    </div>
+
+    <!-- 组件模板1 -->
+    <template id="my-div1">
+        <div>
+            <h2>{{h2msg}}</h2>
+        </div>
+    </template>
+    <!-- 组件模板2 -->
+    <template id="my-div2">
+        <div>
+            <img :src="imgsrc" alt="">
+        </div>
+    </template>
+    <!-- 父组件模板 -->
+    <template id="my-div0">
+        <div>
+            <!-- 子组件有参数，所有要传值，定义两个父组件的参数“msg”，“src” ，用来传值，而且全部要动态绑定传值！！！！-->
+            <div1 :h2msg="msg"></div1>
+            <div2 :imgsrc="src"></div2>
+        </div>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        // 1.子组件实例化
+        let Child1 = Vue.extend({
+            template: "#my-div1",
+            props: ["h2msg"]
+        });
+        let Child2 = Vue.extend({
+            template: "#my-div2",
+            props: ["imgsrc"]
+        });
+
+        //2.父组件实例化
+        Vue.component("mybox", {
+            components: {
+                "div1": Child1,
+                "div2": Child2,
+            },
+            template: "#my-div0",
+            props: ["msg", "src"]
+
+        });
+
+        //实例化
+        new Vue({
+            el: "#box",
+            data: {
+                msgs: "你好",
+                srcs: "img/20190130201555.jpg"
+            }
+        })
+    </script>
+    <script>
+        // 父往子传递数据，类似于父函数往子函数传参
+        function fn(a, b) {
+            var c = a;
+            var d = b;
+
+            function fn1(c) {
+                console.log(c);
+            }
+
+            function fn2(d) {
+                console.log(d);
+            }
+            return {
+                func1: fn1,
+                func2: fn2,
+            }
+        }
+        fn(1, 2).func1(1);
+        fn(1, 2).func2(2);
+    </script>
+</body>
+
+</html>

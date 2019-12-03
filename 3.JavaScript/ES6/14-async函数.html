@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+
+            //返回值为非Promise 对象，它也可以跟其他值，如字符串，布尔值，数值以及普通函数。
+            async function testAwait() {
+                function GG(param) {
+                    setTimeout(() => {
+                        console.log("testAwait    1");
+                    }, 1000);
+                }
+                await GG()
+            }
+            async function helloAsync() {
+                await testAwait();
+                console.log("helloAsync   2");
+            }
+
+            helloAsync();
+            // testAwait
+            // helloAsync
+
+            //返回值为Promise对象：await 会暂停执行，等待 Promise 对象 resolve，然后恢复 async 函数的执行并返回解析值。
+            function testAwait1(x) {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        resolve(x);
+                    }, 2000);
+                });
+            }
+
+            async function helloAsync1() {
+                var x = await testAwait1("hello world");
+                console.log(x);
+            }
+            helloAsync1();
+            // hello world
+        }
+    </script>
+</body>
+
+</html>

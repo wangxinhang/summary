@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1 a{
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-decoration: none;
+            color: black;
+        }
+        .box1 a:hover{
+            color: white;
+            background-color: orange;
+        }
+        .box2 {
+            width: 400px;
+            height: 400px;
+            background-color: #eee;
+        }
+        .box3,.box4{
+            width: 400px;
+            height: 400px;
+            text-align: center;
+            line-height: 400px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    <!-- html部分：两步 -->
+        <div class="box1">
+            <!-- 使用 router-link 组件来导航. -->
+            <!-- 通过传入 `to` 属性指定链接. -->
+            <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+            <router-link to="/html">我是一级路由，html</router-link>
+            <router-link to="/css">我是一级路由，css</router-link>
+        </div>
+ 
+        <div class="box2">
+            <!-- 路由出口: 路由匹配到的组件将渲染在这里-->
+            <router-view></router-view>
+        </div>
+
+    </div>
+
+    <script src="vue.js"></script>
+    <script src="vue-router.js"></script>
+    <script>
+        //定义组件
+        const Foo = {template: '<div class="box3">这里是HTML板块</div>'}
+        const Bar = {template: '<div class="box4">这里是CSS板块</div>'}
+        // js部分：两步
+        //1.定义路由组routes（单个路由则是route）
+        const routes = [
+            {path: '/html',component: Foo},
+            {path: '/css',component:Bar},
+            {path: '/',redirect: '/html'},    //默认路由路径
+        ];
+
+        // 2.创建路由实例
+        const router = new VueRouter({
+            routes                          //ES6中routes: routes可以简写为 routes
+        });
+
+        // 3.挂载根实例
+        new Vue({
+            router
+        }).$mount("#app");
+        //或者原来的写法也可以
+        // new Vue({
+        //     el:"#app",
+        //     router
+        // })
+    </script>
+
+</body>
+
+</html>

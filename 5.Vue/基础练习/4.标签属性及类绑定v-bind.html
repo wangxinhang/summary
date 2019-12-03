@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .img{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img v-bind:src="src"  :alt="alt" :class="class1"></img>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#box",
+            data:{
+                src:"img/xmad_15410599445473_Ivjsb.jpg",
+                alt:"小米图片",
+                class1:"img"
+            }
+        })
+    </script>
+</body>
+</html>

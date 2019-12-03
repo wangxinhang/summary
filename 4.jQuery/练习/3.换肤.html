@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        button {
+            margin-left: 500px;
+        }
+
+        #top {
+            height: 20%;
+            width: 100%;
+            background-color: pink;
+            display: none;
+
+        }
+
+        #top ul {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            background-color: rebeccapurple;
+            zoom: 1;
+        }
+
+        #top ul::after {
+            content: "";
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+
+        #top ul li {
+            list-style: none;
+            float: left;
+            margin: 20px;
+        }
+
+        #top ul li a img {
+            vertical-align: top;
+            width: 100px;
+            height: 150px;
+        }
+
+        #bottom {
+            width: 100%;
+            height: 800px;
+            background: url(../js练习/基础练习/image/1.jpg) no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+    <button>切换</button>
+    <div id="top">
+        <ul>
+            <li><a href="#"><img src="../js练习/基础练习/image/1.jpg" alt=""></a></li>
+            <li><a href="#"><img src="../js练习/基础练习/image/2.jpg" alt=""></a></li>
+            <li><a href="#"><img src="../js练习/基础练习/image/3.jpg" alt=""></a></li>
+            <li><a href="#"><img src="../js练习/基础练习/image/4.jpg" alt=""></a></li>
+            <li><a href="#"><img src="../js练习/基础练习/image/5.jpg" alt=""></a></li>
+        </ul>
+    </div>
+    <div id="bottom"></div>
+</body>
+
+</html>
+<script src="jquery/jquery-3.1.1.js"></script>
+<script>
+    $(function () {
+        $("button").click(function () {
+            $("#top").slideToggle();
+        });
+        $("img").click(function () {
+            $("#bottom").css("backgroundImage", "url(" + $(this).attr("src") + ")");
+        });
+    })
+</script>

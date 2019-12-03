@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #container {
+            width: 400px;
+            margin: 100px auto;
+        }
+
+        #container ul {
+            list-style: none;
+            zoom: 1;
+        }
+
+        #container ul::after {
+            contain: ".";
+            height: 0px;  
+            clear: both;
+            visibility: hidden;
+            display: block;
+        }
+
+        #container ul li {
+            float: left;
+            width: 100px;
+            height: 50px;
+            background-color: yellowgreen;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+        }
+
+        #container ul li.current {
+            background-color: pink;
+            border-bottom: 3px solid red;
+            box-sizing: border-box;
+        }
+
+        #box {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
+
+        #box div {
+            width: 400px;
+            height: 400px;
+            text-align: center;
+            line-height: 400px;
+            font-size: 40px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <ul>
+            <li class="current">选项卡1</li>
+            <li>选项卡2</li>
+            <li>选项卡3</li>
+            <li>选项卡4</li>
+        </ul>
+        <div id="box">
+            <div style="display: block;">你</div>
+            <div>在</div>
+            <div>干</div>
+            <div>嘛</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var allLis = document.getElementsByTagName("li");
+    var allBoxs = document.getElementById("box").children;
+
+    for (var i = 0; i < allLis.length; i++) {
+
+        // 执行事件前，先将i赋值给lis的index属性
+        allLis[i].index = i;
+        allLis[i].onmouseover = function () {
+            // 执行语句前，先把所有的类名等清空
+            for (var i = 0; i < allLis.length; i++) {
+                allLis[i].className = "";
+                allBoxs[i].style.display = "none";
+            }
+            this.className = "current";
+            allBoxs[this.index].style.display = "block";
+        }
+    }
+
+    // for (let i = 0; i < allLis.length; i++) {
+
+    //     allLis[i].onmouseover = function () {
+    //         // 执行语句前，先把所有的类名等清空
+    //         for (let i = 0; i < allLis.length; i++) {
+    //             allLis[i].className = "";
+    //             allBoxs[i].style.display = "none";
+    //         }
+    //         this.className = "current";
+    //         allBoxs[i].style.display = "block";
+    //     }
+    // }
+
+    // for (let i = 0; i < 5; i++) {
+    //     setTimeout(function () {  
+    //         console.log(i);
+    //     },i*1000);
+    //     // console.log(i);
+    // }
+
+    // setTimeout(() => {
+    //     task();
+    // },3000)
+    // console.log('执行console');
+
+    // function task() {  
+    //     console.log(1);
+    // }
+
+
+    // var obj = { a:1, b:2 };
+    // // console.log(obj.a);
+    // obj.d = 3;
+    // console.log(obj.d);
+
+// for (var i = 0; i < 5; i++) {
+//     console.log(i);
+// }
+
+var a = 1;
+
+function fn() {  
+    var a = 0;
+    a+=1;
+    console.log(a);
+}
+fn();
+
+// console.log(a);
+</script>

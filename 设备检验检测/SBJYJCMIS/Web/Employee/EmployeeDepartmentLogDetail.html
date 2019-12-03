@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwGridView.js" type="text/javascript"></script>
+    <link href="../SzdwControls/SzdwGridView.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <script type="text/javascript">
+
+        //#region 全局变量
+        var xuserId, xmenuId, permission = null; //用户及权限：json格式 
+        var bodyWidth = $(document.body).width();
+        var bodyHeight = $(document).height();
+        var ml = 10; mt = 10; themeColor = parent.themeColor; //ml:margin-left;mt:margin-top;
+        var btnWidth = 90; btnHeight = 25; btnImageWidth = 25; //btnWidth:按钮宽;btnHeight:按钮高;btnImageWidth:按钮图片宽
+        var panelWidth = bodyWidth - ml * 2; //面板宽度       
+        var panelMinWidth = 700; pwWidth = 320; //面板最小宽度及弹窗宽度
+
+        var oldDepartmentId;
+        var newDepartmentId;
+        //#endregion 全局变量
+
+        //#region 网页加载时事件//
+
+        //#region 初始加载
+
+        $(document).ready(function () {
+            xuserId = parent.xuserId;
+            //获取结果
+            GetQueryResult();
+
+            //窗口调整大小
+            $(window).resize(function () {
+                var opw = parent.document.body.opDepartmentDetail;
+                var body = document.body;
+                bodyWidth = $(body).width();
+                bodyHeight = opw.pagePanelHeight;
+                panelWidth = bodyWidth - ml * 2;
+
+                ResizeControls();
+                RepositionControls();
+            });
+        });
+
+        //#endregion 初始加载
+
+        //#region 重设位置尺寸
+
+        //重设网页元素位置
+        function RepositionControls() {
+            var t = document.body;
+            var bw = $(t).width();
+            var bh = $(t).height();
+
+            //重设弹窗位置
+            var pw = t.popupWindow;
+            if (pw) {
+                var w = pw.width;
+                var x = bw - w - 2;
+                var y = 2;
+                pw.RePosition(x, y);
+            }
+        }
+
+        //重设网页元素尺寸
+        function ResizeControls() {
+
+            var dh = bodyHeight;
+            var dw = bodyWidth;
+            var panelWidth = dw - ml * 2;
+            var pw = Math.max(panelWidth, panelMinWidth);
+
+
+            //结果集
+            if (szdwGv) {
+                var w = pw;
+                var sw = pw + 2 * ml+2;
+                var y = 0;
+                var h = dh;
+                szdwGv.Resize(sw, h);
+            }
+
+            var t = document.body;
+
+            //重设弹窗尺寸
+            var pw = t.popupWindow;
+            if (pw) {
+                var w = pw.width;
+                var h = dh-4;
+                pw.ReSize(w, h);
+            }
+        }
+        //#endregion 重设位置尺寸
+
+        //#endregion 网页加载时事件
+
+        //#region 单击按钮事件
+        function GetQueryResult() {
+
+            //获取父容器及其相关属性
+            var c = document.body;
+            var bw = $(document.body).width();
+            var bh = $(document).height();
+            var position = "relative";
+            var x = 0;
+            var y = 0;
+            var w = bodyWidth;
+            var h = bodyHeight;
+
+            //创建Gridview并绑定数据
+            CreateArGridView(c, position, x, y, w, h);
+        }
+        //#endregion 单击按钮事件
+
+        //#region 创建Gridview并绑定数据
+        var szdwGv = null;
+        function CreateArGridView(namingContainer, position, x, y, width, height) {
+            if (szdwGv == null || typeof (szdwGv) == "undefined") {
+                //创建SzdwGridViewt实例
+                szdwGv = new SzdwGridView(position, x, y, width, height);
+                szdwGv.namingContainer = namingContainer;
+                szdwGv.fnInitial = InitialArGridview(szdwGv);
+            }
+
+            //异步加载数据
+            if (szdwGv.pagination != null) {
+                szdwGv.pagination.ResetBar();
+            }
+
+            var paramJson = $.parseJSON(SzdwCommon.getUrlParam("paramJson"));
+            paramJson["MethodName"] = "EmployeeDepartmentLogGetList";
+            szdwGv.requestUrl = "CollectEmployeeDepartmentLog.ashx";
+            szdwGv.paramJson = paramJson;
+            szdwGv.DataBind();
+        }
+        //#endregion 创建Gridview并绑定数据
+
+        //#region 初始化Gridview
+        function InitialArGridview(szdwGv) {
+            //分页设置
+            szdwGv.hasPagination = false
+            szdwGv.hasSumRow = false;
+            szdwGv.dataPanelCssJson = { "border": "0px", "background-color": "White" };
+            szdwGv.paginationCssJson = { "background-color": "White", "font-family": "微软雅黑", "font-size": "small", "border": "1px solid Silver", "border-top": "0px" };
+
+            //            szdwGv.hasOperationColumn = true;
+            //            szdwGv.permission.deletePermission = true;
+
+            //数据列表表头字段样式
+            szdwGv.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 35 },
+                                    { "Field": "Employee", "Text": "人员姓名", "Width": 75, "OrderField": "Employee" },
+                                    { "Field": "OldDepartment", "Text": "原单位", "Width": 150, "OrderField": "OldDepartment" },
+                                    { "Field": "NewDepartment", "Text": "现单位", "Width": 150, "OrderField": "NewDepartment" },
+                                    { "Field": "Reason", "Text": "调动原因", "Width": 150, "OrderField": "Reason" },
+                                    { "Field": "Date", "Text": "调动日期", "Width": 100, "OrderField": "Date", "FieldType": szdwGv.fieldType.Date },
+                                    { "Field": "AdjustmentProcedure", "Text": "调动过程", "Width": 250, "OrderField": "AdjustmentProcedure" },
+                                    { "Field": "Memo", "Text": "调动描述", "Width": 80, "OrderField": "Memo" },
+                                    { "Field": "Opration", "Text": "操作", "Width": 75, "FnControlColumn": CreateCellControl }];
+
+            //数据列表数据行单元格样式
+            szdwGv.cellCssJson = {
+                "Reason": { "text-align": "left" },
+                "AdjustmentProcedure": { "text-align": "left" },
+                "Memo": { "text-align": "left" }
+            };
+        }
+        //#endregion 初始化Gridview
+
+        //#region 自定义控件列
+        //#region 设置控件
+        function CreateCellControl(jsonList, cell) {
+            var rowIndex = $(cell).data("rowIndex");
+            var jsonDataList = jsonList[rowIndex];
+            var IsCanUpdate = jsonDataList.IsCanUpdate;
+            var disabled = IsCanUpdate == 0 ? true : false;
+
+            var c = document.createElement("div");
+            var edit = document.createElement("div");
+            $(c).css({ "height": 25, "line-height": "25px", "float": "center"});
+
+            //可配置权限Operation列表
+            var editImg = document.createElement("image");
+//            $(editImg).attr("type", "image");
+            $(editImg).attr("src", "../SzdwControls/Image/gridview/edit21b.png").css({ "width": 21, "border": "0px solid Silver", "margin-top": "1px", "padding": "0px 0px 0px 0px" });
+           
+            
+            var btn = document.createElement("input");
+            $(btn).attr("type", "button").attr("disabled", disabled);
+            $(btn).addClass("button2").css({ "float": "right", "height": 24, "border-style": "none none solid none", "width": 35, "background-color": "transparent", "padding": "0px 0px 0px 0px", "margin-left": "0px", "border-bottom": "0px", "line-height": "26px" }).val("编辑");
+           
+            $(edit).addClass("button2").css({ "height": 24, "line-height": "25px", "float": "center",  "border": "1px solid Silver" });
+            $(edit).append(editImg).append(btn);
+            var editColor = disabled == true ? "#D4D4D4" : "";
+            $(edit).css({ "background-color": editColor });
+            var btnColor = disabled == true ? "#FCFCFC" : "#1B60C3";
+            $(btn).css({ "color": btnColor });
+
+            $(c).append(edit);
+
+            //绑定事件
+            $(edit).click(function () {
+                if (disabled) {
+                }
+                else {
+                    EmployeeDepartmentLogUpdate(rowIndex);
+                }
+            });
+
+            return c;
+        }
+
+        //#endregion 设置控件
+
+        //#endregion 自定义控件列        
+
+        //#region 数据操作：增删改
+
+        //编辑
+        function EmployeeDepartmentLogUpdate(rowIndex) {
+            var jsData = szdwGv.recordSetJson[rowIndex];
+            if (jsData != null) {
+                szdwGv.SetSelectedRow(szdwGv.bodyRows[rowIndex]);
+
+                var oldDepartment = jsData.OldDepartment;
+                var employeeId = jsData.EmployeeId;
+                var employee = jsData.Employee;
+
+                oldDepartmentId = jsData.OldDepartmentId;
+                newDepartmentId = jsData.NewDepartmentId;
+                var date = jsData.Date.substring(0, 10);
+                var body = document.body;
+                var bw = $(body).width();
+                //                var bh = $(body).height();
+                var titleText = "编辑人员单位调动信息"
+                var pageUrl = "EmployeeDepartmentLogUpdate.html";
+                var paramJson = { id: jsData.Id, oldDepartment: oldDepartment, newDepartmentId: jsData.NewDepartmentId, newDepartment: jsData.NewDepartment, employeeId: employeeId, employee: employee, date: date, reason: jsData.Reason, modifierId: xuserId
+                };
+
+                var w = 300;
+                var h = bodyHeight-4;
+                var x = bw - w - 2;
+                var y = 2;
+                var hasAnimation = false;
+                var oJson = { fnCloseCallBack: RecoverSelectedRow };
+                SzdwCommon.openPopupWindow(titleText, pageUrl, paramJson, x, y, w, h, oJson);
+            }
+        }
+
+        //更新完毕后恢复行样式（无选中底色）
+        function RecoverSelectedRow() {
+            szdwGv.RecoverSelectedRow();
+        }
+
+        //#endregion 数据操作：增删改
+
+        //#region 数据操作提示信息面板
+        var opInfoPanel = null;
+        function CreateOperateInfoPanel() {
+            opInfoPanel = SzdwCommon.createOperateInfoPanel({ backColor: themeColor, namingContainer: document.body });
+            return opInfoPanel;
+        }
+        //#endregion 数据操作提示信息面板
+
+        //#endregion 查询结果 
+    </script>
+</body>
+</html>

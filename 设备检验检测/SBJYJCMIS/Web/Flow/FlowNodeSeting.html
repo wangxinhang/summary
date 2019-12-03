@@ -1,0 +1,503 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../Styles/Page.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/Query.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwCommon.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwDropDownList.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButtonGroup.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwGridView.js" type="text/javascript"></script>
+    <link href="../SzdwControls/SzdwGridView.css" rel="stylesheet" type="text/css" />
+    <script src="../SzdwControls/SzdwPagination.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButton.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwPopupWindow.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwButtonGroup.js" type="text/javascript"></script>
+    <script src="../SzdwControls/SzdwTabButtonList.js" type="text/javascript"></script>
+    <link href="Flow.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        input::-ms-clear
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body style="background-color:white">
+    <form>
+    <div id="flowPanel" class="flowPanel" >
+        <div id="queryPanel">
+            <div id="search" style=" height: 35px;">
+                <div id="assign" style="height: 25px;  float: left;">
+                </div>
+                <div id="cellCp00" class="cellDiv" style="margin-left: 50px;border: 1px solid Silver; border-right:0px;">
+                    <input id="txtIcon" type="text" class="textBox2" style="width: 150px; height: 25px;
+                        border-right: 0px;border: none;" />
+                </div>
+                <div id="cellCp01" class="cellDiv" style="padding-left: 0px; border-left: 0px; 
+                    height: 25px;">
+                </div>
+            </div>
+        </div>
+        <div id="dataPanel"> </div>
+    </div>
+    </form>
+    <script type="text/javascript">
+        //#region 全局变量
+        var szdwDdl;
+        var permission = null, xuserId, flowId; //用户权限：json格式 
+        var bodyWidth = $(document.body).width();
+        var bodyHeight = $(document.body).height();
+        var ml = 10; mt = 10; 
+        var btnWidth = 90; btnHeight = 25; btnImageWidth = 25; //btnWidth:按钮宽;btnHeight:按钮高;btnImageWidth:按钮图片宽
+        var panelWidth = 800; // bodyWidth - ml * 2; //面板宽度       
+        var panelMinWidth = 800; //面板最小宽度        
+        var assignTypeId = 0;
+        //#endregion 全局变量
+
+        //#region 网页加载 
+
+        //#region 初始加载
+        $(document).ready(function () {
+
+            //获取用户Id和FlowId
+            xuserId = GetXuserId();
+            flowId = GetFlowId();
+
+            //设置查询面板
+            SetQueryPanel();
+
+            //#region 流程设置
+            SetDataPanel();
+            //#endregion 流程设置
+
+            //窗口调整大小
+            $(window).resize(function () {
+                var body = document.body;
+                bodyWidth = $(body).width();
+                bodyHeight = $(body).height();
+                panelWidth = bodyWidth - ml * 2;
+                RepositionControls();
+                ResizeControls();
+            });
+        });
+        //#endregion 初始加载
+
+        //#region 重设元素位置尺寸
+
+        //#region 重设位置尺寸
+        //重设网页元素位置
+        function RepositionControls() {
+            //重设弹窗位置
+            var t = document.body;
+            var pw = t.popupWindow;
+            if (pw) {
+                var bw = $(t).width();
+                var w = pw.width;
+                var x = bw - w - ml - 2;
+                var y = pw.y;
+                pw.RePosition(x, y);
+            }
+        }
+
+        //重设网页元素尺寸
+        function ResizeControls() {
+            var dh = bodyHeight;
+            var pw = Math.max(panelWidth, panelMinWidth);
+            var qx = GetQueryPanelX();
+            var qy = GetQueryPanelY();
+            var qw = GetQueryPanelWidth();
+            var qh = GetQueryPanelHeight();
+
+            var q = $("#queryPanel");
+            if (q) {
+                $(q).outerWidth(pw);
+            }
+
+            //结果集
+            if (szdwGv) {
+                var w = pw;
+                var y = qy + qh;
+                var h = dh - y;
+
+                $("#dataPanel").outerWidth(pw).outerHeight(h);
+                szdwGv.Resize(w, h);
+            }
+
+            //重设弹窗尺寸
+            var t = document.body;
+            var pw = t.popupWindow;
+            if (pw) {
+                var w = pw.width;
+                var h = $(dataPanel).height() - 4;
+                pw.ReSize(w, h);
+            }
+        }
+        //#endregion 重设位置尺寸
+
+        //#region 获取查询面板位置尺寸
+        //获取查询面板宽度
+        function GetQueryPanelWidth() {
+            var p = $("#queryPanel");
+            return $(p).css("display") == "none" ? 0 : $(p).outerWidth(true);
+        }
+
+        //获取查询面板高度
+        function GetQueryPanelHeight() {
+            var p = $("#queryPanel");
+            return $(p).css("display") == "none" ? 0 : $(p).outerHeight(true);
+        }
+
+        //获取查询面板纵坐标
+        function GetQueryPanelY() {
+            var p = $("#queryPanel");
+            return $(p).css("display") == "none" ? 0 : $(p).offset().top;
+        }
+
+        //获取查询面板横坐标
+        function GetQueryPanelX() {
+            var p = $("#queryPanel");
+            return $(p).offset().left;
+        }
+        //#endregion 获取查询面板位置尺寸              
+
+        //#endregion 重设元素尺寸
+
+        //#endregion 网页加载
+
+        //#region 用户权限
+        //获取用户Id
+        function GetXuserId() {
+            return $.parseJSON(SzdwCommon.getUrlParam("paramJson")).xuserId;
+
+        }
+        //获取菜单ID:xMenuId
+        function GetFlowId() {
+            return $.parseJSON(SzdwCommon.getUrlParam("paramJson")).flowId;
+        }
+        //获取导出打印权限
+        function GetExportPrintPermission() {
+            var xUserId = xuserId;
+            var xMenuId = xmenuId;
+            var url = "../Permission/XuserPermissionProcess.ashx";
+            var paramJson = { xUserId: xUserId, xMenuId: xMenuId, MethodName: "GetXUserPermission" };
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json", async: false,
+                success: function (jsData) {
+                    if (!$.isEmptyObject(jsData)) {
+                        permission = jsData;
+                        ShowExportButton();
+                        ShowSubtotalButton();
+                    }
+                }
+            });
+        }
+        //#endregion 用户权限
+
+        //#region 流程面板
+        //#region 设置查询面板
+        function SetQueryPanel() {
+            var q = $("#queryPanel");
+            var w = Math.max(panelWidth, panelMinWidth);
+            $(q).outerWidth(w);
+
+            //设置角色添加类别按钮组
+            CreateRoleInsertTypeList();
+
+            //设置角色名称查询按钮组
+            CreateIconButton();
+
+        }
+        //#endregion 设置查询面板 
+
+        //获取导出打印权限
+        function GetPermission() {
+            var xUserId = xuserId();
+            var xMenuId = GetXMenuId();
+            var url = "../Permission/XuserPermissionProcess.ashx";
+            var paramJson = { xUserId: xUserId, xMenuId: xMenuId, MethodName: "GetXUserPermission" };
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json", async: false,
+                success: function (jsData) {
+                    if (!$.isEmptyObject(jsData)) {
+                        permission = jsData;
+                        //显示 新增、编辑和删除当前按钮
+                        ShowDeleteButton();
+                        ShowModifyButton();
+                        ShowInsertButton();
+                    }
+                }
+            });
+        }
+
+        //#region 设置图标按钮
+        var szdwIconButton = null;
+        function CreateIconButton() {
+            var nc = $("#cellCp01");
+            var p = "relative";
+            var x = 0;
+            var y = 0;
+            var w = 0;
+            var h = 27;
+            szdwIconButton = new SzdwButton(p, x, y, w, h);
+            szdwIconButton.namingContainer = nc;
+            szdwIconButton.imageWidth = 25;
+            szdwIconButton.imageHeight = 25;
+            szdwIconButton.image = "../Image/query20b.png";
+            szdwIconButton.title = "角色名称查询";
+            szdwIconButton.Load();
+
+            //单击事件
+            var btn = szdwIconButton.button;
+            $(btn).click(function (e) {
+                var paramJson = GetParamJson();
+                paramJson["pageSize"] = szdwGv.pageSize;
+                paramJson["MethodName"] = "FlowNodeRoleGetList";
+                szdwGv.requestUrl = "FlowNodeProcess.ashx";
+                szdwGv.paramJson = paramJson;
+                szdwGv.DataBind();
+
+                e.stopPropagation();
+            });
+        }
+
+        //#endregion 创建按钮面板
+        //#endregion 流程面板
+
+        //#region 角色是否添加流程节点结果列表
+
+        var RoleInsertTypeList = null;
+        function CreateRoleInsertTypeList() {
+            var nc = $("#assign");
+            var tabBtnJsonList = [{ Text: "全部", Value: 0, FnClick: CstRefeshData }, { Text: "已添加", Value: 1, FnClick: CstRefeshData },
+                                  { Text: "未添加", Value: 2, FnClick: CstRefeshData}];
+            var position = "relative";
+            var x = mt;
+            var y = 0;
+            var h = 0;
+            RoleInsertTypeList = new SzdwTabButtonList(position, 10, 0, 40);
+            RoleInsertTypeList.namingContainer = nc;
+            RoleInsertTypeList.btnWidth = 40;
+            RoleInsertTypeList.btnJsonList = tabBtnJsonList;
+            RoleInsertTypeList.panelCssJson["float"] = "left";
+            RoleInsertTypeList.panelCssJson["padding-left"] = "1px";
+            RoleInsertTypeList.btnCssJson["margin-left"] = "-1px";
+            RoleInsertTypeList.btnSelectedCssJson["margin-left"] = "-1px";
+            RoleInsertTypeList.btnSelectedCssJson["background-color"] = "#D0D0D0";
+            RoleInsertTypeList.btnSelectedCssJson["border-color"] = "#D0D0D0";
+            RoleInsertTypeList.btnSelectedCssJson["color"] = "";
+            RoleInsertTypeList.Load();
+            RoleInsertTypeList.SetSelectedButton(RoleInsertTypeList.arrButton[2]);
+            RoleInsertTypeList.selectedValue = 2;
+        }
+        //检查情况按钮组刷新数据
+        function CstRefeshData() {
+            //后去点击按钮 点击已填写 默认单条保存  点击未填写 默认整页保存
+            assignTypeId = RoleInsertTypeList.selectedValue;
+            var paramJson = GetParamJson();
+            paramJson["pageSize"] = szdwGv.pageSize;
+            paramJson["MethodName"] = "FlowNodeRoleGetList";
+            szdwGv.requestUrl = "FlowNodeProcess.ashx";
+            szdwGv.paramJson = paramJson;
+            szdwGv.DataBind();
+        }
+        //#endregion 角色是否添加流程节点结果列表 结束
+
+        //#region 结果集面板
+        //#region 设置结果集面板
+        function SetDataPanel() {
+            var q = $("#queryPanel");
+            var qw = $(q).outerWidth();
+            var qh = $(q).outerHeight();
+            var qt = $(q).offset().top;
+            var x = $(q).offset().left;
+            var y = qh + qt;
+            var w = qw;
+            var h = bodyHeight - y;
+
+            var d = $("#dataPanel");
+            $(d).css({ "position": "relative", "left": 10, "top": 0 }).outerWidth(w).outerHeight(h);
+
+            //初始加载结果数据
+            GetQueryResult();
+        }
+        //#endregion 设置结果集面板
+
+
+        //#region 审批节点设置
+        //#region 获取查询参数
+        function GetParamJson() {
+            var assignTypeId = RoleInsertTypeList.selectedValue;
+            var role = $("#txtIcon").val();
+
+            var paramJson = { xuserId: xuserId, assignTypeId: assignTypeId };
+
+            if (flowId.length > 0) {
+                paramJson["flowId"] = flowId;
+            }
+            if (role.length > 0) {
+                paramJson["role"] = role;
+            }
+            return paramJson;
+        }
+        //#endregion 获取查询参数
+
+        //查询按钮事件
+        function GetQueryResult() {
+            //设置结果面板相关属性
+            //var body = document.body;
+            var c = $("#dataPanel");
+            var position = "absolute";
+            var x = 0;
+            var y = 0; //by + bh + mt;
+            var w = $(c).width();
+            var h = $(c).height();
+
+            //创建Gridview并绑定数据
+            CreateGridView(c, position, x, y, w, h);
+        }
+
+        //#region 创建Gridview并绑定数据
+        var szdwGv = null;
+        function CreateGridView(namingContainer, position, x, y, width, height) {
+            if (szdwGv == null || typeof (szdwGv) == "undefined") {
+                //创建SzdwGridViewt实例
+                szdwGv = new SzdwGridView(position, x, y, width, height);
+                szdwGv.namingContainer = namingContainer;
+                szdwGv.fnInitial = InitialArGridview(szdwGv);
+            }
+
+            //异步加载数据
+            if (szdwGv.pagination != null) {
+                szdwGv.pagination.ResetBar();
+            }
+            var paramJson = GetParamJson();
+            paramJson["pageSize"] = szdwGv.pageSize;
+            paramJson["MethodName"] = "FlowNodeRoleGetList";
+            szdwGv.requestUrl = "FlowNodeProcess.ashx";
+            szdwGv.paramJson = paramJson;
+            szdwGv.DataBind();
+        }
+        //#region 初始化Gridview属性
+        function InitialArGridview(szdwGv) {
+            //个性样式设置
+            //szdwGv.headCssJson = { "font-weight": "bolder"};        
+            szdwGv.dataPanelCssJson = { "background-color": "White", "border": "1px solid Silver" };
+            szdwGv.paginationCssJson = { "background-color": "White", "font-family": "微软雅黑", "font-size": "small", "border": "1px solid Silver", "border-top": "0px" };
+            szdwGv.minHeight = 300;
+
+            //dataPanel设置
+            szdwGv.pageSize = 20;
+            szdwGv.hasSumRow = false;
+
+            //head设置
+            szdwGv.headCssName = "gridHead2";
+            szdwGv.headHeight = 30;
+            szdwGv.fieldJsonData = [{ "Field": "RowNumber", "Text": "序号", "Width": 40 },
+                                    { "Field": "RoleName", "Text": "角色名称", "Width": 260, "Style": { "text-align": "center"} },
+                                    { "Field": "FlowNodeSet", "Text": "审批节点设置", "Width": 320, "FnControlColumn": CreateflowNodeCellControl, "Style": { "text-align": "center", "color": "red"}}];
+
+            //数据列表数据行单元格样式
+            szdwGv.cellCssJson = {
+                "RoleName": { "text-align": "left" },
+                "FlowNodeSet": { "text-align": "left" }
+            };
+        }
+        //#endregion 初始化Gridview属性
+        //#endregion 创建Gridview并绑定数据
+
+        //#region 创建控件列控件
+        //发起申请人设置控件
+        function CreateflowNodeCellControl(jsonList, cell) {
+            var rowIndex = $(cell).data("rowIndex");
+            var isAssigned = jsonList[rowIndex].IsAssigned;
+
+            var chk = document.createElement("input");
+            $(chk).attr("type", "checkbox");
+            $(chk).attr("id", "chkRole");
+            $(chk).attr("disabled", true);
+            $(chk).css({ "float": "left", "height": 18, "line-height": "18px" });
+            $(chk).prop("checked", isAssigned);
+
+            var s = document.createElement("label");
+            $(s).css({ "float": "left", "height": 25, "line-height": "25px" });
+            if (isAssigned) {
+                $(s).text("已添加为流程节点");
+                $(s).css("color", "red");
+            }
+
+            var btn = document.createElement("input");
+            $(btn).attr("type", "button");
+            $(btn).addClass("button2");
+            $(btn).css({ "float": "right", "width": 45, "height": 25 });
+            var text = isAssigned ? "移除" : "添加";
+            $(btn).val(text);
+
+            var c = document.createElement("div");
+            $(c).css({ "height": 25, "line-height": "25px" });
+            $(c).append(chk);
+            $(c).append(s);
+            $(c).append(btn);
+
+            //#region 事件
+            $(btn).click(function () {
+                var flowNodeId = jsonList[rowIndex].FlowNodeId;
+                var roleId = jsonList[rowIndex].RoleId;
+                var szdwGv = $(c).data("szdwControl");
+                if (isAssigned) {
+                    var paramJson = { flowNodeId: flowNodeId, xuserId: xuserId };
+                    FlowNodeLogicDelete(szdwGv, paramJson);
+                } else {
+                    var paramJson = { flowId: flowId, roleId: roleId, xuserId: xuserId };
+                    FlowNodeInsert(szdwGv, paramJson);
+                }
+            });
+            //#endregion 事件
+
+            //返回控件
+            return c;
+        }
+        //#endregion 审批节点设置
+        //#endregion 查询结果
+        //#endregion 右面板
+
+        //#region 添加或移除流程审批节点
+        //添加流程审批节点
+        function FlowNodeInsert(szdwGv, paramJson) {
+            var url = "FlowNodeProcess.ashx";
+            paramJson["MethodName"] = "FlowNodeInsert";
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json",
+                success: function (jsonData) {
+                    if (!$.isEmptyObject(jsonData)) {
+                        if (jsonData.IsExisted) {
+                            alert("该流程节点已经存在。请重新设置");
+                        } else {
+                            if (jsonData.IsInserted) {
+                                szdwGv.DataBind();
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        //移除流程审批节点
+        function FlowNodeLogicDelete(szdwGv, paramJson) {
+            var url = "FlowNodeProcess.ashx";
+            paramJson["MethodName"] = "FlowNodeLogicDelete";
+            $.ajax({ url: url, type: "post", data: paramJson, dataType: "json",
+                success: function (jsonData) {
+                    if (!$.isEmptyObject(jsonData)) {
+                        if (jsonData.IsDeleted) {
+                            szdwGv.DataBind();
+                        }
+                    }
+                },
+                complete: function () {
+                    szdwGv.HideLoadingImg();
+                }
+            });
+        }
+        //#endregion 添加或移除流程审批节点
+
+    </script>
+</body>
+</html>

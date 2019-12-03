@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="box">
+
+        <!-- 3.监听子组件的事件,一旦监听到子组件调用了countnum事件，就调用clicktotal -->
+        <mybox @upup="clicktotal"></mybox>
+        <mybox @upup="clicktotal"></mybox>
+
+        <p>一共点击了{{totalnum}}次</p>
+    </div>
+
+    <!-- 组件模板1 -->
+    <template id="my-div">
+            <button @click="countnum">点击了{{count}}次</button>
+    </template>
+
+    <script src="vue.js"></script>
+    <script>
+        // 1.组件
+        Vue.component("mybox",{
+            template: "#my-div",
+            data: function () {
+                return {
+                    count: 0,
+                }
+            },
+            methods: {
+                countnum:function(){
+                    this.count += 1;
+                    // 2.当countnum函数执行时，通过$emit触发名为upup事件，'你好'是为向父组件传递的数据，可以不写
+                    this.$emit('upup',this.count);
+                }
+            },
+        });
+
+        //实例化
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                totalnum:0
+            },
+            methods: {
+                clicktotal:function(a){
+                    this.totalnum += 1;
+                    console.log(a);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

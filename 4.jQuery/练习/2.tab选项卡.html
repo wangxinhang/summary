@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #container {
+            width: 400px;
+            margin: 100px auto;
+        }
+
+        #container ul {
+            list-style: none;
+            zoom: 1;
+        }
+
+        #container ul::after {
+            contain: ".";
+            height: 0px;
+            clear: both;
+            visibility: hidden;
+            display: block;
+        }
+
+        #container ul li {
+            float: left;
+            width: 100px;
+            height: 50px;
+            background-color: yellowgreen;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+        }
+
+        #container ul li.current {
+            background-color: pink;
+            border-bottom: 3px solid red;
+            box-sizing: border-box;
+        }
+
+        #box {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
+
+        #box div {
+            width: 400px;
+            height: 400px;
+            text-align: center;
+            line-height: 400px;
+            font-size: 40px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <ul>
+            <li class="current">选项卡1</li>
+            <li>选项卡2</li>
+            <li>选项卡3</li>
+            <li>选项卡4</li>
+        </ul>
+        <div id="box">
+            <div style="display: block;">你</div>
+            <div>在</div>
+            <div>干</div>
+            <div>嘛</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="jquery/jquery-3.1.1.js"></script>
+<script>
+    $(function () {
+        $("#container ul li").mouseenter(function () {
+            $(this).addClass("current").css({"color":"red","font-size":"20px"}).siblings().removeClass("current").css({"color":"white","font-size":"16px"});
+            $("#box div").eq($(this).index()).show().siblings().hide();
+          })
+    })
+</script>

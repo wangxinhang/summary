@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        window.onload = function () {
+
+            let allLis = document.getElementsByTagName('li');
+            let data = [
+            {title:'woainidsddagd',read:200},
+            {title:'woainidsafdagd',read:100},
+            {title:'woainidddsagd',read:220},
+            {title:'woainierredagd',read:430},
+            {title:'woainiderdagd',read:270}
+            ]
+            // 使用 ``，不用再使用+来拼接字符串了
+            for (let i = 0; i < allLis.length; i++) {
+                allLis[i].innerHTML = `<a href="#">${data[i].title}</a><span>${data[i].read}</span>`;
+            }
+
+            // 关于一些新增的字符串方法
+            // 1.字符串查找方法
+            let str = 'I love You';
+            // 老方法
+            if (str.indexOf("You") != -1) {
+                console.log(str.indexOf("You"));
+            }else{
+                console.log('不存在');
+            }
+            // 新方法
+            if (str.includes('You')) {
+                console.log(str.indexOf("You"));
+            }else{
+                console.log('不存在');
+            }
+
+            // 2.字符串以谁开头以谁结尾
+            console.log(str.startsWith('I'));
+            console.log(str.endsWith('you'));
+
+
+
+          }
+    </script>
+</body>
+</html>

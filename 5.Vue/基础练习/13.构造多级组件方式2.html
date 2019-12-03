@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 500px;
+            height: 500px;
+            background-color: pink;
+        }
+        .box2{
+            width: 300px;
+            height: 300px;
+            background-color: greenyellow;
+        }
+        .box3{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myApp">
+        <component1>
+            <component2>
+                <component3></component3>
+            </component2>
+        </component1>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        // 注册1级组件
+            Vue.component('component1',{
+                template:
+                `<div class="box1">
+                    <div>我是1级组件</div>
+                    <slot></slot>
+                </div>`
+            });
+        // 注册2级组件
+            Vue.component('component2',{
+                template:
+                `<div  class="box2">
+                    <div>我是2级组件</div>
+                    <slot></slot>
+                </div>`
+            });
+        // 注册3级组件
+            Vue.component('component3',{
+                template:'<div  class="box3">我是3级组件</div>'
+            });
+
+            var myApp=new Vue({
+                el:'#myApp'
+            });
+
+    </script>
+</body>
+
+</html>
+

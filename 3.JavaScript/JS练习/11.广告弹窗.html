@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            width: 150px;
+            height: 300px;
+            background-color: red;
+            position: absolute;
+            top: 0px;
+            left: -150px;
+        }
+
+        span {
+            width: 50px;
+            height: 100px;
+            background-color: pink;
+            color: aliceblue;
+            position: absolute;
+            top: 50px;
+            left: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <span>分享到</span>
+    </div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var Box = document.getElementsById("box");
+        var timer = null;
+        Box.onmouseover = function () {
+            Animation(Box, 1, -160, 10);
+            console.log(1);
+        }
+        Box.onmouseout = function () {
+            Animation(-5, 10, -150, 10);
+            console.log(2);
+        }
+
+        function Animation(obj ,speedLeft,speedTop, target, time) {
+
+            clearInterval(timer);
+            timer = setInterval(function () {
+                if (obj.offsetLeft == target || obj.offsetTop == target) {
+                    clearInterval(timer);
+                } else {
+                    obj.style.left = obj.offsetLeft + speedLeft + "px";
+                    obj.style.top = obj.offsetTop + speedTop + "px";
+                }
+            }, time);
+        }
+    }
+</script>

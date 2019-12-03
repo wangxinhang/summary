@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{11C4A520-9772-46DE-AD6F-E21BA8049E33}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SBJYJCMIS.SQLServerDAL</RootNamespace>
+    <AssemblyName>SBJYJCMIS.SQLServerDAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contract\ContractDepartment.cs" />
+    <Compile Include="Contract\NewContractSubtotal.cs" />
+    <Compile Include="Flow\DefaultFlowNode.cs" />
+    <Compile Include="Flow\FinishSituation.cs" />
+    <Compile Include="Flow\Flow.cs" />
+    <Compile Include="Flow\FlowApprovalRelation.cs" />
+    <Compile Include="Flow\FlowHandleResult.cs" />
+    <Compile Include="Flow\FlowHandleType.cs" />
+    <Compile Include="Flow\FlowNode.cs" />
+    <Compile Include="Flow\FlowNodeDefaultSetting.cs" />
+    <Compile Include="Flow\FlowNodeDepartment.cs" />
+    <Compile Include="Flow\FlowNodeOperationRelation.cs" />
+    <Compile Include="Flow\FlowNodeRole.cs" />
+    <Compile Include="Flow\FlowOperation.cs" />
+    <Compile Include="Flow\FlowOperationFlowRuleRelation.cs" />
+    <Compile Include="Flow\FlowOperationHandleResultRelation.cs" />
+    <Compile Include="Flow\FlowOperationHandleTypeRelation.cs" />
+    <Compile Include="Flow\FlowOperationStatusRelation.cs" />
+    <Compile Include="Flow\FlowRule.cs" />
+    <Compile Include="Flow\FlowStatus.cs" />
+    <Compile Include="Flow\FlowStep.cs" />
+    <Compile Include="InspectionOrgan\InspectionOrgan.cs" />
+    <Compile Include="Mine\Mine.cs" />
+    <Compile Include="Region\RegionDao.cs" />
+    <Compile Include="Department\DepartmentDao.cs" />
+    <Compile Include="Department\DepartmentTypeDao.cs" />
+    <Compile Include="Department\UserPermission.cs" />
+    <Compile Include="Employee\DimisionType.cs" />
+    <Compile Include="Employee\EducationDao.cs" />
+    <Compile Include="Employee\EmployeeDao.cs" />
+    <Compile Include="Employee\EmployeeDepartmentLog.cs" />
+    <Compile Include="Employee\EmployeeDimision.cs" />
+    <Compile Include="Employee\EmployeePositionLog.cs" />
+    <Compile Include="Employee\EmployeeStatusDao.cs" />
+    <Compile Include="Employee\NationDao.cs" />
+    <Compile Include="Employee\PositionDao.cs" />
+    <Compile Include="Group\Group.cs" />
+    <Compile Include="Permission\Permission.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\Role.cs" />
+    <Compile Include="Xmenu\Xmenu.cs" />
+    <Compile Include="Xpage\Xpage.cs" />
+    <Compile Include="XuserGroup\XuserGroup.cs" />
+    <Compile Include="Xuser\Xuser.cs" />
+    <Compile Include="Operation\Operation.cs" />
+    <Compile Include="Resource\Resource.cs" />
+    <Compile Include="ResourceType\ResourceType.cs" />
+    <Compile Include="GroupRole\GroupRole.cs" />
+    <Compile Include="RolePermission\RolePermission.cs" />
+    <Compile Include="XmenuPage\XmenuPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{16D90AF3-2E1E-4196-A717-57B9601F30A7}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DALFactory\DALFactory.csproj">
+      <Project>{52a57185-380e-47b2-a249-673dff192354}</Project>
+      <Name>DALFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{358E3C98-011C-4925-BF11-CA0C90000D72}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDAL\IDAL.csproj">
+      <Project>{012203D5-5648-4A5D-AD28-B5F6B79E77BF}</Project>
+      <Name>IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3827A259-4C49-412F-8C12-26C0ECFD385D}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\ResolveAssemblyReference.cache" />
+    <None Include="obj\Release\build.force" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\ResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\Debug\SQLServerDAL.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\SQLServerDAL.csproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

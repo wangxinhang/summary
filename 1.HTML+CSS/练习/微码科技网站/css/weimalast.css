@@ -1,0 +1,206 @@
+*{margin: 0px; padding: 0px;}
+#footer{
+	width: 100%;
+	height: 1800px;
+	background-color: #FFFFFF;
+	margin: 0 auto;
+}
+#container_GYWM{
+	height: 480px;
+	background-color: #ffffff;
+	margin: 0 auto;
+	padding-top: 180px;
+	position: relative;
+}
+#container_GYWM h3{
+	text-align: center;
+	font-family: "微软雅黑";
+	font-size: 40px;
+	color: #2e2d2b;
+}
+#container_GYWM .container-link{
+	margin: 120px auto 0;
+	text-align: center;
+}
+#container_GYWM .container-link a{
+	display: inline-block;
+	width: 40%;
+	height: 60px;
+	border: 1px solid #c5c5c5;
+	text-align: center;
+	line-height: 60px;
+	font-family: "微软雅黑";
+	font-size: 24px;
+	color: #676767;
+	background-color: #FFFFFF;
+}
+#container_GYWM .container-link a:nth-child(2){
+	margin-left: 30px;
+}
+#container_GYWM .container-link a:hover {
+	background-color: #efefef;
+}
+.container_text{
+	width: 1600px;
+	margin: 100px auto 0;
+	font-family: "微软雅黑";
+	font-size: 20px;
+}
+.container_text p:nth-child(1){
+	position: relative;
+}
+.container_text p:nth-child(1)::before{
+	content: "";
+	display: inline-block;
+	width: 150px;
+	height: 40px;
+	position: absoulte;
+	top: 20px;
+	background: url("../img/微码科技LOGO-灰色.png") no-repeat center center;
+	background-size: 100%;
+}
+.container_text p{
+	  margin-top: 30px;
+	  font-size: 18px;
+      color: #838383;
+}
+#container_SERVER{
+	width: 1600px;
+    background-color: #FFFFFF;
+	margin: 0 auto;
+	padding-top: 200px;
+	position: relative;
+}
+#container_SERVER h3{
+	text-align: center;
+	font-family: "微软雅黑";
+	font-size: 40px;
+	color: #2e2d2b;
+}
+.container_service{
+	width: 1600px;
+	height: 150px;
+	margin: 0 auto;
+	border-bottom: 1px solid #bdbdbd;
+
+}
+.container_service h4{	
+	font-family: "微软雅黑";
+	margin-top:70px ;
+	font-size: 24px;
+	color: #757575;
+
+}
+.container_service p{
+	color: #757575;
+	font-size: 18px;
+	line-height: 30px;
+	font-family: "微软雅黑";
+	margin-top: 30px;
+}
+.container_way{
+	width: 1600px;
+	height: 300px;
+	margin: 80px auto 10px;
+    border-bottom: 1px solid #bdbdbd;
+}
+.container_way h4{
+	font-family: "微软雅黑";
+    margin-top:25px ;
+	color: #757575;
+	font-size: 24px;
+	display: inline-block;
+}
+.container_way>span{
+	font-family: "微软雅黑";
+	font-size: 20px;
+	color: #757575;
+}
+.container_way a:link{
+	color: #3e3a39;
+}
+.container_way ul a span{
+	margin-top: 25px;
+	font-size: 24px;
+	font-family: "微软雅黑";
+	color: #707070;
+}
+.container_way ul img{
+	width: 120px;
+	height: 120px;
+	margin-top: 10px;
+	vertical-align:middle;
+	
+}
+.container_way ul li{
+	list-style: none;
+	float: left;
+	margin-top: 50px;
+	margin-left: 20px;	
+}
+.container_way ul li:nth-child(n+2){
+	margin-left: 150px;	
+}
+.container_tel{
+	width: 1600px;
+	height: 40px;
+	margin: 50px auto;
+	font-size: 18px;
+   color: #737373;
+}
+.container_tel span{
+	font-size: 18px;
+   color: #757575;
+   font-weight: bolder;
+   font-family: "微软雅黑";
+}
+#container_TALEAT{
+	width: 1600px;
+	height: 480px;
+    background-color: #FFFFFF;
+	margin: 0 auto;
+	position: relative;
+	padding-top: 180px;
+}
+#container_TALEAT h3{
+	text-align: center;
+	font-family: "微软雅黑";
+	font-size: 40px;
+	color: #2e2d2b;
+}
+.container_event3{
+	width: 1600px;
+	height: 140px;
+	margin: 100px auto 0;
+	text-align: center;
+
+}
+.container_event3 div{
+	width: 340px;
+	height: 60px;
+	display: inline-block;
+	border: 1px solid #bbbbbb;
+    line-height: 60px;
+    font-size: 28px;
+    color: #717171;
+    text-align: center;
+}
+.container_event3 div:nth-child(n+2){	
+	margin-left: 70px;
+}
+
+.container_event3 div:hover{
+	background-color: #efefef;
+}
+.container_p{
+	width: 1600px;
+	height: 280px;
+	margin: 10px auto;
+	border-bottom: 2px solid #bdbdbd;
+}
+.container_p p{
+	color: #757575;
+	font-family: "微软雅黑";
+	margin-top: 30px;
+	font-size: 18px;
+}

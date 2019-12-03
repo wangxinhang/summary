@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <select name="" id="province">
+        <option>--请选择省份--</option>
+    </select>
+    <select name="" id="city">
+        <option>--请选择市份--</option>
+    </select>
+    <select name="" id="county">
+        <option>--请选择区份--</option>
+    </select>
+</body>
+
+</html>
+<script>
+    var province = document.getElementById("province");
+    var city = document.getElementById("city");
+    var county = document.getElementById("county");
+    var allProvince = ["河南省", "山东省", "江苏省"];
+    var henanCity = ["郑州市", "洛阳市", "开封市"];
+    // var allCity = [["郑州市", "洛阳市", "开封市"],["济南市", "青岛市", "烟台市"]];
+    var zhengzhouConuty = ["中原区", "高新区", "东新区"];
+    // for (var i = 0; i < allProvince.length; i++) {
+    //     province.add(new Option(allProvince[i]));
+    //     allProvince[i].index = i;
+    //     allProvince[i].onclick = function () {
+    //         show(allCity[this.index]);
+    //     }
+    // }
+    // function show(x) {
+    //     city.length = 1;
+    //     for (var i = 0; i < x.length; i++) {
+    //         city.add(new Option(x[i]));
+    //     }
+    // }
+    for (var i = 0; i < allProvince.length; i++) {
+        province.add(new Option(allProvince[i]));
+    }
+    province.onclick = function () {
+        city.length = 1;
+        switch (province.value) {
+            case "河南省":
+                for (var i = 0; i < henanCity.length; i++) {
+                    city.add(new Option(henanCity[i]));
+                }
+                break;
+        }
+    }
+    city.onclick = function () {
+        county.length = 1;
+        switch (city.value) {
+            case "郑州市":
+                for (var i = 0; i < zhengzhouConuty.length; i++) {
+                    county.add(new Option(zhengzhouConuty[i]));
+                }
+                break;
+        }
+    }
+</script>

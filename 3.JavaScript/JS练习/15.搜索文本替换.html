@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 30%;
+            border: 1px solid #000;
+        }
+        i{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text">
+    <input type="text">
+    <input type="submit">
+    <div>
+        中华人民共和国中央人民政府声明：
+        中华人民共和国中央人民政府声明：
+        中华人民共和国中央人民政府声明：
+        中华人民共和国中央人民政府声明：
+        中华人民共和国中央人民政府声明：
+    </div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var txt = document.getElementsByTagName("input");
+        var box = document.getElementsByTagName("div");
+        var text = box[0].innerHTML;
+
+        txt[2].onclick = function () {
+            if (txt[0].value == "") {
+                alert("请输入内容");
+            } else {
+                if (txt[1].value == "") {
+                    // 搜索功能
+                    // 第一种方法
+                    // box[0].innerHTML = box[0].innerText.split(txt[0].value).join("<i>" + txt[0].value + "</i>");
+                    // 第二种方法
+                    box[0].innerHTML = text.split(txt[0].value).join("<i>" + txt[0].value + "</i>");
+                    txt[0].value = "";
+                } else {
+                    // 替换功能
+                    // 第一种方法
+                    // box[0].innerHTML = box[0].innerText.split(txt[0].value).join("<i>" + txt[1].value + "</i>");
+                    // 第二种方法
+                    box[0].innerHTML = box[0].innerText.replace(new RegExp(txt[0].value,'g'),"<i>" + txt[1].value + "</i>");
+                    txt[0].value = "";
+                    txt[1].value = "";
+                }
+            }
+        }
+    }
+</script>

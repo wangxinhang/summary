@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+            
+        class person{
+            constructor(name,age){  //构造方法，调用new，自动执行
+                this.name = name;
+                this.age = age;
+                console.log(`构造函数执行了，${this.name},${this.age}`)
+            }
+            show(){
+                return `名字：${this.name}`
+            }
+        }
+        let p1 = new person('wang',18);
+        console.log(p1.show())
+
+
+
+
+        var a = ' a ';
+        console.log(a.length)
+        }
+        
+    </script>
+</body>
+</html>

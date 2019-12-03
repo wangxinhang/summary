@@ -1,0 +1,42 @@
+E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.Model.dll
+E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.Model.pdb
+E:\设备检验检测平台\SBJYJCMIS\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+E:\设备检验检测平台\SBJYJCMIS\IDAL\obj\Debug\SBJYJCMIS.IDAL.dll
+E:\设备检验检测平台\SBJYJCMIS\IDAL\obj\Debug\SBJYJCMIS.IDAL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\SBJYJCMIS\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\SBJYJCMIS\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.Model.dll
+D:\SBJYJCMIS\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\SBJYJCMIS\SBJYJCMIS\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+D:\SBJYJCMIS\SBJYJCMIS\IDAL\obj\Debug\SBJYJCMIS.IDAL.dll
+D:\SBJYJCMIS\SBJYJCMIS\IDAL\obj\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\IDAL\obj\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20181106修改\IDAL\obj\Debug\SBJYJCMIS.IDAL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.Model.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\IDAL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\实训框架整理\SBJYJCMIS 20181106修改\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+D:\实训框架整理\SBJYJCMIS 20181106修改\IDAL\obj\Debug\SBJYJCMIS.IDAL.dll
+D:\实训框架整理\SBJYJCMIS 20181106修改\IDAL\obj\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\IDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\IDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\IDAL\bin\Debug\SBJYJCMIS.Model.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\IDAL\bin\Debug\SBJYJCMIS.Model.pdb
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\IDAL\obj\Debug\SBJYJCMIS.IDAL.dll
+C:\Users\Admin\Desktop\SBJYJCMIS 20190226修改\IDAL\obj\Debug\SBJYJCMIS.IDAL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.IDAL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.IDAL.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.Model.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\IDAL\bin\Debug\SBJYJCMIS.Model.pdb
+D:\设备检验检测(实训框架)\SBJYJCMIS\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+D:\设备检验检测(实训框架)\SBJYJCMIS\IDAL\obj\Debug\SBJYJCMIS.IDAL.dll
+D:\设备检验检测(实训框架)\SBJYJCMIS\IDAL\obj\Debug\SBJYJCMIS.IDAL.pdb

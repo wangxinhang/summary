@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            position: relative;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>dianji</button>
+    <div></div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        var Btn = document.getElementsByTagName("button")[0];
+        var Box = document.getElementsByTagName("div")[0];
+        var timer = null;
+        Btn.onclick = function () {
+            Animation(1,10,100,1);
+        }
+        function Animation(x,y,l,s) {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                if (Box.offsetLeft >= l) {
+                    
+                    clearInterval(timer);
+                } else {
+                    Box.style.left = Box.offsetLeft + x + "px";
+                }
+            }, s);
+        }
+    }
+</script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+			a{
+				background: url(image/fclose.gif) no-repeat 35px center;
+				padding-left: 50px;
+			}
+			#a{
+				background: rgb(255, 255, 255);
+				padding-left: 0;
+			}
+			ul{
+				margin-left: 20px;
+				list-style: none;
+				display: none;
+			}
+			ul li{
+				background: url(image/doc.gif) no-repeat -10px center;
+				padding-left: 20px;
+			}
+		</style>
+</head>
+<body>
+	<a href="#" id="a">切换</a>
+	<img id="img" src="image/1.jpg" alt="" />
+	<div>
+		<a href="#" id="a1">此电脑</a>
+		<ul id="firstUl">
+			<li>图片</li>
+			<li>文字</li>
+			<li>视频</li>
+		</ul>
+		<br>
+		<a href="#" id="a2">此电脑</a>
+		<ul id="secondUl">
+			<li>图片</li>
+			<li>文字</li>
+			<li>视频</li>
+		</ul>
+	</div>
+	
+<script>
+	// 1.点击切换图片
+	var a = document.getElementById("a");
+    var x = 2;
+    a.onclick = function () {
+        var img = document.getElementById("img");
+		img.src = "image/"+ x +".jpg";
+		x++;
+		if (x === 5) {
+			x = 1;
+		}
+	};
+	// 2.树形菜单
+	$("a1").onclick = function () {
+		toShow("firstUl");
+    };
+    $("a2").onclick = function () {
+        toShow("secondUl");
+    };
+    function $(id) {
+        return typeof id ==="string" ? document.getElementById(id) : null;
+    }
+    function toShow(id) {
+        var ul = document.getElementById(id);
+        if (ul.style.display === "none") {
+            ul.style.display = "block";
+        }else{
+            ul.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
