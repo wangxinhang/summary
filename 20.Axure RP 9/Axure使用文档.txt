@@ -1,3 +1,0 @@
-1.下载安装：https://www.axure.com/download
-2.破解：http://www.ddooo.com/softdown/143618.htm，此处不要汉化
-3.汉化：https://www.axure.com.cn/77455/ ，汉化时只需要复制lang文件夹即可，不要复制.dll文件
