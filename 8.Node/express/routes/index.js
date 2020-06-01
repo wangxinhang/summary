@@ -4,7 +4,9 @@ var dbconf = require("../util/dbconf")
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  // res.render('index', { title: 'Express' });
+  // res.render('index', {
+  //   title: 'Express'
+  // });
   let sql = `select * from user`
   let sqlArr = []
   let callBack = (err, data) => {
