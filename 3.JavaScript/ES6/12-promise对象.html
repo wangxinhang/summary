@@ -40,6 +40,20 @@
                 //或者使用throw
                 // throw err
             })
+            new Promise(resolve => {
+                setTimeout(() => {
+                    let a = 1;
+                    console.log(a)
+                    a += 1;
+                    resolve(a)
+                }, 1000);
+            }).then(a => {
+                setTimeout(() => {
+                    console.log(a)
+                }, 1000);
+            })
+
+
         }
     </script>
 </body>

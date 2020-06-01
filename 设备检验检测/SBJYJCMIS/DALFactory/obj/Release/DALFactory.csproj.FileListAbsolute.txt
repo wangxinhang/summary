@@ -1,9 +1,0 @@
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Release\SBJYJCMIS.DALFactory.dll
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Release\SBJYJCMIS.DALFactory.pdb
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Release\SBJYJCMIS.IDAL.dll
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Release\SBJYJCMIS.Model.dll
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Release\SBJYJCMIS.IDAL.pdb
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\bin\Release\SBJYJCMIS.Model.pdb
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\obj\Release\DALFactory.csprojResolveAssemblyReference.cache
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\obj\Release\SBJYJCMIS.DALFactory.dll
-E:\设备检验检测平台\SBJYJCMIS\DALFactory\obj\Release\SBJYJCMIS.DALFactory.pdb

@@ -1,5 +1,0 @@
-E:\设备检验检测平台\SBJYJCMIS\Model\bin\Release\SBJYJCMIS.Model.dll
-E:\设备检验检测平台\SBJYJCMIS\Model\bin\Release\SBJYJCMIS.Model.pdb
-E:\设备检验检测平台\SBJYJCMIS\Model\obj\Release\SBJYJCMIS.Model.dll
-E:\设备检验检测平台\SBJYJCMIS\Model\obj\Release\SBJYJCMIS.Model.pdb
-E:\设备检验检测平台\SBJYJCMIS\Model\obj\Release\Model.csprojResolveAssemblyReference.cache

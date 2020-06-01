@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         window.onload = function () {
-           
-          let show = (...a) => { console.log(a) };
-          show(1,2,3);
-            
-          let hide = (a,b,c) => { console.log(a,b,c) };
-          hide(...[1,2,3]);
-          
 
-          let play = ([a,...b]) => { console.log(a,b) };
-          play([1,2,3]);
-          
+            let show = (...a) => {
+                console.log(a)
+            };
+            show(1, 2, 3);
+
+            let hide = (a, b, c) => {
+                console.log(a, b, c)
+            };
+            hide(...[1, 2, 3]);
+
+
+            let play = ([a, ...b]) => {
+                console.log(a, b)
+            };
+            play([1, 2, 3]);
+
             let result = 0;
-          let play1 = (a,...sum) => { 
-              console.log(a);
-              for (const value of sum) {
-                  result += value;
-              }
-              console.log(result);
+            let play1 = (a, ...sum) => {
+                console.log(a);
+                for (const value of sum) {
+                    result += value;
+                }
+                console.log(result);
 
-           };
-          play1('wang',1,2,3);
+            };
 
-          }
+            play1('wang', 1, 2, 3);
+            
+        }
     </script>
 </body>
+
 </html>

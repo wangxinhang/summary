@@ -1,7 +1,0 @@
-E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Release\SBJYJCMIS.IDAL.dll
-E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Release\SBJYJCMIS.IDAL.pdb
-E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Release\SBJYJCMIS.Model.dll
-E:\设备检验检测平台\SBJYJCMIS\IDAL\bin\Release\SBJYJCMIS.Model.pdb
-E:\设备检验检测平台\SBJYJCMIS\IDAL\obj\Release\IDAL.csprojResolveAssemblyReference.cache
-E:\设备检验检测平台\SBJYJCMIS\IDAL\obj\Release\SBJYJCMIS.IDAL.dll
-E:\设备检验检测平台\SBJYJCMIS\IDAL\obj\Release\SBJYJCMIS.IDAL.pdb
