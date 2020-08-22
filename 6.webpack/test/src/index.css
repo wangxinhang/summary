@@ -1,0 +1,18 @@
+html,
+body {
+    background-color: rgb(240, 195, 195);
+}
+
+.box1 {
+    width: 100px;
+    height: 100px;
+    background: url("./img/title.png");
+    background-size: contain;
+}
+
+.box2 {
+    width: 100px;
+    height: 100px;
+    background: url("./img/meinv.jpg");
+    background-size: contain;
+}
